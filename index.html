@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Legion TD 2 UI</title>
+  <style>
+    .background-container {
+      position: absolute;
+      top: 10px;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('img/bg.png');
+      background-size: 47%;
+      background-repeat: no-repeat;
+      background-position: top;
+      z-index: -1;
+    }
+    body {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 1fr 250px 1fr;
+      grid-template-rows: 50px 50px;
+      height: 100vh;
+      margin: 0;
+      font-family: Cuprum, sans-serif;
+    }
+
+    .top-left, .top-middle, .top-right, .bottom-left, .bottom-middle, .bottom-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .top-left {
+      justify-content: flex-end;
+    }
+
+    .top-middle {
+      justify-content: center;
+      position: relative;
+      font-size: 40px;
+      color: black;
+      -webkit-text-fill-color: red;
+      -webkit-text-stroke-width: 2px;
+    }
+    
+    .bottom-middle {
+      margin-top: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 1px;
+      line-height: 1;
+      text-align: center;
+      color: white;
+    }
+
+    .bottom-middle .line-1 {
+      font-size: 24px;
+    }
+
+    .bottom-middle .line-2 {
+      font-size: 48px;
+    }
+
+    .bottom-middle .line-3 {
+      font-size: 24px;
+    }
+
+    .top-right, .bottom-right {
+      justify-content: flex-start;
+    }
+
+    .top-right {
+      flex-wrap: nowrap;
+      overflow: hidden;
+    }
+
+    img {
+      width: 32px;
+      height: 32px;
+    }
+
+    .timer {
+      position: absolute;
+      z-index: 1;
+    }
+
+
+    .opacity-75 {
+      opacity: 0.75;
+    }
+    .opacity-50 {
+      opacity: 0.50;
+    }
+    .opacity-25 {
+      opacity: 0.25;
+    }
+    .hidden {
+      display: none;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="background-container"></div>
+  <div class="top-left"></div>
+  <div class="top-middle"><span class="timer"></span></div>
+  <div class="top-right"></div>
+  <div class="bottom-left"></div>
+  <div class="bottom-middle">
+    <span class="line-1"></span>
+    <span class="line-2"></span>
+    <span class="line-3"></span>
+  </div>
+  <div class="bottom-right"></div>
+
+  <script src="ui.js"></script>
+  <script>
+    const topRight = document.querySelector('.top-right');
+
+    for (let i = 1; i <= 21; i++) {
+      const img = document.createElement('img');
+      img.src = `img/${i}.png`;
+      img.id = `wave-${i}`;
+      topRight.appendChild(img);
+    }
+  </script>
+</body>
+</html>
