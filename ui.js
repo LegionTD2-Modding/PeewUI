@@ -48,10 +48,25 @@ function updateUI() {
   const line2 = document.querySelector('.line-2');
   const line3 = document.querySelector('.line-3');
 
+  const line1WrapperA = document.querySelector('.types-line-1 .image-wrapper-attack');
+  const line1WrapperD = document.querySelector('.types-line-1 .image-wrapper-defense');
+  const line2WrapperA = document.querySelector('.types-line-2 .image-wrapper-attack');
+  const line2WrapperD = document.querySelector('.types-line-2 .image-wrapper-defense');
+  const line3WrapperA = document.querySelector('.types-line-3 .image-wrapper-attack');
+  const line3WrapperD = document.querySelector('.types-line-3 .image-wrapper-defense');
+
   if (currentPhase === 'build') {
     line1.textContent = `Prepare for`;
     line2.textContent = `WAVE ${currentWave}`;
     line3.textContent = ``;
+
+    let attack = wavesData[Math.min(currentWave, 21)].dmgType;
+    let defense = wavesData[Math.min(currentWave, 21)].defType;
+
+    line2WrapperA.innerHTML = ` <img style="margin-right: 10px;" class="img" src='img/types/${attack}.png' alt='Damage ${attack}' /> `
+    line2WrapperD.innerHTML = ` <img style="margin-left: 10px;" class="img" src='img/types/${defense}.png' alt='Defense ${defense}' /> `
+    line3WrapperA.innerHTML = ``
+    line3WrapperD.innerHTML = ``
 
     topMiddle.textContent = `${remainingTime}`;
     image.style.border = '4px solid black';
@@ -66,6 +81,12 @@ function updateUI() {
     line1.textContent = ``;
     line2.textContent = `WAVE ${currentWave}`;
     line3.textContent = `Next: WAVE ${currentWave + 1}`;
+
+    let attack = wavesData[Math.min(currentWave + 1, 21)].dmgType;
+    let defense = wavesData[Math.min(currentWave + 1, 21)].defType;
+
+    line3WrapperA.innerHTML = ` <img style="width: 16px; height: 16px; margin-right: 5px;" src='img/types/${attack}.png' alt='Damage ${attack}' /> `
+    line3WrapperD.innerHTML = ` <img style="width: 16px; height: 16px; margin-left: 5px;" src='img/types/${defense}.png' alt='Defense ${defense}' /> `
 
     topMiddle.textContent = '';
     image.style.border = '4px solid red';

@@ -88,6 +88,15 @@
       z-index: 1;
     }
 
+    .image-wrapper-attack .image-wrapper-defense {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .image-wrapper-attack .image-wrapper-defense img {
+      width: 32px;
+      height: 32px;
+    }
 
     .opacity-75 {
       opacity: 0.75;
@@ -102,6 +111,14 @@
       display: none;
     }
 
+    .types-line-1 .types-line-2 .types-line-3 p {
+      margin-right: 100px;
+    }
+
+    .types-line-1 .types-line-2 .types-line-3 p:last-child {
+      margin-right: 0;
+    }
+
   </style>
 </head>
 <body>
@@ -111,17 +128,35 @@
   <div class="top-right"></div>
   <div class="bottom-left"></div>
   <div class="bottom-middle">
-    <span class="line-1"></span>
-    <span class="line-2"></span>
-    <span class="line-3"></span>
+
+    <p class="types-line-1">
+      <span class="image-wrapper-attack"></span>
+      <span class="line-1"></span>
+      <span class="image-wrapper-defense"></span>
+    </p>
+
+    <p class="types-line-2">
+      <span class="image-wrapper-attack"></span>
+      <span class="line-2"></span>
+      <span class="image-wrapper-defense"></span>
+    </p>
+
+    <p class="types-line-3">
+      <span class="image-wrapper-attack image-wrapper-attack-s"></span>
+      <span class="line-3"></span>
+      <span class="image-wrapper-defense image-wrapper-defense-s"></span>
+    </p>
+
   </div>
   <div class="bottom-right"></div>
 
+
+  <script src="units.js"></script>
   <script src="ui.js"></script>
   <script>
     const topRight = document.querySelector('.top-right');
 
-    for (let i = 1; i <= 21; i++) {
+    for (let i = 1; i <= wavesData.length; i++) {
       const img = document.createElement('img');
       img.src = `img/${i}.png`;
       img.id = `wave-${i}`;
