@@ -166,9 +166,21 @@
 <div class="top-right"></div>
 <div class="bottom-left"></div>
 <div class="bottom-middle">
-  <p class="types-line-1"><span class="image-wrapper-attack"></span> <span class="line-1"></span> <span class="image-wrapper-defense"></span></p>
-  <p class="types-line-2"><span class="image-wrapper-attack"></span> <span class="line-2"></span> <span class="image-wrapper-defense"></span></p>
-  <p class="types-line-3"><span class="image-wrapper-attack image-wrapper-attack-s"></span> <span class="line-3"></span> <span class="image-wrapper-defense image-wrapper-defense-s"></span></p>
+  <p class="types-line-1">
+    <span class="image-wrapper-attack"></span>
+    <span class="line-1"></span>
+    <span class="image-wrapper-defense"></span>
+  </p>
+  <p class="types-line-2">
+    <span class="image-wrapper-attack"></span>
+    <span class="line-2"></span>
+    <span class="image-wrapper-defense"></span>
+  </p>
+  <p class="types-line-3">
+    <span class="image-wrapper-attack"></span>
+    <span class="line-3"></span>
+    <span class="image-wrapper-defense"></span>
+  </p>
 </div>
 <div class="bottom-right"></div>
 <script src="units.js">
@@ -178,7 +190,7 @@
 <script>
   const topRight = document.querySelector('.top-right');
 
-  for (let i = 1; i <= wavesData.length; i++) {
+  for (let i = 1; i < wavesData.length; i++) {
     const img = document.createElement('img');
     img.src = `img/${i}.png`;
     img.id = `wave-${i}`;
