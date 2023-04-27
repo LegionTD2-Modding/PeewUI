@@ -124,27 +124,27 @@ function gameOver() {
   bottomMiddle.textContent = 'Game Over';
 }
 
-function applyFadingEffect() {
-  const topRightImages = document.querySelectorAll('.top-right > img');
-  const topLeftImages = document.querySelectorAll('.top-left > img');
+function applyFadingEffect(fadeThreshold = 3) {
+  const topRight = document.querySelectorAll('.top-right > img');
+  const topLeft = document.querySelectorAll('.top-left > img');
 
-  [topRightImages, topLeftImages].forEach((images) => {
-    images.forEach((image, index) => {
-      image.classList.remove('opacity-75', 'opacity-50', 'opacity-25', 'hidden');
+  for (let i = 0; i < topRight.length; i++) {
+    const distanceFromCurrent = Math.abs(currentWave - (i + 1));
+    if (distanceFromCurrent >= fadeThreshold) {
+      topRight[i].style.opacity = 0;
+    } else {
+      topRight[i].style.opacity = 1 - (distanceFromCurrent / fadeThreshold);
+    }
+  }
 
-      if (index >= 3) {
-        if (index === 3) {
-          image.classList.add('opacity-75');
-        } else if (index === 4) {
-          image.classList.add('opacity-50');
-        } else if (index === 5) {
-          image.classList.add('opacity-25');
-        } else {
-          image.classList.add('hidden');
-        }
-      }
-    });
-  });
+  for (let i = topLeft.length - 1, j = 0; i >= 0; i--, j++) {
+    const distanceFromCurrent = Math.abs(currentWave - (j + 1));
+    if (distanceFromCurrent >= fadeThreshold) {
+      topLeft[i].style.opacity = 0;
+    } else {
+      topLeft[i].style.opacity = 1 - (distanceFromCurrent / fadeThreshold);
+    }
+  }
 }
 
 window.addEventListener('DOMContentLoaded', startGame);
