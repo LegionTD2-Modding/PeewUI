@@ -63,8 +63,8 @@ function updateUI() {
     let attack = wavesData[Math.min(currentWave, 21)].dmgType;
     let defense = wavesData[Math.min(currentWave, 21)].defType;
 
-    line2WrapperA.innerHTML = ` <img style="margin-right: 10px;" class="img" src='img/types/${attack}.png' alt='Damage ${attack}' /> `
-    line2WrapperD.innerHTML = ` <img style="margin-left: 10px;" class="img" src='img/types/${defense}.png' alt='Defense ${defense}' /> `
+    line2WrapperA.innerHTML = ` <img style="margin-right: 0.6vw;" class="img" src='img/types/${attack}.png' alt='Damage ${attack}' /> `
+    line2WrapperD.innerHTML = ` <img style="margin-left: 0.6vw;" class="img" src='img/types/${defense}.png' alt='Defense ${defense}' /> `
     line3WrapperA.innerHTML = ``
     line3WrapperD.innerHTML = ``
 
@@ -85,8 +85,8 @@ function updateUI() {
     let attack = wavesData[Math.min(currentWave + 1, 21)].dmgType;
     let defense = wavesData[Math.min(currentWave + 1, 21)].defType;
 
-    line3WrapperA.innerHTML = ` <img style="width: 16px; height: 16px; margin-right: 5px;" src='img/types/${attack}.png' alt='Damage ${attack}' /> `
-    line3WrapperD.innerHTML = ` <img style="width: 16px; height: 16px; margin-left: 5px;" src='img/types/${defense}.png' alt='Defense ${defense}' /> `
+    line3WrapperA.innerHTML = ` <img style="width: 1vw; height: 1vw; margin-right: 0.3vw;" src='img/types/${attack}.png' alt='Damage ${attack}' /> `
+    line3WrapperD.innerHTML = ` <img style="width: 1vw; height: 1vw; margin-left: 0.3vw;" src='img/types/${defense}.png' alt='Defense ${defense}' /> `
 
     topMiddle.textContent = '';
     image.style.border = '4px solid red';
