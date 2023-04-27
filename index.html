@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Legion TD 2 UI</title>
   <style>
     .background-map {
@@ -19,7 +19,7 @@
     }
     .background-container {
       position: absolute;
-      top: 10px;
+      top: 1vh;
       left: 0;
       width: 100%;
       height: 100%;
@@ -31,9 +31,9 @@
     }
     body {
       display: grid;
-      gap: 10px;
-      grid-template-columns: 1fr 250px 1fr;
-      grid-template-rows: 50px 50px;
+      gap: 1vh;
+      grid-template-columns: 1fr 13vw 1fr;
+      grid-template-rows: 5vh 5vh;
       height: 100vh;
       margin: 0;
       font-family: Cuprum, sans-serif;
@@ -51,14 +51,14 @@
     .top-middle {
       justify-content: center;
       position: relative;
-      font-size: 42px;
+      font-size: 2.4vw;
       color: white;
       -webkit-text-fill-color: black;
       -webkit-text-stroke-width: 2px;
     }
-    
+
     .bottom-middle {
-      margin-top: 50px;
+      margin-top: 5vh;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -70,15 +70,15 @@
     }
 
     .bottom-middle .line-1 {
-      font-size: 20px;
+      font-size: 1.1vw;
     }
 
     .bottom-middle .line-2 {
-      font-size: 40px;
+      font-size: 2.2vw;
     }
 
     .bottom-middle .line-3 {
-      font-size: 20px;
+      font-size: 1.1vw;
     }
 
     .top-right, .bottom-right {
@@ -91,8 +91,8 @@
     }
 
     img {
-      width: 32px;
-      height: 32px;
+      width: 1.8vw;
+      height: 1.8vw;
     }
 
     .timer {
@@ -106,8 +106,8 @@
     }
 
     .image-wrapper-attack .image-wrapper-defense img {
-      width: 32px;
-      height: 32px;
+      width: 1.8vw;
+      height: 1.8vw;
     }
 
     .opacity-75 {
@@ -123,50 +123,67 @@
       display: none;
     }
 
+    @media screen and (max-width: 767px) {
+      body {
+        grid-template-columns: 1fr 30vw 1fr;
+      }
+
+      .top-middle {
+        font-size: 4vw;
+      }
+
+      .bottom-middle .line-1 {
+        font-size: 2.2vw;
+      }
+
+      .bottom-middle .line-2 {
+        font-size: 4.4vw;
+      }
+
+      .bottom-middle .line-3 {
+        font-size: 2.2vw;
+      }
+
+      img {
+        width: 3.6vw;
+        height: 3.6vw;
+      }
+
+      .image-wrapper-attack .image-wrapper-defense img {
+        width: 3.6vw;
+        height: 3.6vw;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="background-map"></div>
-  <div class="background-container"></div>
-  <div class="top-left"></div>
-  <div class="top-middle"><span class="timer"></span></div>
-  <div class="top-right"></div>
-  <div class="bottom-left"></div>
-  <div class="bottom-middle">
+<div class="background-map"></div>
+<div class="background-container"></div>
+<div class="top-left"></div>
+<div class="top-middle">
+  <span class="timer"></span>
+</div>
+<div class="top-right"></div>
+<div class="bottom-left"></div>
+<div class="bottom-middle">
+  <p class="types-line-1"><span class="image-wrapper-attack"></span> <span class="line-1"></span> <span class="image-wrapper-defense"></span></p>
+  <p class="types-line-2"><span class="image-wrapper-attack"></span> <span class="line-2"></span> <span class="image-wrapper-defense"></span></p>
+  <p class="types-line-3"><span class="image-wrapper-attack image-wrapper-attack-s"></span> <span class="line-3"></span> <span class="image-wrapper-defense image-wrapper-defense-s"></span></p>
+</div>
+<div class="bottom-right"></div>
+<script src="units.js">
+</script>
+<script src="ui.js">
+</script>
+<script>
+  const topRight = document.querySelector('.top-right');
 
-    <p class="types-line-1">
-      <span class="image-wrapper-attack"></span>
-      <span class="line-1"></span>
-      <span class="image-wrapper-defense"></span>
-    </p>
-
-    <p class="types-line-2">
-      <span class="image-wrapper-attack"></span>
-      <span class="line-2"></span>
-      <span class="image-wrapper-defense"></span>
-    </p>
-
-    <p class="types-line-3">
-      <span class="image-wrapper-attack image-wrapper-attack-s"></span>
-      <span class="line-3"></span>
-      <span class="image-wrapper-defense image-wrapper-defense-s"></span>
-    </p>
-
-  </div>
-  <div class="bottom-right"></div>
-
-
-  <script src="units.js"></script>
-  <script src="ui.js"></script>
-  <script>
-    const topRight = document.querySelector('.top-right');
-
-    for (let i = 1; i <= wavesData.length; i++) {
-      const img = document.createElement('img');
-      img.src = `img/${i}.png`;
-      img.id = `wave-${i}`;
-      topRight.appendChild(img);
-    }
-  </script>
+  for (let i = 1; i <= wavesData.length; i++) {
+    const img = document.createElement('img');
+    img.src = `img/${i}.png`;
+    img.id = `wave-${i}`;
+    topRight.appendChild(img);
+  }
+</script>
 </body>
 </html>
