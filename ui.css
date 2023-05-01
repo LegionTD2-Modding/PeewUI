@@ -1,42 +1,49 @@
 @font-face { font-family: Cuprum; src: url('font/Cuprum.ttf'); }
 @font-face { font-family: Cuprum; font-weight: bold; src: url('font/Cuprum-Bold.ttf');}
 
-body, html {
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
     height: 100%;
     width: 100%;
 }
+
 .background {
+    background-image: url('img/bg.png');
+    background-size: cover;
+    background-position: center;
     position: fixed;
-    top: 0;
-    left: 0;
     height: 100%;
     width: 100%;
-    background-image: url("img/bg.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    z-index: -1;
 }
-.interface-box {
-    position: absolute;
-    top: 10vh;
-    left: 30vw;
-    height: 20vh;
-    width: 40vw;
-    background-image: url("img/ui.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+
+.ui-container {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    top: 5vh;
+    height: 20vh;
+    margin: 0 auto;
 }
-.text-element {
-    width: 100%;
+
+.ui-image {
+    position: absolute;
+    height: 100%;
+    width: auto;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.ui-text {
+    position: relative;
+    font-size: calc(10px + 1vmin);
+    color: white;
     text-align: center;
-    font-size: 1.5rem;
-    color: #ffffff;
-    word-wrap: break-word;
-    padding: 0 1rem;
+    font-family: Cuprum, sans-serif;
 }

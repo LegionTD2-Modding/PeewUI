@@ -7,7 +7,7 @@ let currentWave = 1;
 let phaseTimer;
 let remainingTime;
 
-function startGame() {
+function startUILoop() {
   remainingTime = buildPhaseDuration[0];
   updateUI();
   phaseTimer = setInterval(nextSecond, 1000);
@@ -147,4 +147,22 @@ function applyFadingEffect(fadeThreshold = 3) {
   }
 }
 
-window.addEventListener('DOMContentLoaded', startGame);
+
+document.addEventListener('DOMContentLoaded', () => {
+  const uiText = document.querySelector('.ui-text');
+  const uiContainer = document.querySelector('.ui-container');
+  const uiImage = document.querySelector('.ui-image');
+
+  const updateDimensions = () => {
+    const containerHeight = uiContainer.clientHeight;
+    const containerWidth = uiImage.clientWidth;
+    uiContainer.style.width = `${containerWidth}px`;
+    const fontSize = containerWidth * 0.025; // Adjust the multiplier to change the font size
+    uiText.style.fontSize = `${fontSize}px`;
+  };
+
+  updateDimensions();
+  window.addEventListener('resize', updateDimensions);
+
+  //startUILoop();
+});
