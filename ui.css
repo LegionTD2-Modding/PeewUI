@@ -82,6 +82,10 @@ body, html {
     justify-content: flex-end;
 }
 
+/*.top-row.mid-col .timer {
+    justify-content: center;
+}*/
+
 .mid-row.mid-col {
     justify-content: center;
     flex-direction: column;
@@ -147,9 +151,10 @@ body, html {
 
 .timer {
     z-index: 2;
-    justify-content: center;
-    position: relative;
     color: white;
     -webkit-text-fill-color: black;
     -webkit-text-stroke-width: 2px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
