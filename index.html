@@ -1,53 +1,17 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Legion TD 2 UI</title>
-  <link rel="stylesheet" href="ui.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="ui.css" />
+  <title>LTD2 UI</title>
 </head>
 <body>
-
-<div class="body-container">
-
-  <div class="background-map"></div>
-  <div class="background-container"></div>
-  <div class="top-left"></div>
-  <div class="top-middle">
-    <span class="timer"></span>
-  </div>
-  <div class="top-right"></div>
-  <div class="bottom-left"></div>
-  <div class="bottom-middle">
-    <p class="types-line-1">
-      <span class="image-wrapper-attack"></span>
-      <span class="line-1"></span>
-      <span class="image-wrapper-defense"></span>
-    </p>
-    <p class="types-line-2">
-      <span class="image-wrapper-attack"></span>
-      <span class="line-2"></span>
-      <span class="image-wrapper-defense"></span>
-    </p>
-    <p class="types-line-3">
-      <span class="image-wrapper-attack"></span>
-      <span class="line-3"></span>
-      <span class="image-wrapper-defense"></span>
-    </p>
-  </div>
-  <div class="bottom-right"></div>
+<div class="background"></div>
+<div class="interface-box">
+  <p class="text-element" id="text-element">Your text goes here</p>
 </div>
-<script src="units.js"></script>
-<script src="ui.js"></script>
-<script>
-  const topRight = document.querySelector('.top-right');
-
-  for (let i = 1; i < wavesData.length; i++) {
-    const img = document.createElement('img');
-    img.src = `img/${i}.png`;
-    img.id = `wave-${i}`;
-    topRight.appendChild(img);
-  }
-</script>
+<script type="text/javascript" src="ui.js"></script>
 </body>
 </html>
