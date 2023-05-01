@@ -147,8 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const fontSize = containerWidth * 0.025; // Adjust the multiplier to change the font size
     uiText.style.fontSize = `${fontSize}px`;
 
-    timerText.style.fontSize = `${fontSize * 3.0}px`;
-    timerText.style.marginBottom = `${fontSize}px`;
+    timerText.style.fontSize = `${fontSize * 3.5}px`;
+    timerText.style.marginBottom = `${fontSize * 1.5}px`;
 
     line1mid.style.fontSize = `${fontSize * 1.1}px`;
     line2mid.style.fontSize = `${fontSize * 2.1}px`;

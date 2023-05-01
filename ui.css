@@ -82,10 +82,6 @@ body, html {
     justify-content: flex-end;
 }
 
-/*.top-row.mid-col .timer {
-    justify-content: center;
-}*/
-
 .mid-row.mid-col {
     justify-content: center;
     flex-direction: column;
