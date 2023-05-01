@@ -127,9 +127,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const uiContainer = document.querySelector('.ui-container');
   const uiImage = document.querySelector('.ui-image');
   const wavesIcons = document.querySelector('.ui-container .ui-text .grid-item.top-row.right-col');
-  //const pastWavesIcons = document.querySelector('.ui-container .ui-text .grid-item.top-row.left-col');
 
   const timerText = document.querySelector('.timer');
+  const line1mid = document.querySelector('.line-1');
+  const line2mid = document.querySelector('.line-2');
+  const line3mid = document.querySelector('.line-3');
+  const midText = document.querySelector('.types-line-1');
 
   const updateDimensions = () => {
     //const containerHeight = uiContainer.clientHeight;
@@ -138,6 +141,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const fontSize = containerWidth * 0.025; // Adjust the multiplier to change the font size
     uiText.style.fontSize = `${fontSize}px`;
     timerText.style.fontSize = `${fontSize * 2.5}px`;
+
+    line1mid.style.fontSize = `${fontSize * 1.1}px`;
+    line2mid.style.fontSize = `${fontSize * 2.1}px`;
+    line3mid.style.fontSize = `${fontSize * 1.1}px`;
+
+    midText.style.marginTop = `${fontSize * 0.5}px`;
   };
 
 
