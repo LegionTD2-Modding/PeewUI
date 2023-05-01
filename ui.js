@@ -152,6 +152,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const uiText = document.querySelector('.ui-text');
   const uiContainer = document.querySelector('.ui-container');
   const uiImage = document.querySelector('.ui-image');
+  const wavesIcons = document.querySelector('.ui-container .ui-text .grid-item.top-row.right-col');
+  const pastWavesIcons = document.querySelector('.ui-container .ui-text .grid-item.top-row.left-col');
+
+  const timerText = document.querySelector('.timer');
 
   const updateDimensions = () => {
     const containerHeight = uiContainer.clientHeight;
@@ -159,7 +163,24 @@ document.addEventListener('DOMContentLoaded', () => {
     uiContainer.style.width = `${containerWidth}px`;
     const fontSize = containerWidth * 0.025; // Adjust the multiplier to change the font size
     uiText.style.fontSize = `${fontSize}px`;
+    timerText.style.fontSize = `${fontSize * 2.5}px`;
   };
+
+
+
+  for (let i = 1; i < wavesData.length; i++) {
+    const img = document.createElement('img');
+    img.src = `img/${i}.png`;
+    img.id = `wave-${i}`;
+    img.classList.add('wave-icon');
+    wavesIcons.appendChild(img);
+
+    const img2 = document.createElement('img');
+    img2.src = `img/${i}.png`;
+    img2.id = `wave--${i}`;
+    img2.classList.add('wave-icon');
+    pastWavesIcons.appendChild(img2);
+  }
 
   updateDimensions();
   window.addEventListener('resize', updateDimensions);

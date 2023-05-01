@@ -38,12 +38,13 @@ body, html {
     width: auto;
     left: 50%;
     transform: translateX(-50%);
+    z-index: 1;
 }
 
 .ui-text {
     position: relative;
     display: grid;
-    grid-template-columns: auto 29.2% auto;
+    grid-template-columns: 35.4% 29.2% 35.4%;
     grid-template-rows: 20% 46% 34%;
     width: 100%;
     height: 100%;
@@ -68,4 +69,60 @@ body, html {
 
 .bot-row {
     /*background-color: rgba(0, 0, 0, 0.2);*/
+}
+
+.left-col {
+    /*background-color: rgba(0, 0, 0, 0.2);*/
+    justify-content: flex-end;
+}
+
+.mid-col {
+    justify-content: center;
+    /*background-color: rgba(255, 255, 255, 0.2);*/
+}
+
+.right-col {
+    justify-content: flex-start;
+    /*flex-direction: row;*/
+    /*background-color: rgba(0, 0, 0, 0.2);*/
+}
+
+.wave-icon {
+    width: auto;
+    height: 100%;
+    z-index: 0;
+}
+
+.grid-item.right-col img:nth-child(6) {
+    opacity: 0.67;
+}
+
+.grid-item.right-col img:nth-child(7) {
+    opacity: 0.33;
+}
+
+.grid-item.right-col img:nth-child(n+8) {
+    opacity: 0;
+}
+
+
+.grid-item.left-col img:nth-last-child(6) {
+    opacity: 0.67;
+}
+
+.grid-item.left-col img:nth-last-child(7) {
+    opacity: 0.33;
+}
+
+.grid-item.left-col img:nth-last-child(n+8) {
+    opacity: 0;
+}
+
+.timer {
+    z-index: 1;
+    justify-content: center;
+    position: relative;
+    color: white;
+    -webkit-text-fill-color: black;
+    -webkit-text-stroke-width: 2px;
 }
