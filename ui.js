@@ -98,15 +98,19 @@ function updateUI() {
 function moveImage(wave) {
   const image = document.querySelector(`#wave-${wave}`);
   const middle = document.querySelector('.top-row.mid-col');
-  
+  const right = document.querySelector('.top-row.right-col');
+
+  right.removeChild(image);
   middle.appendChild(image);
-  image.style.position = 'absolute';
+
+  image.style.position = 'relative';
   image.style.right = '0';
-  image.style.transition = `right ${buildPhaseDuration[1]}s`;
+  image.style.zIndex = '1';
+  image.style.transition = `right ${buildPhaseDuration[1]}s linear`;
 
   setTimeout(() => {
-    image.style.right = 'calc(100% - 32px)';
-  }, 0);
+    image.style.right = `calc(100% - ${image.clientWidth}px)`;
+  }, 100);
 }
 
 function moveToTopLeft(wave) {
@@ -164,5 +168,5 @@ document.addEventListener('DOMContentLoaded', () => {
   updateDimensions();
   window.addEventListener('resize', updateDimensions);
 
-  startUILoop();
+    setTimeout(startUILoop, 100);
 });
