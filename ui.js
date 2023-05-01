@@ -41,35 +41,37 @@ function nextPhase() {
 
 
 function updateUI() {
-  //const bottomMiddle = document.querySelector('.bottom-middle');
   const topMiddle = document.querySelector('.timer');
   const image = document.querySelector(`#wave-${currentWave}`);
   const line1 = document.querySelector('.line-1');
   const line2 = document.querySelector('.line-2');
   const line3 = document.querySelector('.line-3');
 
-  //const line1WrapperA = document.querySelector('.types-line-1 .image-wrapper-attack');
-  //const line1WrapperD = document.querySelector('.types-line-1 .image-wrapper-defense');
-  //const line2WrapperA = document.querySelector('.types-line-2 .image-wrapper-attack');
-  //const line2WrapperD = document.querySelector('.types-line-2 .image-wrapper-defense');
-  //const line3WrapperA = document.querySelector('.types-line-3 .image-wrapper-attack');
-  //const line3WrapperD = document.querySelector('.types-line-3 .image-wrapper-defense');
+  const uiImage = document.querySelector('.ui-image');
+  const fontSize = uiImage.clientWidth * 0.025;
+
+  const line1WrapperA = document.querySelector('.types-line-1 .image-wrapper-attack');
+  const line1WrapperD = document.querySelector('.types-line-1 .image-wrapper-defense');
+  const line2WrapperA = document.querySelector('.types-line-2 .image-wrapper-attack');
+  const line2WrapperD = document.querySelector('.types-line-2 .image-wrapper-defense');
+  const line3WrapperA = document.querySelector('.types-line-3 .image-wrapper-attack');
+  const line3WrapperD = document.querySelector('.types-line-3 .image-wrapper-defense');
 
   if (currentPhase === 'build') {
     line1.textContent = `Prepare for`;
     line2.textContent = `WAVE ${currentWave}`;
     line3.textContent = ``;
-/*
+
     let attack = wavesData[Math.min(currentWave, 21)].dmgType;
     let defense = wavesData[Math.min(currentWave, 21)].defType;
 
-    line2WrapperA.innerHTML = ` <img style="margin-right: 0.6vw;" class="img" src='img/types/${attack}.png' alt='Damage ${attack}' /> `
-    line2WrapperD.innerHTML = ` <img style="margin-left: 0.6vw;" class="img" src='img/types/${defense}.png' alt='Defense ${defense}' /> `
+    line2WrapperA.innerHTML = ` <img class='type-icon' src='img/types/${attack}.png' alt='Damage ${attack}' /> `
+    line2WrapperD.innerHTML = ` <img class='type-icon' src='img/types/${defense}.png' alt='Defense ${defense}' /> `
     line3WrapperA.innerHTML = ``
     line3WrapperD.innerHTML = ``
-*/
+
     topMiddle.textContent = `${remainingTime}`;
-    image.style.border = '4px solid black';
+    image.style.border = `${fontSize * 0.2}px solid black`;
 
     if ((currentWave === 1 && remainingTime === buildPhaseDuration[0]) || (currentWave > 1 && remainingTime === buildPhaseDuration[1])) {
       moveImage(currentWave);
@@ -81,15 +83,15 @@ function updateUI() {
     line1.textContent = ``;
     line2.textContent = `WAVE ${currentWave}`;
     line3.textContent = `Next: WAVE ${currentWave + 1}`;
-/*
+
     let attack = wavesData[Math.min(currentWave + 1, 21)].dmgType;
     let defense = wavesData[Math.min(currentWave + 1, 21)].defType;
 
-    line3WrapperA.innerHTML = ` <img style="width: 1vw; height: 1vw; margin-right: 0.3vw;" src='img/types/${attack}.png' alt='Damage ${attack}' /> `
-    line3WrapperD.innerHTML = ` <img style="width: 1vw; height: 1vw; margin-left: 0.3vw;" src='img/types/${defense}.png' alt='Defense ${defense}' /> `
-*/
+    line3WrapperA.innerHTML = ` <img class='type-icon' src='img/types/${attack}.png' alt='Damage ${attack}' /> `
+    line3WrapperD.innerHTML = ` <img class='type-icon' src='img/types/${defense}.png' alt='Defense ${defense}' /> `
+
     topMiddle.textContent = '';
-    image.style.border = '4px solid red';
+    image.style.border = `${fontSize * 0.2}px solid red`;
   }
 }
 
@@ -157,13 +159,6 @@ document.addEventListener('DOMContentLoaded', () => {
     img.id = `wave-${i}`;
     img.classList.add('wave-icon');
     wavesIcons.appendChild(img);
-
-    /*
-    const img2 = document.createElement('img');
-    img2.src = `img/${i}.png`;
-    img2.id = `wave--${i}`;
-    img2.classList.add('wave-icon');
-    pastWavesIcons.appendChild(img2);*/
   }
 
   updateDimensions();
