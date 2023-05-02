@@ -171,3 +171,19 @@ body, html {
         transform: translateX(-100%);
     }
 }
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.fade-out {
+    animation: fadeOut 1.5s 1 forwards linear;
+}

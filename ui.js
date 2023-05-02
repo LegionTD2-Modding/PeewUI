@@ -1,11 +1,12 @@
 const buildPhaseDuration = [13, 7];
 const fightPhaseDuration = 5;
 const maxWaves = 30;
+const fontSizeRatio = 0.024;
 
 let currentPhase = 'build';
 let currentWave = 1;
 let phaseTimer;
-let remainingTime;
+let remainingTime = 0;
 
 function startUILoop() {
   remainingTime = buildPhaseDuration[0];
@@ -35,6 +36,9 @@ function nextPhase() {
     }
     currentPhase = 'build';
     remainingTime = buildPhaseDuration[1];
+
+    const topMiddle = document.querySelector('.timer');
+    topMiddle.contentText = remainingTime;
   }
   updateUI();
 }
@@ -44,9 +48,7 @@ function updateUI() {
   const topMiddle = document.querySelector('.timer');
   const image = document.querySelector(`#wave-${currentWave}`);
   const uiImage = document.querySelector('.ui-image');
-  const fontSize = uiImage.clientWidth * 0.025;
-
-  topMiddle.textContent = `${remainingTime}`;
+  const fontSize = uiImage.clientWidth * fontSizeRatio;
 
   if (currentPhase === 'build' && remainingTime <= 3) {
     image.style.border = `solid red`;
@@ -54,16 +56,14 @@ function updateUI() {
     image.style.borderStyle = 'outset';
     image.style.borderWidth = `${fontSize * 0.2}px`
     image.style.animation = `breathingBorder 0.5s infinite linear`;
-  } else {
-    topMiddle.style.color = 'white';
   }
 
   const line1 = document.querySelector('.line-1');
   const line2 = document.querySelector('.line-2');
   const line3 = document.querySelector('.line-3');
 
-  const line1WrapperA = document.querySelector('.types-line-1 .image-wrapper-attack');
-  const line1WrapperD = document.querySelector('.types-line-1 .image-wrapper-defense');
+  //const line1WrapperA = document.querySelector('.types-line-1 .image-wrapper-attack');
+  //const line1WrapperD = document.querySelector('.types-line-1 .image-wrapper-defense');
   const line2WrapperA = document.querySelector('.types-line-2 .image-wrapper-attack');
   const line2WrapperD = document.querySelector('.types-line-2 .image-wrapper-defense');
   const line3WrapperA = document.querySelector('.types-line-3 .image-wrapper-attack');
@@ -108,23 +108,22 @@ function updateUI() {
     line3WrapperA.innerHTML = `&nbsp;<img class='type-icon' src='img/types/${attack}.png' alt='Damage ${attack}' />&nbsp;`
     line3WrapperD.innerHTML = `&nbsp;<img class='type-icon' src='img/types/${defense}.png' alt='Defense ${defense}' />&nbsp;`
 
-    topMiddle.textContent = '';
+    if (topMiddle.textContent !== '   ') {
+      topMiddle.textContent = 'FIGHT';
+      topMiddle.classList.add('fade-out');
+      topMiddle.addEventListener('animationend', function() {
+        topMiddle.textContent = '   ';
+        topMiddle.style.opacity = '1';
+        topMiddle.style.color = 'white';
+        topMiddle.classList.remove('fade-out');
+      });
+    }
 
     image.style.border = `solid red`;
     image.style.borderStyle = 'outset';
     image.style.borderWidth = `${fontSize * 0.2}px`
     image.style.animation = '';
   }
-}
-
-function moveImageToTheLeft(image, left, right) {
-  image.style.animation = 'slideLeft 0.1s forwards';
-  image.addEventListener('animationend', function() {
-    image.style.animation = '';
-    //image.removeEventListener('animationend', arguments.callee);
-    //right.removeChild(image)
-    left.appendChild(image);
-  });
 }
 
 function moveImage(wave) {
@@ -237,9 +236,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const containerWidth = uiImage.clientWidth;
 
     uiContainer.style.width = `${containerWidth}px`;
-    const fontSize = containerWidth * 0.025; // Adjust the multiplier to change the font size
+    const fontSize = containerWidth * fontSizeRatio; // Adjust the multiplier to change the font size
     uiText.style.fontSize = `${fontSize}px`;
 
+    timerText.textContent = '';
     timerText.style.fontSize = `${fontSize * 3.5}px`;
     timerText.style.marginBottom = `${fontSize * 1.5}px`;
 
