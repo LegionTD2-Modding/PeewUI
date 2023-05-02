@@ -142,19 +142,34 @@ function moveImage(wave) {
   const middle = document.querySelector('.top-row.mid-col');
   const right = document.querySelector('.top-row.right-col');
 
-  image.style.animation = 'slideLeft 0.5s forwards';
-  image.addEventListener('animationend', function() {
-    image.style.animation = '';
-    middle.appendChild(image);
-    image.style.position = 'relative';
-    image.style.right = '0';
-    image.style.zIndex = '1';
-    image.style.transition = `right ${remainingTime - 0.5}s linear`;
+  right.querySelectorAll('img').forEach(t_img => {
 
-    setTimeout(() => {
-      image.style.right = `calc(100% - ${image.clientWidth}px)`;
-    }, 0);
+    t_img.addEventListener('click', function () {
+      /**/
+    });
+
+    t_img.style.animation = 'slideLeft 0.5s forwards';
+    t_img.addEventListener('animationend', function () {
+
+      t_img.style.animation = '';
+
+      if (t_img === image) {
+
+        middle.appendChild(image);
+
+        image.style.position = 'relative';
+        image.style.right = '0';
+        image.style.zIndex = '1';
+        image.style.transition = `right ${remainingTime - 0.5}s linear`;
+
+        setTimeout(() => {
+          image.style.right = `calc(100% - ${image.clientWidth}px)`;
+        }, 0);
+
+      }
+    });
   });
+
 }
 
 function moveToTopLeft(wave) {
