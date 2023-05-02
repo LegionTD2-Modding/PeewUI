@@ -222,6 +222,26 @@ function loopDone() {
 
 
 document.addEventListener('DOMContentLoaded', () => {
+
+  const soundUrls = [
+    'snd/battle-begin.ogg',
+    'snd/expecting-send.ogg',
+    'snd/ping-thinking-about.ogg',
+    'snd/save.ogg',
+    'snd/send.ogg',
+    'snd/tick-tock.ogg',
+    'snd/welcome.ogg',
+    'snd/windgust.ogg'
+  ];
+
+  preloadSounds(soundUrls).then(() => {
+    console.log('All sounds loaded');
+    setTimeout(startUILoop, 10);
+  }).catch(error => {
+        console.error('Error while preloading sounds:', error);
+      }
+  );
+
   const uiText = document.querySelector('.ui-text');
   const uiContainer = document.querySelector('.ui-container');
   const uiImage = document.querySelector('.ui-image');
@@ -289,8 +309,6 @@ document.addEventListener('DOMContentLoaded', () => {
   updateDimensions();
   window.addEventListener('resize', updateDimensions);
   window.addEventListener('load', updateDimensions);
-
-  setTimeout(startUILoop, 1000);
 });
 
 function onLeftClickWaveIcon(event, wave_id) {
@@ -306,7 +324,7 @@ function onLeftClickWaveIcon(event, wave_id) {
   }
 
   chatTxt.appendChild(msg);
-  event.preventDefault();
+  //event.preventDefault();
 }
 
 function onMiddleClickWaveIcon(event, wave_id) {
@@ -322,7 +340,7 @@ function onMiddleClickWaveIcon(event, wave_id) {
   }
 
   chatTxt.appendChild(msg);
-  event.preventDefault();
+  //event.preventDefault();
 
 }
 
@@ -339,7 +357,7 @@ function onRightClickWaveIcon(event, wave_id) {
   }
 
   chatTxt.appendChild(msg);
-  event.preventDefault();
+  //event.preventDefault();
 }
 
 function playOggSound(url, volume = soundVolume) {
@@ -352,3 +370,20 @@ function playOggSound(url, volume = soundVolume) {
     console.error('Error occurred while loading the sound:', audio.error);
   });
 }
+
+function loadAudio(url) {
+  return new Promise((resolve, reject) => {
+    const audio = new Audio(url);
+    audio.addEventListener('canplaythrough', () => {
+      resolve(audio);
+    });
+    audio.addEventListener('error', () => {
+      reject(new Error(`Error loading sound: ${url}`));
+    });
+  });
+}
+
+function preloadSounds(soundUrls) {
+  return Promise.all(soundUrls.map(loadAudio));
+}
+
