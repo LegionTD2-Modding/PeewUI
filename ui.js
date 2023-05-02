@@ -352,7 +352,8 @@ window.addEventListener('DOMContentLoaded', () => {
     'snd/send.ogg',
     'snd/tick-tock.ogg',
     'snd/welcome.ogg',
-    'snd/windgust.ogg'
+    'snd/windgust.ogg',
+    'snd/Fiesta.ogg'
   ];
 
   preloadSounds(soundUrls).then(() => {
@@ -410,17 +411,23 @@ window.addEventListener('DOMContentLoaded', () => {
     img.classList.add('wave-icon');
     wavesIcons.appendChild(img);
     img.addEventListener('mousedown', event => {
-      if (event.buttons & 1) {// Left click
+      if (event.buttons & 1) {
         onLeftClickWaveIcon(event, i);
-      } else if (event.buttons & 2) {// Right click
+      } else if (event.buttons & 2) {
         onRightClickWaveIcon(event, i);
-      } else if (event.buttons & 4) {// Middle click
+      } else if (event.buttons & 4) {
         onMiddleClickWaveIcon(event, i);
       } else {
         console.log('Unknown click type detected.');
       }
     });
   }
+
+  document.getElementById("pub-span-kidev").addEventListener('mousedown', event => {
+    if (event.buttons & 1) {
+      playOggSound('snd/Fiesta.ogg');
+    }
+  });
 
   updateDimensions();
   window.addEventListener('resize', updateDimensions);
