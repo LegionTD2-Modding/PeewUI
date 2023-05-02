@@ -2,12 +2,14 @@ const buildPhaseDuration = [13, 7];
 const fightPhaseDuration = 5;
 const maxWaves = 30;
 const fontSizeRatio = 0.024;
-const soundVolume = 0.1;
 
+let soundVolume = 0.1;
 let currentPhase = 'build';
 let currentWave = 1;
 let phaseTimer;
 let remainingTime = 0;
+
+let timeReducer = 1.0;
 
 console.log = (function (originalLog) {
   return function (...args) {
@@ -54,7 +56,7 @@ function startUILoop() {
   console.info('WELCOME TO NOVA');
   remainingTime = buildPhaseDuration[0];
   updateUI();
-  phaseTimer = setInterval(nextSecond, 1000);
+  phaseTimer = setInterval(nextSecond, 1000 / timeReducer);
 }
 
 function nextSecond() {
@@ -82,7 +84,7 @@ function nextPhase() {
 
     const topMiddle = document.querySelector('.timer');
     topMiddle.contentText = remainingTime;
-    setTimeout(fightBegins, remainingTime * 1000);
+    setTimeout(fightBegins, remainingTime * 1000 / timeReducer);
   }
   updateUI();
 }
@@ -435,6 +437,39 @@ window.addEventListener('DOMContentLoaded', () => {
     if (event.buttons & 1) {
       window.startUILoop();
       document.getElementById("start-button").style.opacity = '0';
+    }
+  });
+  document.getElementById("bottom-left-input").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      const typedText = document.getElementById("bottom-left-input").value;
+      const msg = document.createElement('span');
+      const chatTxt = document.getElementById('bottom-left-txt');
+      msg.innerHTML = `<span style="color: red">PLAYER</span>: ${typedText}<br/>`;
+
+      if (typedText === '/fast') {
+        timeReducer = 5.0;
+        loopDone();
+        phaseTimer = setInterval(nextSecond, 1000 / timeReducer);
+        msg.innerHTML = `<span style="color: green">Fast mode enabled</span><br/>`;
+      }
+      if (typedText === '/slow') {
+        timeReducer = 1.0;
+        loopDone();
+        phaseTimer = setInterval(nextSecond, 1000);
+        msg.innerHTML = `<span style="color: green">Fast mode disabled</span><br/>`;
+      }
+      if (typedText === '/mute') {
+        soundVolume = 0.0;
+        msg.innerHTML = `<span style="color: green">Sounds disabled</span><br/>`;
+      }
+      if (typedText === '/unmute') {
+        soundVolume = 0.1;
+        msg.innerHTML = `<span style="color: green">Sounds enabled</span><br/>`;
+      }
+
+      chatTxt.appendChild(msg);
+      document.getElementById("bottom-left-input").value = '';
     }
   });
 
