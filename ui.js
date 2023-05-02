@@ -135,6 +135,10 @@ function moveImage(wave) {
     img.src = `img/21.png`;
     img.id = `wave-${wave + 8}`;
     img.classList.add('wave-icon');
+    img.addEventListener('click', function () {
+      console.log(`${img.id}`);
+    });
+    img.style.cursor = 'pointer';
     wavesIcons.appendChild(img);
   }
 
@@ -143,10 +147,6 @@ function moveImage(wave) {
   const right = document.querySelector('.top-row.right-col');
 
   right.querySelectorAll('img').forEach(t_img => {
-
-    t_img.addEventListener('click', function () {
-      /**/
-    });
 
     t_img.style.animation = 'slideLeft 0.5s forwards';
     t_img.addEventListener('animationend', function () {
@@ -173,13 +173,34 @@ function moveImage(wave) {
 }
 
 function moveToTopLeft(wave) {
+
   const image = document.querySelector(`#wave-${wave}`);
   const target = document.querySelector('.top-row.left-col');
-  image.style.transition = 'none';
+
   image.style.border = '';
-  image.style.position = 'static';
   image.style.zIndex = '0';
-  target.appendChild(image);
+
+  target.querySelectorAll('img').forEach(t_img => {
+
+    t_img.style.animation = 'slideLeft 0.5s forwards';
+    t_img.addEventListener('animationend', function () {
+
+      t_img.style.animation = '';
+    });
+  });
+
+  image.style.animation = 'slideLeft 0.5s forwards';
+
+  image.addEventListener('animationend', function () {
+
+    image.style.animation = '';
+    image.style.transition = 'none';
+    image.style.border = '';
+    image.style.position = 'static';
+    image.style.zIndex = '0';
+    target.appendChild(image);
+  });
+
 }
 
 
