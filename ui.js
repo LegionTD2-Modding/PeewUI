@@ -117,6 +117,16 @@ function updateUI() {
   }
 }
 
+function moveImageToTheLeft(image, left, right) {
+  image.style.animation = 'slideLeft 0.1s forwards';
+  image.addEventListener('animationend', function() {
+    image.style.animation = '';
+    //image.removeEventListener('animationend', arguments.callee);
+    //right.removeChild(image)
+    left.appendChild(image);
+  });
+}
+
 function moveImage(wave) {
 
   if (wave >= 14) {
@@ -132,17 +142,19 @@ function moveImage(wave) {
   const middle = document.querySelector('.top-row.mid-col');
   const right = document.querySelector('.top-row.right-col');
 
-  right.removeChild(image);
-  middle.appendChild(image);
+  image.style.animation = 'slideLeft 0.5s forwards';
+  image.addEventListener('animationend', function() {
+    image.style.animation = '';
+    middle.appendChild(image);
+    image.style.position = 'relative';
+    image.style.right = '0';
+    image.style.zIndex = '1';
+    image.style.transition = `right ${remainingTime - 0.5}s linear`;
 
-  image.style.position = 'relative';
-  image.style.right = '0';
-  image.style.zIndex = '1';
-  image.style.transition = `right ${remainingTime - 0.5}s linear`;
-
-  setTimeout(() => {
-    image.style.right = `calc(100% - ${image.clientWidth}px)`;
-  }, 0);
+    setTimeout(() => {
+      image.style.right = `calc(100% - ${image.clientWidth}px)`;
+    }, 0);
+  });
 }
 
 function moveToTopLeft(wave) {
