@@ -402,6 +402,9 @@ window.addEventListener('DOMContentLoaded', () => {
     line3mid.style.fontSize = `${fontSize * 1.1}px`;
 
     midText.style.marginTop = `${fontSize * 0.5}px`;
+
+    document.getElementById('top-right-txt').style.fontSize = `${fontSize * 0.7}px`;
+    document.getElementById('bottom-left-txt').style.fontSize = `${fontSize * 1.1}px`;
   };
 
   for (let i = 1; i < wavesData.length; i++) {
