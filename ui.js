@@ -13,6 +13,7 @@ function startUILoop() {
   remainingTime = buildPhaseDuration[0];
   updateUI();
   phaseTimer = setInterval(nextSecond, 1000);
+  playOggSound('snd/welcome.ogg');
 }
 
 function nextSecond() {
@@ -56,12 +57,21 @@ function updateUI() {
   const uiImage = document.querySelector('.ui-image');
   const fontSize = uiImage.clientWidth * fontSizeRatio;
 
-  if (currentPhase === 'build' && remainingTime <= 3) {
-    image.style.border = `solid red`;
-    topMiddle.style.color = 'red';
-    image.style.borderStyle = 'outset';
-    image.style.borderWidth = `${fontSize * 0.2}px`
-    image.style.animation = `breathingBorder 0.5s infinite linear`;
+  if (currentPhase === 'build') {
+    if (remainingTime <= 3) {
+      image.style.border = `solid red`;
+      topMiddle.style.color = 'red';
+      image.style.borderStyle = 'outset';
+      image.style.borderWidth = `${fontSize * 0.2}px`
+      image.style.animation = `breathingBorder 0.5s infinite linear`;
+
+      if (remainingTime === 3) {
+        playOggSound('snd/tick-tock.ogg');
+      }
+    }
+    if (remainingTime === 5) {
+      playOggSound('snd/windgust.ogg');
+    }
   }
 
   const line1 = document.querySelector('.line-1');
@@ -280,33 +290,55 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', updateDimensions);
   window.addEventListener('load', updateDimensions);
 
-  setTimeout(startUILoop, 100);
+  setTimeout(startUILoop, 1000);
 });
 
 function onLeftClickWaveIcon(event, wave_id) {
   const msg = document.createElement('span');
-  msg.innerHTML = `<span style="color: red">PLAYER</span> WANTS TO <span style="color: green">SEND WAVE ${wave_id}</span><br/>`;
   const chatTxt = document.querySelector('.fake-chat');
+
+  if (event.ctrlKey) {
+    msg.innerHTML = `<span style="color: red">PLAYER</span> is thinking about <span style="color: green">sending WAVE ${wave_id}</span><br/>`;
+    playOggSound('snd/ping-thinking-about.ogg');
+  } else {
+    msg.innerHTML = `<span style="color: red">PLAYER</span> WANTS TO <span style="color: green">SEND WAVE ${wave_id}</span><br/>`;
+    playOggSound('snd/send.ogg');
+  }
+
   chatTxt.appendChild(msg);
-  playOggSound('snd/send.ogg');
   event.preventDefault();
 }
 
 function onMiddleClickWaveIcon(event, wave_id) {
   const msg = document.createElement('span');
-  msg.innerHTML = `<span style="color: red">PLAYER</span> WANTS TO START <span style="color: green">SAVING WAVE ${wave_id}</span><br/>`;
   const chatTxt = document.querySelector('.fake-chat');
+
+  if (event.ctrlKey) {
+    msg.innerHTML = `<span style="color: red">PLAYER</span> is thinking about <span style="color: green">saving WAVE ${wave_id}</span><br/>`;
+    playOggSound('snd/ping-thinking-about.ogg');
+  } else {
+    msg.innerHTML = `<span style="color: red">PLAYER</span> WANTS TO START <span style="color: green">SAVING WAVE ${wave_id}</span><br/>`;
+    playOggSound('snd/save.ogg');
+  }
+
   chatTxt.appendChild(msg);
-  playOggSound('snd/save.ogg');
   event.preventDefault();
+
 }
 
 function onRightClickWaveIcon(event, wave_id) {
   const msg = document.createElement('span');
-  msg.innerHTML = `<span style="color: red">PLAYER</span> EXPECTS A <span style="color: green">SEND WAVE ${wave_id}</span><br/>`;
   const chatTxt = document.querySelector('.fake-chat');
+
+  if (event.ctrlKey) {
+    msg.innerHTML = `<span style="color: red">PLAYER</span> think they may <span style="color: green">send WAVE ${wave_id}</span><br/>`;
+    playOggSound('snd/ping-thinking-about.ogg');
+  } else {
+    msg.innerHTML = `<span style="color: red">PLAYER</span> EXPECTS A <span style="color: green">SEND WAVE ${wave_id}</span><br/>`;
+    playOggSound('snd/expecting-send.ogg');
+  }
+
   chatTxt.appendChild(msg);
-  playOggSound('snd/expecting-send.ogg');
   event.preventDefault();
 }
 
