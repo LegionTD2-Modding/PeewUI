@@ -11,6 +11,51 @@ let remainingTime = 0;
 
 let timeReducer = 1.0;
 
+function resetGame() {
+  loopDone();
+
+  currentPhase = 'build';
+  currentWave = 1;
+  remainingTime = 0;
+
+  document.querySelector('.ui-container').innerHTML =
+      ' <img class="ui-image" src="img/ui.png" alt="UI">' +
+      ' <div class="ui-text">' +
+      '    <div class="grid-item top-row left-col"></div>' +
+      '    <div class="grid-item top-row mid-col">' +
+      '      <span class="timer">0</span>' +
+      '    </div>' +
+      '    <div class="grid-item top-row right-col"></div>' +
+      '    <div class="grid-item mid-row left-col"></div>' +
+      '    <div class="grid-item mid-row mid-col">' +
+      '      <p class="types-line-1">' +
+      '        <span class="image-wrapper-attack"></span>' +
+      '        <span class="line-1"></span>' +
+      '        <span class="image-wrapper-defense"></span>' +
+      '      </p>' +
+      '      <p class="types-line-2">' +
+      '        <span class="image-wrapper-attack"></span>' +
+      '        <span class="line-2"></span>' +
+      '        <span class="image-wrapper-defense"></span>' +
+      '      </p>' +
+      '      <p class="types-line-3">' +
+      '        <span class="image-wrapper-attack"></span>' +
+      '        <span class="line-3"></span>' +
+      '        <span class="image-wrapper-defense"></span>' +
+      '      </p>' +
+      '    </div>' +
+      '    <div class="grid-item mid-row right-col"></div>' +
+      '    <div class="grid-item bot-row left-col"></div>' +
+      '    <div class="grid-item bot-row mid-col">' +
+      '      <img src="img/unpause.png" style="opacity: 1" alt="Unpause" id="start-button">' +
+      '    </div>' +
+      '    <div class="grid-item bot-row right-col"></div>' +
+      '  </div>';
+
+  setupPage(true);
+  remainingTime = buildPhaseDuration[0];
+}
+
 console.log = (function (originalLog) {
   return function (...args) {
     originalLog.apply(console, args); // Call the original console.log function
@@ -365,6 +410,70 @@ window.addEventListener('DOMContentLoaded', () => {
         console.error('Error while preloading sounds:', error);
       });
 
+  setupPage(false);
+
+
+  document.getElementById("pub-span-kidev").addEventListener('mousedown', event => {
+    if (event.buttons & 1) {
+      playOggSound('snd/Fiesta.ogg');
+    }
+  });
+  document.getElementById("start-button").addEventListener('mousedown', event => {
+    if (event.buttons & 1) {
+      window.startUILoop();
+      document.getElementById("start-button").style.opacity = '0';
+    }
+  });
+  document.getElementById("bottom-left-input").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      const typedText = document.getElementById("bottom-left-input").value;
+      const msg = document.createElement('span');
+      const chatTxt = document.getElementById('bottom-left-txt');
+      msg.innerHTML = `<span style="color: red">PLAYER</span>: ${typedText}<br/>`;
+
+      if (typedText === '/fast') {
+        timeReducer = 5.0;
+        loopDone();
+        phaseTimer = setInterval(nextSecond, 1000 / timeReducer);
+        msg.innerHTML = `<span style="color: green">Fast mode enabled</span><br/>`;
+      }
+      if (typedText === '/slow') {
+        timeReducer = 1.0;
+        loopDone();
+        phaseTimer = setInterval(nextSecond, 1000);
+        msg.innerHTML = `<span style="color: green">Fast mode disabled</span><br/>`;
+      }
+      if (typedText === '/mute') {
+        soundVolume = 0.0;
+        msg.innerHTML = `<span style="color: green">Sounds disabled</span><br/>`;
+      }
+      if (typedText === '/unmute') {
+        soundVolume = 0.1;
+        msg.innerHTML = `<span style="color: green">Sounds enabled</span><br/>`;
+      }
+      if (typedText === '/start') {
+        if (document.getElementById("start-button").style.opacity === '1') {
+          msg.innerHTML = `<span style="color: green">Started game!</span><br/>`;
+          window.startUILoop();
+          document.getElementById("start-button").style.opacity = '0';
+        }
+      }
+      if (typedText === '/help') {
+        msg.innerHTML = `<span style="color: green">Commands: /help, /fast, /slow, /mute, /unmute<br/>/start, /reset, /stop, /restart<br/><br/>Made with love by Kidev :)</span><br/>`;
+      }
+      if (typedText === '/reset' || typedText === '/stop' || typedText === '/restart') {
+        msg.innerHTML = `<span style="color: green">Game restarted!</span><br/>`;
+        window.resetGame();
+      }
+
+      chatTxt.appendChild(msg);
+      document.getElementById("bottom-left-input").value = '';
+    }
+  });
+});
+
+function setupPage(reset = false) {
   const uiText = document.querySelector('.ui-text');
   const uiContainer = document.querySelector('.ui-container');
   const uiImage = document.querySelector('.ui-image');
@@ -428,53 +537,13 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  document.getElementById("pub-span-kidev").addEventListener('mousedown', event => {
-    if (event.buttons & 1) {
-      playOggSound('snd/Fiesta.ogg');
-    }
-  });
-  document.getElementById("start-button").addEventListener('mousedown', event => {
-    if (event.buttons & 1) {
-      window.startUILoop();
-      document.getElementById("start-button").style.opacity = '0';
-    }
-  });
-  document.getElementById("bottom-left-input").addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      const typedText = document.getElementById("bottom-left-input").value;
-      const msg = document.createElement('span');
-      const chatTxt = document.getElementById('bottom-left-txt');
-      msg.innerHTML = `<span style="color: red">PLAYER</span>: ${typedText}<br/>`;
-
-      if (typedText === '/fast') {
-        timeReducer = 5.0;
-        loopDone();
-        phaseTimer = setInterval(nextSecond, 1000 / timeReducer);
-        msg.innerHTML = `<span style="color: green">Fast mode enabled</span><br/>`;
-      }
-      if (typedText === '/slow') {
-        timeReducer = 1.0;
-        loopDone();
-        phaseTimer = setInterval(nextSecond, 1000);
-        msg.innerHTML = `<span style="color: green">Fast mode disabled</span><br/>`;
-      }
-      if (typedText === '/mute') {
-        soundVolume = 0.0;
-        msg.innerHTML = `<span style="color: green">Sounds disabled</span><br/>`;
-      }
-      if (typedText === '/unmute') {
-        soundVolume = 0.1;
-        msg.innerHTML = `<span style="color: green">Sounds enabled</span><br/>`;
-      }
-
-      chatTxt.appendChild(msg);
-      document.getElementById("bottom-left-input").value = '';
-    }
-  });
+  if (reset === true) {
+    window.removeEventListener('resize', updateDimensions);
+    window.removeEventListener('load', updateDimensions);
+  }
 
   updateDimensions();
+
   window.addEventListener('resize', updateDimensions);
   window.addEventListener('load', updateDimensions);
-});
-
+}
