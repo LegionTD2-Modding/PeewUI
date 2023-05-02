@@ -69,6 +69,14 @@ body, html {
     z-index: 2;
 }
 
+.bot-row.mid-col {
+    position: relative;
+    display: flex;
+    padding: 0;
+    border: 0;
+    bottom: 27%;
+}
+
 .left-col {
     justify-content: flex-end;
     flex-direction: row;
@@ -220,4 +228,11 @@ body, html {
 
 #top-right-txt:hover {
     opacity: 1;
+}
+
+#start-button {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    z-index: 4;
 }

@@ -358,7 +358,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   preloadSounds(soundUrls).then(() => {
       console.info('All sounds loaded');
-      window.startUILoop();
+      document.getElementById("start-button").style.opacity = '1';
     }).catch(error => {
         console.error('Error while preloading sounds:', error);
       });
@@ -426,6 +426,12 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById("pub-span-kidev").addEventListener('mousedown', event => {
     if (event.buttons & 1) {
       playOggSound('snd/Fiesta.ogg');
+    }
+  });
+  document.getElementById("start-button").addEventListener('mousedown', event => {
+    if (event.buttons & 1) {
+      window.startUILoop();
+      document.getElementById("start-button").style.opacity = '0';
     }
   });
 
