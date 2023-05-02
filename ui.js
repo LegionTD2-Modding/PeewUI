@@ -141,8 +141,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const midText = document.querySelector('.types-line-1');
 
   const updateDimensions = () => {
+    const screenW = window.innerWidth;
+    const imageW = uiImage.clientWidth;
+
+    if (screenW < imageW) {
+      const scaleFactor = screenW / imageW;
+      uiContainer.style.transform = `scale(${scaleFactor})`;
+      uiContainer.style.transformOrigin = 'top left';
+    } else {
+      uiContainer.style.transform = 'scale(1)';
+    }
+
     //const containerHeight = uiContainer.clientHeight;
     const containerWidth = uiImage.clientWidth;
+
     uiContainer.style.width = `${containerWidth}px`;
     const fontSize = containerWidth * 0.025; // Adjust the multiplier to change the font size
     uiText.style.fontSize = `${fontSize}px`;
@@ -169,6 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updateDimensions();
   window.addEventListener('resize', updateDimensions);
+  window.addEventListener('load', updateDimensions);
 
-    setTimeout(startUILoop, 100);
+  setTimeout(startUILoop, 100);
 });
