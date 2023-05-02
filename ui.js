@@ -2,6 +2,7 @@ const buildPhaseDuration = [13, 7];
 const fightPhaseDuration = 5;
 const maxWaves = 30;
 const fontSizeRatio = 0.024;
+const soundVolume = 0.1;
 
 let currentPhase = 'build';
 let currentWave = 1;
@@ -39,8 +40,13 @@ function nextPhase() {
 
     const topMiddle = document.querySelector('.timer');
     topMiddle.contentText = remainingTime;
+    setTimeout(fightBegins, remainingTime * 1000);
   }
   updateUI();
+}
+
+function fightBegins() {
+  playOggSound('snd/battle-begin.ogg');
 }
 
 
@@ -109,9 +115,6 @@ function updateUI() {
     line3WrapperD.innerHTML = `&nbsp;<img class='type-icon' src='img/types/${defense}.png' alt='Defense ${defense}' />&nbsp;`
 
     if (topMiddle.textContent !== '   ') {
-
-      playOggSound('snd/battle-begin.ogg');
-
       topMiddle.textContent = 'FIGHT';
       topMiddle.classList.add('fade-out');
       topMiddle.addEventListener('animationend', function() {
@@ -307,8 +310,9 @@ function onRightClickWaveIcon(event, wave_id) {
   event.preventDefault();
 }
 
-function playOggSound(url) {
+function playOggSound(url, volume = soundVolume) {
   const audio = new Audio(url);
+  audio.volume = Math.max(0, Math.min(1, volume));
   audio.addEventListener('canplaythrough', () => {
     audio.play();
   });
