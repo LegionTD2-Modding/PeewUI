@@ -41,7 +41,7 @@ function writeToLogDiv(message, error = false) {
   const chatTxt = document.querySelector('.fake-chat');
 
   if (error) {
-    msg.innerHTML =  `<span style="color: red; font-style: bold;">${message}</span><br/>`;
+    msg.innerHTML =  `<span style="color: red;">${message}</span><br/>`;
   } else {
     msg.innerHTML =  `<span style="color: white; font-style: italic;">${message}</span><br/>`;
   }
@@ -266,15 +266,15 @@ function onLeftClickWaveIcon(event, wave_id) {
   const chatTxt = document.querySelector('.fake-chat');
 
   if (event.ctrlKey) {
-    msg.innerHTML = `<span style="color: red">PLAYER</span> is thinking about <span style="color: green">sending WAVE ${wave_id}</span><br/>`;
+    msg.innerHTML = `<span style="color: red">PLAYER</span> is thinking about <span style="color: green">sending wave ${wave_id}</span><br/>`;
     playOggSound('snd/ping-thinking-about.ogg');
   } else {
-    msg.innerHTML = `<span style="color: red">PLAYER</span> WANTS TO <span style="color: green">SEND WAVE ${wave_id}</span><br/>`;
+    msg.innerHTML = `<span style="color: red">PLAYER</span> WANTS to <span style="color: green">SEND wave ${wave_id}</span><br/>`;
     playOggSound('snd/send.ogg');
   }
 
   chatTxt.appendChild(msg);
-  //event.preventDefault();
+  event.preventDefault();
 }
 
 function onMiddleClickWaveIcon(event, wave_id) {
@@ -282,15 +282,15 @@ function onMiddleClickWaveIcon(event, wave_id) {
   const chatTxt = document.querySelector('.fake-chat');
 
   if (event.ctrlKey) {
-    msg.innerHTML = `<span style="color: red">PLAYER</span> is thinking about <span style="color: green">saving WAVE ${wave_id}</span><br/>`;
+    msg.innerHTML = `<span style="color: red">PLAYER</span> is thinking about <span style="color: green">SAVING from wave ${wave_id}</span><br/>`;
     playOggSound('snd/ping-thinking-about.ogg');
   } else {
-    msg.innerHTML = `<span style="color: red">PLAYER</span> WANTS TO START <span style="color: green">SAVING WAVE ${wave_id}</span><br/>`;
+    msg.innerHTML = `<span style="color: red">PLAYER</span> WANTS to start <span style="color: green">SAVING wave ${wave_id}</span><br/>`;
     playOggSound('snd/save.ogg');
   }
 
   chatTxt.appendChild(msg);
-  //event.preventDefault();
+  event.preventDefault();
 
 }
 
@@ -299,22 +299,22 @@ function onRightClickWaveIcon(event, wave_id) {
   const chatTxt = document.querySelector('.fake-chat');
 
   if (event.ctrlKey) {
-    msg.innerHTML = `<span style="color: red">PLAYER</span> think they may <span style="color: green">send WAVE ${wave_id}</span><br/>`;
+    msg.innerHTML = `<span style="color: red">PLAYER</span> thinks he may <span style="color: green"> get sent wave ${wave_id}</span><br/>`;
     playOggSound('snd/ping-thinking-about.ogg');
   } else {
-    msg.innerHTML = `<span style="color: red">PLAYER</span> EXPECTS A <span style="color: green">SEND WAVE ${wave_id}</span><br/>`;
+    msg.innerHTML = `<span style="color: red">PLAYER</span> EXPECTS a <span style="color: green">send from the ennemy at wave ${wave_id}</span><br/>`;
     playOggSound('snd/expecting-send.ogg');
   }
 
   chatTxt.appendChild(msg);
-  //event.preventDefault();
+  event.preventDefault();
 }
 
 function playOggSound(url, volume = soundVolume) {
   const audio = new Audio(url);
   audio.volume = Math.max(0, Math.min(1, volume));
   audio.addEventListener('canplaythrough', () => {
-    audio.play();
+    audio.play().then(promise => console.info('audio.play:', audio.error));
   });
   audio.addEventListener('error', () => {
     console.error('Error occurred while loading the sound:', audio.error);
@@ -410,7 +410,7 @@ window.addEventListener('DOMContentLoaded', () => {
     img.classList.add('wave-icon');
     wavesIcons.appendChild(img);
     img.addEventListener('mousedown', event => {
-      switch (event.which) {
+      switch (event.button) {
         case 1: // Left click
           onLeftClickWaveIcon(event, i);
           break;
