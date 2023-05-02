@@ -1,6 +1,6 @@
 const buildPhaseDuration = [13, 7];
 const fightPhaseDuration = 5;
-const maxWaves = 21;
+const maxWaves = 30;
 
 let currentPhase = 'build';
 let currentWave = 1;
@@ -118,6 +118,16 @@ function updateUI() {
 }
 
 function moveImage(wave) {
+
+  if (wave >= 14) {
+    const wavesIcons = document.querySelector('.ui-container .ui-text .grid-item.top-row.right-col');
+    const img = document.createElement('img');
+    img.src = `img/21.png`;
+    img.id = `wave-${wave + 8}`;
+    img.classList.add('wave-icon');
+    wavesIcons.appendChild(img);
+  }
+
   const image = document.querySelector(`#wave-${wave}`);
   const middle = document.querySelector('.top-row.mid-col');
   const right = document.querySelector('.top-row.right-col');
