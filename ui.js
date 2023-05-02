@@ -43,12 +43,24 @@ function nextPhase() {
 function updateUI() {
   const topMiddle = document.querySelector('.timer');
   const image = document.querySelector(`#wave-${currentWave}`);
+  const uiImage = document.querySelector('.ui-image');
+  const fontSize = uiImage.clientWidth * 0.025;
+
+  topMiddle.textContent = `${remainingTime}`;
+
+  if (currentPhase === 'build' && remainingTime <= 3) {
+    image.style.border = `solid red`;
+    topMiddle.style.color = 'red';
+    image.style.borderStyle = 'outset';
+    image.style.borderWidth = `${fontSize * 0.2}px`
+    image.style.animation = `breathingBorder 0.5s infinite linear`;
+  } else {
+    topMiddle.style.color = 'white';
+  }
+
   const line1 = document.querySelector('.line-1');
   const line2 = document.querySelector('.line-2');
   const line3 = document.querySelector('.line-3');
-
-  const uiImage = document.querySelector('.ui-image');
-  const fontSize = uiImage.clientWidth * 0.025;
 
   const line1WrapperA = document.querySelector('.types-line-1 .image-wrapper-attack');
   const line1WrapperD = document.querySelector('.types-line-1 .image-wrapper-defense');
@@ -71,7 +83,13 @@ function updateUI() {
     line3WrapperD.innerHTML = ``
 
     topMiddle.textContent = `${remainingTime}`;
-    image.style.border = `${fontSize * 0.2}px solid black`;
+
+    if (remainingTime > 3) {
+      image.style.border = `solid white`;
+      image.style.borderStyle = 'outset';
+      image.style.borderWidth = `${fontSize * 0.2}px`
+      image.style.animation = '';
+    }
 
     if ((currentWave === 1 && remainingTime === buildPhaseDuration[0]) || (currentWave > 1 && remainingTime === buildPhaseDuration[1])) {
       moveImage(currentWave);
@@ -91,7 +109,11 @@ function updateUI() {
     line3WrapperD.innerHTML = `&nbsp;<img class='type-icon' src='img/types/${defense}.png' alt='Defense ${defense}' />&nbsp;`
 
     topMiddle.textContent = '';
-    image.style.border = `${fontSize * 0.2}px solid red`;
+
+    image.style.border = `solid red`;
+    image.style.borderStyle = 'outset';
+    image.style.borderWidth = `${fontSize * 0.2}px`
+    image.style.animation = '';
   }
 }
 
@@ -106,11 +128,11 @@ function moveImage(wave) {
   image.style.position = 'relative';
   image.style.right = '0';
   image.style.zIndex = '1';
-  image.style.transition = `right ${buildPhaseDuration[1]}s linear`;
+  image.style.transition = `right ${remainingTime - 0.5}s linear`;
 
   setTimeout(() => {
     image.style.right = `calc(100% - ${image.clientWidth}px)`;
-  }, 100);
+  }, 0);
 }
 
 function moveToTopLeft(wave) {
@@ -119,6 +141,7 @@ function moveToTopLeft(wave) {
   image.style.transition = 'none';
   image.style.border = '';
   image.style.position = 'static';
+  image.style.zIndex = '0';
   target.appendChild(image);
 }
 
@@ -163,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
     timerText.style.marginBottom = `${fontSize * 1.5}px`;
 
     line1mid.style.fontSize = `${fontSize * 1.1}px`;
-    line2mid.style.fontSize = `${fontSize * 2.1}px`;
+    line2mid.style.fontSize = `${fontSize * 2.0}px`;
     line3mid.style.fontSize = `${fontSize * 1.1}px`;
 
     midText.style.marginTop = `${fontSize * 0.5}px`;

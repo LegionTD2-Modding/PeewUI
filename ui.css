@@ -154,3 +154,9 @@ body, html {
     left: 50%;
     transform: translateX(-50%);
 }
+
+@keyframes breathingBorder {
+    50% {
+        border-width: 0;
+    }
+}
