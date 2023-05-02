@@ -38,7 +38,7 @@ console.error = (function (originalLog) {
 
 function writeToLogDiv(message, error = false) {
   const msg = document.createElement('span');
-  const chatTxt = document.querySelector('.fake-chat');
+  const chatTxt = document.getElementById('top-right-txt');
 
   if (error) {
     msg.innerHTML =  `<span style="color: red;">${message}</span><br/>`;
@@ -263,7 +263,7 @@ function loopDone() {
 
 function onLeftClickWaveIcon(event, wave_id) {
   const msg = document.createElement('span');
-  const chatTxt = document.querySelector('.fake-chat');
+  const chatTxt = document.getElementById('bottom-left-txt');
 
   if (event.ctrlKey) {
     msg.innerHTML = `<span style="color: red">PLAYER</span> is thinking about <span style="color: green">sending wave ${wave_id}</span><br/>`;
@@ -279,7 +279,7 @@ function onLeftClickWaveIcon(event, wave_id) {
 
 function onMiddleClickWaveIcon(event, wave_id) {
   const msg = document.createElement('span');
-  const chatTxt = document.querySelector('.fake-chat');
+  const chatTxt = document.getElementById('bottom-left-txt');
 
   if (event.ctrlKey) {
     msg.innerHTML = `<span style="color: red">PLAYER</span> is thinking about <span style="color: green">SAVING from wave ${wave_id}</span><br/>`;
@@ -296,7 +296,7 @@ function onMiddleClickWaveIcon(event, wave_id) {
 
 function onRightClickWaveIcon(event, wave_id) {
   const msg = document.createElement('span');
-  const chatTxt = document.querySelector('.fake-chat');
+  const chatTxt = document.getElementById('bottom-left-txt');
 
   if (event.ctrlKey) {
     msg.innerHTML = `<span style="color: red">PLAYER</span> thinks he may <span style="color: green"> get sent wave ${wave_id}</span><br/>`;
@@ -314,7 +314,7 @@ function playOggSound(url, volume = soundVolume) {
   const audio = new Audio(url);
   audio.volume = Math.max(0, Math.min(1, volume));
   audio.addEventListener('canplaythrough', () => {
-    audio.play().then(promise => console.info('audio.play:', audio.error));
+    audio.play().then(promise => console.info('Played (v=' + volume + '): ' + url));
   });
   audio.addEventListener('error', () => {
     console.error('Error occurred while loading the sound:', audio.error);
@@ -410,18 +410,14 @@ window.addEventListener('DOMContentLoaded', () => {
     img.classList.add('wave-icon');
     wavesIcons.appendChild(img);
     img.addEventListener('mousedown', event => {
-      switch (event.button) {
-        case 1: // Left click
-          onLeftClickWaveIcon(event, i);
-          break;
-        case 2: // Middle click
-          onMiddleClickWaveIcon(event, i);
-          break;
-        case 3: // Right click
-          onRightClickWaveIcon(event, i);
-          break;
-        default:
-          console.log('Unknown click type detected.');
+      if (event.buttons & 1) {// Left click
+        onLeftClickWaveIcon(event, i);
+      } else if (event.buttons & 2) {// Right click
+        onRightClickWaveIcon(event, i);
+      } else if (event.buttons & 4) {// Middle click
+        onMiddleClickWaveIcon(event, i);
+      } else {
+        console.log('Unknown click type detected.');
       }
     });
   }

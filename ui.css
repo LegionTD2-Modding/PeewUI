@@ -192,3 +192,32 @@ body, html {
 .fade-out {
     animation: fadeOut 1.5s 1 forwards linear;
 }
+
+#bottom-left-txt {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: blue;
+    color: white;
+    height: 40%;
+    width: 30%;
+    overflow-y: scroll;
+    overflow-x: clip;
+}
+
+#top-right-txt {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: red;
+    color: white;
+    height: 40%;
+    width: 20%;
+    opacity: 0;
+    overflow-y: scroll;
+    overflow-x: visible;
+}
+
+#top-right-txt:hover {
+    opacity: 1;
+}
