@@ -109,6 +109,9 @@ function updateUI() {
     line3WrapperD.innerHTML = `&nbsp;<img class='type-icon' src='img/types/${defense}.png' alt='Defense ${defense}' />&nbsp;`
 
     if (topMiddle.textContent !== '   ') {
+
+      playOggSound('snd/battle-begin.ogg');
+
       topMiddle.textContent = 'FIGHT';
       topMiddle.classList.add('fade-out');
       topMiddle.addEventListener('animationend', function() {
@@ -134,9 +137,6 @@ function moveImage(wave) {
     img.src = `img/21.png`;
     img.id = `wave-${wave + 8}`;
     img.classList.add('wave-icon');
-    img.addEventListener('click', function () {
-      console.log(`${img.id}`);
-    });
     img.style.cursor = 'pointer';
     wavesIcons.appendChild(img);
   }
@@ -250,14 +250,27 @@ document.addEventListener('DOMContentLoaded', () => {
     midText.style.marginTop = `${fontSize * 0.5}px`;
   };
 
-
-
   for (let i = 1; i < wavesData.length; i++) {
     const img = document.createElement('img');
     img.src = `img/${i}.png`;
     img.id = `wave-${i}`;
     img.classList.add('wave-icon');
     wavesIcons.appendChild(img);
+    img.addEventListener('mousedown', event => {
+      switch (event.which) {
+        case 1: // Left click
+          onLeftClickWaveIcon(event, i);
+          break;
+        case 2: // Middle click
+          onMiddleClickWaveIcon(event, i);
+          break;
+        case 3: // Right click
+          onRightClickWaveIcon(event, i);
+          break;
+        default:
+          console.log('Unknown click type detected.');
+      }
+    });
   }
 
   updateDimensions();
@@ -266,3 +279,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
   setTimeout(startUILoop, 100);
 });
+
+function onLeftClickWaveIcon(event, wave_id) {
+  const msg = document.createElement('span');
+  msg.innerHTML = `<span style="color: red">PLAYER</span> WANTS TO <span style="color: green">SEND WAVE ${wave_id}</span><br/>`;
+  const chatTxt = document.querySelector('.fake-chat');
+  chatTxt.appendChild(msg);
+  playOggSound('snd/send.ogg');
+  event.preventDefault();
+}
+
+function onMiddleClickWaveIcon(event, wave_id) {
+  const msg = document.createElement('span');
+  msg.innerHTML = `<span style="color: red">PLAYER</span> WANTS TO START <span style="color: green">SAVING WAVE ${wave_id}</span><br/>`;
+  const chatTxt = document.querySelector('.fake-chat');
+  chatTxt.appendChild(msg);
+  playOggSound('snd/save.ogg');
+  event.preventDefault();
+}
+
+function onRightClickWaveIcon(event, wave_id) {
+  const msg = document.createElement('span');
+  msg.innerHTML = `<span style="color: red">PLAYER</span> EXPECTS A <span style="color: green">SEND WAVE ${wave_id}</span><br/>`;
+  const chatTxt = document.querySelector('.fake-chat');
+  chatTxt.appendChild(msg);
+  playOggSound('snd/expecting-send.ogg');
+  event.preventDefault();
+}
+
+function playOggSound(url) {
+  const audio = new Audio(url);
+  audio.addEventListener('canplaythrough', () => {
+    audio.play();
+  });
+  audio.addEventListener('error', () => {
+    console.error('Error occurred while loading the sound:', audio.error);
+  });
+}

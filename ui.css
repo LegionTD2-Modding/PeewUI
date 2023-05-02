@@ -39,6 +39,7 @@ body, html {
     left: 50%;
     transform: translateX(-50%);
     z-index: 1;
+    pointer-events: none;
 }
 
 .ui-text {
@@ -121,6 +122,10 @@ body, html {
 .types-line-3 .image-wrapper-defense .type-icon {
     height: 1.5vh;
     width: auto;
+}
+
+.grid-item.right-col img:hover {
+    opacity: 1;
 }
 
 .grid-item.right-col img:nth-child(6) {
