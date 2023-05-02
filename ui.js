@@ -9,11 +9,52 @@ let currentWave = 1;
 let phaseTimer;
 let remainingTime = 0;
 
+console.log = (function (originalLog) {
+  return function (...args) {
+    originalLog.apply(console, args); // Call the original console.log function
+
+    const message = args.map(arg => (typeof arg === 'object' ? JSON.stringify(arg) : arg)).join(' ');
+    writeToLogDiv(message);
+  };
+})(console.log);
+
+console.info = (function (originalLog) {
+  return function (...args) {
+    originalLog.apply(console, args); // Call the original console.log function
+
+    const message = args.map(arg => (typeof arg === 'object' ? JSON.stringify(arg) : arg)).join(' ');
+    writeToLogDiv(`<span style="color: grey">LOG: ${message}</span>`);
+  };
+})(console.info);
+
+console.error = (function (originalLog) {
+  return function (...args) {
+    originalLog.apply(console, args); // Call the original console.log function
+
+    const message = args.map(arg => (typeof arg === 'object' ? JSON.stringify(arg) : arg)).join(' ');
+    writeToLogDiv(message, true);
+  };
+})(console.error);
+
+function writeToLogDiv(message, error = false) {
+  const msg = document.createElement('span');
+  const chatTxt = document.querySelector('.fake-chat');
+
+  if (error) {
+    msg.innerHTML =  `<span style="color: red; font-style: bold;">${message}</span><br/>`;
+  } else {
+    msg.innerHTML =  `<span style="color: white; font-style: italic;">${message}</span><br/>`;
+  }
+
+  chatTxt.appendChild(msg)
+}
+
 function startUILoop() {
+  playOggSound('snd/welcome.ogg');
+  console.info('WELCOME TO NOVA');
   remainingTime = buildPhaseDuration[0];
   updateUI();
   phaseTimer = setInterval(nextSecond, 1000);
-  playOggSound('snd/welcome.ogg');
 }
 
 function nextSecond() {
@@ -220,97 +261,6 @@ function loopDone() {
   clearInterval(phaseTimer);
 }
 
-
-document.addEventListener('DOMContentLoaded', () => {
-
-  const soundUrls = [
-    'snd/battle-begin.ogg',
-    'snd/expecting-send.ogg',
-    'snd/ping-thinking-about.ogg',
-    'snd/save.ogg',
-    'snd/send.ogg',
-    'snd/tick-tock.ogg',
-    'snd/welcome.ogg',
-    'snd/windgust.ogg'
-  ];
-
-  preloadSounds(soundUrls).then(() => {
-    console.log('All sounds loaded');
-    setTimeout(startUILoop, 10);
-  }).catch(error => {
-        console.error('Error while preloading sounds:', error);
-      }
-  );
-
-  const uiText = document.querySelector('.ui-text');
-  const uiContainer = document.querySelector('.ui-container');
-  const uiImage = document.querySelector('.ui-image');
-  const wavesIcons = document.querySelector('.ui-container .ui-text .grid-item.top-row.right-col');
-
-  const timerText = document.querySelector('.timer');
-  const line1mid = document.querySelector('.line-1');
-  const line2mid = document.querySelector('.line-2');
-  const line3mid = document.querySelector('.line-3');
-  const midText = document.querySelector('.types-line-1');
-
-  const updateDimensions = () => {
-    const screenW = window.innerWidth;
-    const imageW = uiImage.clientWidth;
-
-    if (screenW < imageW) {
-      const scaleFactor = screenW / imageW;
-      uiContainer.style.transform = `scale(${scaleFactor})`;
-      uiContainer.style.transformOrigin = 'top left';
-    } else {
-      uiContainer.style.transform = 'scale(1)';
-    }
-
-    //const containerHeight = uiContainer.clientHeight;
-    const containerWidth = uiImage.clientWidth;
-
-    uiContainer.style.width = `${containerWidth}px`;
-    const fontSize = containerWidth * fontSizeRatio; // Adjust the multiplier to change the font size
-    uiText.style.fontSize = `${fontSize}px`;
-
-    timerText.textContent = '';
-    timerText.style.fontSize = `${fontSize * 3.5}px`;
-    timerText.style.marginBottom = `${fontSize * 1.5}px`;
-
-    line1mid.style.fontSize = `${fontSize * 1.1}px`;
-    line2mid.style.fontSize = `${fontSize * 2.0}px`;
-    line3mid.style.fontSize = `${fontSize * 1.1}px`;
-
-    midText.style.marginTop = `${fontSize * 0.5}px`;
-  };
-
-  for (let i = 1; i < wavesData.length; i++) {
-    const img = document.createElement('img');
-    img.src = `img/${i}.png`;
-    img.id = `wave-${i}`;
-    img.classList.add('wave-icon');
-    wavesIcons.appendChild(img);
-    img.addEventListener('mousedown', event => {
-      switch (event.which) {
-        case 1: // Left click
-          onLeftClickWaveIcon(event, i);
-          break;
-        case 2: // Middle click
-          onMiddleClickWaveIcon(event, i);
-          break;
-        case 3: // Right click
-          onRightClickWaveIcon(event, i);
-          break;
-        default:
-          console.log('Unknown click type detected.');
-      }
-    });
-  }
-
-  updateDimensions();
-  window.addEventListener('resize', updateDimensions);
-  window.addEventListener('load', updateDimensions);
-});
-
 function onLeftClickWaveIcon(event, wave_id) {
   const msg = document.createElement('span');
   const chatTxt = document.querySelector('.fake-chat');
@@ -386,4 +336,98 @@ function loadAudio(url) {
 function preloadSounds(soundUrls) {
   return Promise.all(soundUrls.map(loadAudio));
 }
+
+
+
+
+window.addEventListener('DOMContentLoaded', () => {
+
+  console.info('DOM Content Loaded');
+
+  const soundUrls = [
+    'snd/battle-begin.ogg',
+    'snd/expecting-send.ogg',
+    'snd/ping-thinking-about.ogg',
+    'snd/save.ogg',
+    'snd/send.ogg',
+    'snd/tick-tock.ogg',
+    'snd/welcome.ogg',
+    'snd/windgust.ogg'
+  ];
+
+  preloadSounds(soundUrls).then(() => {
+      console.info('All sounds loaded');
+      window.startUILoop();
+    }).catch(error => {
+        console.error('Error while preloading sounds:', error);
+      });
+
+  const uiText = document.querySelector('.ui-text');
+  const uiContainer = document.querySelector('.ui-container');
+  const uiImage = document.querySelector('.ui-image');
+  const wavesIcons = document.querySelector('.ui-container .ui-text .grid-item.top-row.right-col');
+
+  const timerText = document.querySelector('.timer');
+  const line1mid = document.querySelector('.line-1');
+  const line2mid = document.querySelector('.line-2');
+  const line3mid = document.querySelector('.line-3');
+  const midText = document.querySelector('.types-line-1');
+
+  const updateDimensions = () => {
+    const screenW = window.innerWidth;
+    const imageW = uiImage.clientWidth;
+
+    if (screenW < imageW) {
+      const scaleFactor = screenW / imageW;
+      uiContainer.style.transform = `scale(${scaleFactor})`;
+      uiContainer.style.transformOrigin = 'top left';
+    } else {
+      uiContainer.style.transform = 'scale(1)';
+    }
+
+    //const containerHeight = uiContainer.clientHeight;
+    const containerWidth = uiImage.clientWidth;
+
+    uiContainer.style.width = `${containerWidth}px`;
+    const fontSize = containerWidth * fontSizeRatio; // Adjust the multiplier to change the font size
+    uiText.style.fontSize = `${fontSize}px`;
+
+    timerText.textContent = '';
+    timerText.style.fontSize = `${fontSize * 3.5}px`;
+    timerText.style.marginBottom = `${fontSize * 1.5}px`;
+
+    line1mid.style.fontSize = `${fontSize * 1.1}px`;
+    line2mid.style.fontSize = `${fontSize * 2.0}px`;
+    line3mid.style.fontSize = `${fontSize * 1.1}px`;
+
+    midText.style.marginTop = `${fontSize * 0.5}px`;
+  };
+
+  for (let i = 1; i < wavesData.length; i++) {
+    const img = document.createElement('img');
+    img.src = `img/${i}.png`;
+    img.id = `wave-${i}`;
+    img.classList.add('wave-icon');
+    wavesIcons.appendChild(img);
+    img.addEventListener('mousedown', event => {
+      switch (event.which) {
+        case 1: // Left click
+          onLeftClickWaveIcon(event, i);
+          break;
+        case 2: // Middle click
+          onMiddleClickWaveIcon(event, i);
+          break;
+        case 3: // Right click
+          onRightClickWaveIcon(event, i);
+          break;
+        default:
+          console.log('Unknown click type detected.');
+      }
+    });
+  }
+
+  updateDimensions();
+  window.addEventListener('resize', updateDimensions);
+  window.addEventListener('load', updateDimensions);
+});
 
