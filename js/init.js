@@ -19,6 +19,8 @@ let playerIndex = 0;
 let mouseOverChatArea = false;
 let chatInputFocused = false;
 
+let chatAlwaysDisplayed = false;
+
 window.addEventListener('DOMContentLoaded', initializeAndCache);
 window.addEventListener('resize', updateDimensions);
 window.addEventListener('load', updateDimensions);
@@ -108,7 +110,7 @@ function initializeAndCache() {
                 }
             }
             else if (typedText === '/help') {
-                ChatPrintAll(`<span style="color: green">Commands: /help, /fast, /slow, /mute, /unmute<br/>/start, /reset, /stop, /restart, /idX, /fiesta<br/><br/>Made with love by Kidev :)</span>`);
+                ChatPrintAll(`<span style="color: green">Commands: /help, /fast, /slow, /mute, /unmute<br/>/start, /reset, /stop, /restart, /idX, /chat, /fiesta<br/><br/>Made with love by Kidev :)</span>`);
             }
             else if (typedText === '/id0') {
                 playerIndex = 0;
@@ -130,6 +132,14 @@ function initializeAndCache() {
                 ChatPrintAll(`<span style="color: green">You cleared all pings<br/></span>`);
                 clearPings();
             }
+            else if (typedText === '/chat') {
+                chatAlwaysDisplayed = !chatAlwaysDisplayed;
+                if (chatAlwaysDisplayed) {
+                    ChatPrintAll(`<span style="color: green">Your chat is now always displayed<br/></span>`);
+                } else {
+                    ChatPrintAll(`<span style="color: green">Your chat will now auto hide after some time<br/></span>`);
+                }
+            }
             else if (typedText === '/fiesta') {
                 playOggSound('snd/Fiesta.ogg');
             }
@@ -144,7 +154,7 @@ function initializeAndCache() {
 }
 
 function checkIfWholeChatIsOutOfFocus() {
-    if (!mouseOverChatArea && !chatInputFocused) {
+    if (!mouseOverChatArea && !chatInputFocused && !chatAlwaysDisplayed) {
         document.getElementById("bottom-left-txt").style.animation = 'fadeOut 0.5s forwards';
     }
 }
