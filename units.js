@@ -10,8 +10,9 @@ const wavesData =
         hp: 0,
         dmgType: "",
         defType: "",
-        ability1: "",
-        ability2: "",
+        pingLeft: [0, 0, 0, 0],
+        pingMid: [0, 0, 0, 0],
+        pingRight: [0, 0, 0, 0]
     },
     {
         wave: 1,
@@ -23,8 +24,9 @@ const wavesData =
         hp: 120,
         dmgType: "Pierce",
         defType: "Fortified",
-        ability1: "",
-        ability2: "",
+        pingLeft: [0, 0, 0, 0],
+        pingMid: [0, 0, 0, 0],
+        pingRight: [0, 0, 0, 0]
     },
     {
         wave: 2,
@@ -36,8 +38,9 @@ const wavesData =
         hp: 140,
         dmgType: "Impact",
         defType: "Arcane",
-        ability1: "",
-        ability2: "",
+        pingLeft: [0, 0, 0, 0],
+        pingMid: [0, 0, 0, 0],
+        pingRight: [0, 0, 0, 0]
     },
     {
         wave: 3,
@@ -49,8 +52,9 @@ const wavesData =
         hp: 120,
         dmgType: "Magic",
         defType: "Natural",
-        ability1: "",
-        ability2: "",
+        pingLeft: [0, 0, 0, 0],
+        pingMid: [0, 0, 0, 0],
+        pingRight: [0, 0, 0, 0]
     },
     {
         wave: 4,
@@ -62,8 +66,9 @@ const wavesData =
         hp: 230,
         dmgType: "Impact",
         defType: "Swift",
-        ability1: "",
-        ability2: "",
+        pingLeft: [0, 0, 0, 0],
+        pingMid: [0, 0, 0, 0],
+        pingRight: [0, 0, 0, 0]
     },
     {
         wave: 5,
@@ -75,8 +80,9 @@ const wavesData =
         hp: 340,
         dmgType: "Pierce",
         defType: "Natural",
-        ability1: "",
-        ability2: "",
+        pingLeft: [0, 0, 0, 0],
+        pingMid: [0, 0, 0, 0],
+        pingRight: [0, 0, 0, 0]
     },
     {
         wave: 6,
@@ -88,8 +94,9 @@ const wavesData =
         hp: 830,
         dmgType: "Impact",
         defType: "Fortified",
-        ability1: "Impale",
-        ability2: "",
+        pingLeft: [0, 0, 0, 0],
+        pingMid: [0, 0, 0, 0],
+        pingRight: [0, 0, 0, 0]
     },
     {
         wave: 7,
@@ -101,8 +108,9 @@ const wavesData =
         hp: 560,
         dmgType: "Magic",
         defType: "Arcane",
-        ability1: "Blobs",
-        ability2: "",
+        pingLeft: [0, 0, 0, 0],
+        pingMid: [0, 0, 0, 0],
+        pingRight: [0, 0, 0, 0]
     },
     {
         wave: 8,
@@ -114,8 +122,9 @@ const wavesData =
         hp: 600,
         dmgType: "Magic",
         defType: "Swift",
-        ability1: "",
-        ability2: "",
+        pingLeft: [0, 0, 0, 0],
+        pingMid: [0, 0, 0, 0],
+        pingRight: [0, 0, 0, 0]
     },
     {
         wave: 9,
@@ -127,8 +136,9 @@ const wavesData =
         hp: 740,
         dmgType: "Pierce",
         defType: "Fortified",
-        ability1: "Deflection",
-        ability2: "",
+        pingLeft: [0, 0, 0, 0],
+        pingMid: [0, 0, 0, 0],
+        pingRight: [0, 0, 0, 0]
     },
     {
         wave: 10,
@@ -140,8 +150,9 @@ const wavesData =
         hp: 10000,
         dmgType: "Impact",
         defType: "Arcane",
-        ability1: "Boss Unit",
-        ability2: "",
+        pingLeft: [0, 0, 0, 0],
+        pingMid: [0, 0, 0, 0],
+        pingRight: [0, 0, 0, 0]
     },
     {
         wave: 11,
@@ -153,8 +164,9 @@ const wavesData =
         hp: 1080,
         dmgType: "Pierce",
         defType: "Natural",
-        ability1: "",
-        ability2: "",
+        pingLeft: [0, 0, 0, 0],
+        pingMid: [0, 0, 0, 0],
+        pingRight: [0, 0, 0, 0]
     },
     {
         wave: 12,
@@ -166,8 +178,9 @@ const wavesData =
         hp: 1290,
         dmgType: "Pierce",
         defType: "Swift",
-        ability1: "",
-        ability2: "",
+        pingLeft: [0, 0, 0, 0],
+        pingMid: [0, 0, 0, 0],
+        pingRight: [0, 0, 0, 0]
     },
     {
         wave: 13,
@@ -179,8 +192,9 @@ const wavesData =
         hp: 3210,
         dmgType: "Impact",
         defType: "Fortified",
-        ability1: "",
-        ability2: "",
+        pingLeft: [0, 0, 0, 0],
+        pingMid: [0, 0, 0, 0],
+        pingRight: [0, 0, 0, 0]
     },
     {
         wave: 14,
@@ -192,8 +206,9 @@ const wavesData =
         hp: 2050,
         dmgType: "Magic",
         defType: "Arcane",
-        ability1: "",
-        ability2: "",
+        pingLeft: [0, 0, 0, 0],
+        pingMid: [0, 0, 0, 0],
+        pingRight: [0, 0, 0, 0]
     },
     {
         wave: 15,
@@ -205,8 +220,9 @@ const wavesData =
         hp: 2250,
         dmgType: "Magic",
         defType: "Natural",
-        ability1: "Dual Shot",
-        ability2: "",
+        pingLeft: [0, 0, 0, 0],
+        pingMid: [0, 0, 0, 0],
+        pingRight: [0, 0, 0, 0]
     },
     {
         wave: 16,
@@ -218,8 +234,9 @@ const wavesData =
         hp: 1990,
         dmgType: "Impact",
         defType: "Swift",
-        ability1: "",
-        ability2: "",
+        pingLeft: [0, 0, 0, 0],
+        pingMid: [0, 0, 0, 0],
+        pingRight: [0, 0, 0, 0]
     },
     {
         wave: 17,
@@ -231,8 +248,9 @@ const wavesData =
         hp: 3300,
         dmgType: "Pierce",
         defType: "Arcane",
-        ability1: "",
-        ability2: "",
+        pingLeft: [0, 0, 0, 0],
+        pingMid: [0, 0, 0, 0],
+        pingRight: [0, 0, 0, 0]
     },
     {
         wave: 18,
@@ -244,8 +262,9 @@ const wavesData =
         hp: 8100,
         dmgType: "Impact",
         defType: "Natural",
-        ability1: "Poison-Tipped Pole",
-        ability2: "",
+        pingLeft: [0, 0, 0, 0],
+        pingMid: [0, 0, 0, 0],
+        pingRight: [0, 0, 0, 0]
     },
     {
         wave: 19,
@@ -257,8 +276,9 @@ const wavesData =
         hp: 4350,
         dmgType: "Pierce",
         defType: "Swift",
-        ability1: "Split Shot",
-        ability2: "",
+        pingLeft: [0, 0, 0, 0],
+        pingMid: [0, 0, 0, 0],
+        pingRight: [0, 0, 0, 0]
     },
     {
         wave: 20,
@@ -270,8 +290,9 @@ const wavesData =
         hp: 65000,
         dmgType: "Magic",
         defType: "Fortified",
-        ability1: "Insatiable Hunger",
-        ability2: "Boss Unit",
+        pingLeft: [0, 0, 0, 0],
+        pingMid: [0, 0, 0, 0],
+        pingRight: [0, 0, 0, 0]
     },
     {
         wave: 21,
@@ -283,7 +304,8 @@ const wavesData =
         hp: 8250,
         dmgType: "Pure",
         defType: "Immaterial",
-        ability1: "",
-        ability2: "",
+        pingLeft: [0, 0, 0, 0],
+        pingMid: [0, 0, 0, 0],
+        pingRight: [0, 0, 0, 0]
     },
 ];

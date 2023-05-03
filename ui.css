@@ -102,11 +102,69 @@ body, html {
     flex-direction: row;
 }
 
-.wave-icon {
+
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.image-container .wave-icon img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    object-fit: cover;
+    width: auto;
+    z-index: 0;
+    cursor: pointer;
+}
+
+.image-container .overlay {
+    z-index: 2;
+}
+
+
+
+
+.ping-icon {
+    position: absolute;
+    width: auto;
+    height: 2vh;
+    z-index: 4;
+}
+
+.ping-icon.corner0 {
+    left: 50%;
+    top: 50%;
+    transform: translate(-100%, -100%);
+}
+
+.ping-icon.corner1 {
+    right: 50%;
+    top: 50%;
+    transform: translate(0, -100%);
+}
+
+.ping-icon.corner2 {
+    left: 50%;
+    bottom: 50%;
+    transform: translate(-100%, 0);
+}
+
+.ping-icon.corner3 {
+    right: 50%;
+    bottom: 50%;
+    transform: translate(0, 0);
+}
+
+.wave-icon:hover {
     width: auto;
     height: 100%;
     z-index: 0;
     cursor: pointer;
+    border-width: 2px;
+    border-color: white;
+    border-style: inset;
 }
 
 .type-icon {
@@ -132,19 +190,15 @@ body, html {
     width: auto;
 }
 
-.grid-item.right-col img:hover {
-    opacity: 1;
-}
-
-.grid-item.right-col img:nth-child(6) {
+.grid-item.right-col:not(:hover) img:nth-child(6) {
     opacity: 0.67;
 }
 
-.grid-item.right-col img:nth-child(7) {
+.grid-item.right-col:not(:hover) img:nth-child(7) {
     opacity: 0.33;
 }
 
-.grid-item.right-col img:nth-child(n+8) {
+.grid-item.right-col:not(:hover) img:nth-child(n+8) {
     opacity: 0;
 }
 
@@ -152,11 +206,11 @@ body, html {
     opacity: 0.67;
 }
 
-.grid-item.left-col img:nth-last-child(7) {
+.grid-item.left-col img:not(:hover):nth-last-child(7) {
     opacity: 0.33;
 }
 
-.grid-item.left-col img:nth-last-child(n+8) {
+.grid-item.left-col img:not(:hover):nth-last-child(n+8) {
     opacity: 0;
 }
 
@@ -203,13 +257,14 @@ body, html {
 
 #bottom-left-txt {
     position: fixed;
-    bottom: 40px;
+    bottom: 3%;
     left: 0;
     color: white;
     height: 40%;
     width: 30%;
     overflow-y: scroll;
     overflow-x: clip;
+    padding: 1%;
 }
 
 #bottom-left-input-container {
@@ -217,7 +272,7 @@ body, html {
     bottom: 0;
     left: 0;
     width: 30%;
-    height: 40px;
+    height: 3%;
 }
 
 #bottom-left-input {
@@ -228,7 +283,7 @@ body, html {
     background-color: rgba(0, 0, 0, 0.5);
     border: none;
     outline: none;
-    padding: 5px;
+    padding: 1%;
 }
 
 #top-right-txt {

@@ -2,14 +2,19 @@ const buildPhaseDuration = [13, 7];
 const fightPhaseDuration = 5;
 const maxWaves = 30;
 const fontSizeRatio = 0.024;
+const playerColors = ['red', 'blue', 'orange', 'purple', 'yellow', 'cyan', 'green', 'pink'];
 
 let soundVolume = 0.1;
 let currentPhase = 'build';
 let currentWave = 1;
 let phaseTimer;
 let remainingTime = 0;
-
 let timeReducer = 1.0;
+
+let playerIndex = 0;
+let playerColor = playerColors[playerIndex];
+
+let playerPings = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
 
 function resetGame() {
   loopDone();
@@ -17,6 +22,8 @@ function resetGame() {
   currentPhase = 'build';
   currentWave = 1;
   remainingTime = 0;
+
+  clearPings();
 
   document.querySelector('.ui-container').innerHTML =
       ' <img class="ui-image" src="img/ui.png" alt="UI">' +
@@ -213,7 +220,7 @@ function updateUI() {
     line3WrapperD.innerHTML = `&nbsp;<img class='type-icon' src='img/types/${defense}.png' alt='Defense ${defense}' />&nbsp;`
 
     if (topMiddle.textContent !== '   ') {
-      topMiddle.textContent = 'FIGHT';
+      topMiddle.textContent = 'BATTLE';
       topMiddle.classList.add('fade-out');
       topMiddle.addEventListener('animationend', function() {
         topMiddle.textContent = '   ';
@@ -234,7 +241,7 @@ function moveImage(wave) {
 
   if (wave >= 14) {
     const wavesIcons = document.querySelector('.ui-container .ui-text .grid-item.top-row.right-col');
-    const img = document.createElement('img');
+    const img = document.createElement('.image-container');
     img.src = `img/21.png`;
     img.id = `wave-${wave + 8}`;
     img.classList.add('wave-icon');
@@ -246,7 +253,7 @@ function moveImage(wave) {
   const middle = document.querySelector('.top-row.mid-col');
   const right = document.querySelector('.top-row.right-col');
 
-  right.querySelectorAll('img').forEach(t_img => {
+  right.querySelectorAll('.image-container').forEach(t_img => {
 
     t_img.style.animation = 'slideLeft 0.5s forwards';
     t_img.addEventListener('animationend', function () {
@@ -313,12 +320,13 @@ function onLeftClickWaveIcon(event, wave_id) {
   const chatTxt = document.getElementById('bottom-left-txt');
 
   if (event.ctrlKey) {
-    msg.innerHTML = `<span style="color: red">PLAYER</span> is thinking about <span style="color: green">sending wave ${wave_id}</span><br/>`;
+    msg.innerHTML = `<span style="color: ${playerColor}">PLAYER_${playerIndex}</span> is thinking about <span style="color: green">sending wave ${wave_id}</span><br/>`;
     playOggSound('snd/ping-thinking-about.ogg');
   } else {
-    msg.innerHTML = `<span style="color: red">PLAYER</span> WANTS to <span style="color: green">SEND wave ${wave_id}</span><br/>`;
+    msg.innerHTML = `<span style="color: ${playerColor}">PLAYER_${playerIndex}</span> WANTS to <span style="color: green">SEND wave ${wave_id}</span><br/>`;
     playOggSound('snd/send.ogg');
   }
+  pingWaveFor(wave_id, playerIndex, 0, event.ctrlKey);
 
   chatTxt.appendChild(msg);
   event.preventDefault();
@@ -329,12 +337,13 @@ function onMiddleClickWaveIcon(event, wave_id) {
   const chatTxt = document.getElementById('bottom-left-txt');
 
   if (event.ctrlKey) {
-    msg.innerHTML = `<span style="color: red">PLAYER</span> is thinking about <span style="color: green">SAVING from wave ${wave_id}</span><br/>`;
+    msg.innerHTML = `<span style="color: ${playerColor}">PLAYER_${playerIndex}</span> is thinking about <span style="color: green">SAVING from wave ${wave_id}</span><br/>`;
     playOggSound('snd/ping-thinking-about.ogg');
   } else {
-    msg.innerHTML = `<span style="color: red">PLAYER</span> WANTS to start <span style="color: green">SAVING wave ${wave_id}</span><br/>`;
+    msg.innerHTML = `<span style="color: ${playerColor}">PLAYER_${playerIndex}</span> WANTS to start <span style="color: green">SAVING wave ${wave_id}</span><br/>`;
     playOggSound('snd/save.ogg');
   }
+  pingWaveFor(wave_id, playerIndex, 1, event.ctrlKey);
 
   chatTxt.appendChild(msg);
   event.preventDefault();
@@ -346,15 +355,48 @@ function onRightClickWaveIcon(event, wave_id) {
   const chatTxt = document.getElementById('bottom-left-txt');
 
   if (event.ctrlKey) {
-    msg.innerHTML = `<span style="color: red">PLAYER</span> thinks he may <span style="color: green"> get sent wave ${wave_id}</span><br/>`;
+    msg.innerHTML = `<span style="color: ${playerColor}">PLAYER_${playerIndex}</span> thinks he may <span style="color: green"> get sent wave ${wave_id}</span><br/>`;
     playOggSound('snd/ping-thinking-about.ogg');
   } else {
-    msg.innerHTML = `<span style="color: red">PLAYER</span> EXPECTS a <span style="color: green">send from the ennemy at wave ${wave_id}</span><br/>`;
+    msg.innerHTML = `<span style="color: ${playerColor}">PLAYER_${playerIndex}</span> EXPECTS a <span style="color: green">send from the ennemy at wave ${wave_id}</span><br/>`;
     playOggSound('snd/expecting-send.ogg');
   }
 
+  pingWaveFor(wave_id, playerIndex, 2, event.ctrlKey);
+
   chatTxt.appendChild(msg);
   event.preventDefault();
+}
+
+function pingWaveFor(wave_id, player_id, ping_id, is_ctrl) {
+  playerPings[player_id][ping_id] = is_ctrl ? -wave_id : wave_id;
+  addPingToWave(player_id, wave_id, ping_id);
+}
+
+function clearPings() {
+  playerPings = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
+}
+
+function clearWavesPings() {
+  const waveIcons = document.querySelectorAll('.wave-icon.overlay');
+  waveIcons.forEach(waveIcon => {
+    waveIcon.style.display = 'none';
+  });
+}
+
+function clearWavePingIfNeeded(player_id, wave_id, ping_value) {
+  const pingIcon = document.getElementById(`wave-${wave_id}-${player_id}`);
+  if (pingIcon !== null) {
+    pingIcon.style.display = 'none';
+  }
+}
+
+function addPingToWave(player_id, wave_id, ping_value) {
+
+  clearWavePingIfNeeded(player_id, wave_id, ping_value);
+
+  const pingIcon = document.getElementById(`wave-${wave_id}-${player_id}`);
+  pingIcon.style.display = 'block';
 }
 
 function playOggSound(url, volume = soundVolume) {
@@ -424,13 +466,20 @@ window.addEventListener('DOMContentLoaded', () => {
       document.getElementById("start-button").style.opacity = '0';
     }
   });
+  document.getElementById("bottom-left-input").addEventListener('blur', event => {
+    document.getElementById("bottom-left-txt").style.animation = 'fadeOut 1s forwards';
+  });
+  document.getElementById("bottom-left-input").addEventListener('focus', event => {
+    document.getElementById("bottom-left-txt").style.animation = '';
+    document.getElementById("bottom-left-txt").style.opacity = '1';
+  });
   document.getElementById("bottom-left-input").addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
       event.preventDefault();
       const typedText = document.getElementById("bottom-left-input").value;
       const msg = document.createElement('span');
       const chatTxt = document.getElementById('bottom-left-txt');
-      msg.innerHTML = `<span style="color: red">PLAYER</span>: ${typedText}<br/>`;
+      msg.innerHTML = `<span style="color: ${playerColor}">PLAYER_${playerIndex}</span>: ${typedText}<br/>`;
 
       if (typedText === '/fast') {
         timeReducer = 5.0;
@@ -460,7 +509,27 @@ window.addEventListener('DOMContentLoaded', () => {
         }
       }
       if (typedText === '/help') {
-        msg.innerHTML = `<span style="color: green">Commands: /help, /fast, /slow, /mute, /unmute<br/>/start, /reset, /stop, /restart<br/><br/>Made with love by Kidev :)</span><br/>`;
+        msg.innerHTML = `<span style="color: green">Commands: /help, /fast, /slow, /mute, /unmute<br/>/start, /reset, /stop, /restart, /idX<br/><br/>Made with love by Kidev :)</span><br/>`;
+      }
+      if (typedText === '/id0') {
+        msg.innerHTML = `<span style="color: green">You are now player with id=0<br/></span><br/>`;
+        playerIndex = 0;
+      }
+      if (typedText === '/id1') {
+        msg.innerHTML = `<span style="color: green">You are now player with id=0<br/></span><br/>`;
+        playerIndex = 1;
+      }
+      if (typedText === '/id2') {
+        msg.innerHTML = `<span style="color: green">You are now player with id=0<br/></span><br/>`;
+        playerIndex = 2;
+      }
+      if (typedText === '/id3') {
+        msg.innerHTML = `<span style="color: green">You are now player with id=0<br/></span><br/>`;
+        playerIndex = 3;
+      }
+      if (typedText === '/clear') {
+        msg.innerHTML = `<span style="color: green">You cleared all pings<br/></span><br/>`;
+        clearPings();
       }
       if (typedText === '/reset' || typedText === '/stop' || typedText === '/restart') {
         msg.innerHTML = `<span style="color: green">Game restarted!</span><br/>`;
@@ -519,11 +588,42 @@ function setupPage(reset = false) {
   };
 
   for (let i = 1; i < wavesData.length; i++) {
+    const ctn = document.createElement('div');
+
+    ctn.className = 'image-container';
+
     const img = document.createElement('img');
+    const img0 = document.createElement('img');
+    const img1 = document.createElement('img');
+    const img2 = document.createElement('img');
+    const img3 = document.createElement('img');
+
+    img0.src = 'img/icons/1.png';
+    img0.id = `wave-${i}-0`;
+    img0.className = 'overlay';
+    img0.style.display = 'none';
+
+    img1.src = 'img/icons/1.png';
+    img1.id = `wave-${i}-1`;
+    img1.className = 'overlay';
+    img1.style.display = 'none';
+
+    img2.src = 'img/icons/1.png';
+    img2.id = `wave-${i}-2`;
+    img2.className = 'overlay';
+    img2.style.display = 'none';
+
+    img3.src = 'img/icons/1.png';
+    img3.id = `wave-${i}-3`;
+    img3.className = 'overlay';
+    img3.style.display = 'none';
+
     img.src = `img/${i}.png`;
     img.id = `wave-${i}`;
     img.classList.add('wave-icon');
-    wavesIcons.appendChild(img);
+
+    ctn.appendChild(img);
+
     img.addEventListener('mousedown', event => {
       if (event.buttons & 1) {
         onLeftClickWaveIcon(event, i);
@@ -535,6 +635,11 @@ function setupPage(reset = false) {
         console.log('Unknown click type detected.');
       }
     });
+
+    ctn.appendChild(img0);
+    ctn.appendChild(img1);
+    ctn.appendChild(img2);
+    ctn.appendChild(img3);
   }
 
   if (reset === true) {
