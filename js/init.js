@@ -102,27 +102,30 @@ function initializeAndCache() {
                 }
             }
             else if (typedText === '/help') {
-                ChatPrintAll(`<span style="color: green">Commands: /help, /fast, /slow, /mute, /unmute<br/>/start, /reset, /stop, /restart, /idX<br/><br/>Made with love by Kidev :)</span>`);
+                ChatPrintAll(`<span style="color: green">Commands: /help, /fast, /slow, /mute, /unmute<br/>/start, /reset, /stop, /restart, /idX, /fiesta<br/><br/>Made with love by Kidev :)</span>`);
             }
             else if (typedText === '/id0') {
-                ChatPrintAll(`<span style="color: green">You are now player with id=0<br/></span>`);
                 playerIndex = 0;
+                ChatPrintAll(`<span style="color: green">You are now <span style="color: ${playerColors[playerIndex]}">player</span> with id: 0<br/></span>`);
             }
             else if (typedText === '/id1') {
-                ChatPrintAll(`<span style="color: green">You are now player with id=0<br/></span>`);
                 playerIndex = 1;
+                ChatPrintAll(`<span style="color: green">You are now <span style="color: ${playerColors[playerIndex]}">player</span> with id: 1<br/></span>`);
             }
             else if (typedText === '/id2') {
-                ChatPrintAll(`<span style="color: green">You are now player with id=0<br/></span>`);
                 playerIndex = 2;
+                ChatPrintAll(`<span style="color: green">You are now <span style="color: ${playerColors[playerIndex]}">player</span> with id: 2<br/></span>`);
             }
             else if (typedText === '/id3') {
-                ChatPrintAll(`<span style="color: green">You are now player with id=0<br/></span>`);
                 playerIndex = 3;
+                ChatPrintAll(`<span style="color: green">You are now <span style="color: ${playerColors[playerIndex]}">player</span> with id: 3<br/></span>`);
             }
             else if (typedText === '/clear') {
                 ChatPrintAll(`<span style="color: green">You cleared all pings<br/></span>`);
                 clearPings();
+            }
+            else if (typedText === '/fiesta') {
+                playOggSound('snd/Fiesta.ogg');
             }
             else if (typedText === '/reset' || typedText === '/stop' || typedText === '/restart') {
                 ChatPrintAll(`<span style="color: green">Game restarted!</span>`);
