@@ -17,6 +17,9 @@ const playerColorsHueRotateFromYellow = ['-60deg', '180deg', '-30deg', '-120deg'
 let playerIndex = 0;
 let playerColor = playerColors[playerIndex];
 
+let mouseOverChatArea = false;
+let chatInputFocused = false;
+
 window.addEventListener('DOMContentLoaded', initializeAndCache);
 window.addEventListener('resize', updateDimensions);
 window.addEventListener('load', updateDimensions);
@@ -48,11 +51,19 @@ function initializeAndCache() {
         }
     });
 
-    document.getElementById("bottom-left-input").addEventListener('blur', event => {
-        document.getElementById("bottom-left-txt").style.animation = 'fadeOut 1s forwards';
+    document.getElementById("chat-area-container").addEventListener('mouseenter', () => {
+        mouseOverChatArea = true;
     });
-
+    document.getElementById("chat-area-container").addEventListener('mouseleave', () => {
+        mouseOverChatArea = false;
+        checkIfWholeChatIsOutOfFocus();
+    });
+    document.getElementById("bottom-left-input").addEventListener('blur', event => {
+        chatInputFocused = false;
+        checkIfWholeChatIsOutOfFocus();
+    });
     document.getElementById("bottom-left-input").addEventListener('focus', event => {
+        chatInputFocused = true;
         document.getElementById("bottom-left-txt").style.animation = '';
         document.getElementById("bottom-left-txt").style.opacity = '1';
     });
@@ -123,6 +134,12 @@ function initializeAndCache() {
     });
 }
 
+function checkIfWholeChatIsOutOfFocus() {
+    if (!mouseOverChatArea && !chatInputFocused) {
+        document.getElementById("bottom-left-txt").style.animation = 'fadeOut 0.5s forwards';
+    }
+}
+
 function updateDimensions() {
     const screenW = window.innerWidth;
     const imageW = uiImage.clientWidth;
@@ -172,25 +189,12 @@ function preloadSounds(soundUrls) {
     return Promise.all(soundUrls.map(loadAudio));
 }
 
-function ConsolePrintAll(message, error = false) {
-    const msg = document.createElement('span');
-    const chatTxt = document.getElementById('top-right-txt');
-
-    if (error) {
-        msg.innerHTML =  `<span style="color: red;">${message}</span><br/>`;
-    } else {
-        msg.innerHTML =  `<span style="color: white; font-style: italic;">${message}</span><br/>`;
-    }
-
-    chatTxt.appendChild(msg)
-}
-
 console.log = (function (originalLog) {
     return function (...args) {
         originalLog.apply(console, args); // Call the original console.log function
 
         const message = args.map(arg => (typeof arg === 'object' ? JSON.stringify(arg) : arg)).join(' ');
-        ConsolePrintAll(message);
+        ConsolePrintAll(`[log] ${message}`);
     };
 })(console.log);
 
@@ -199,7 +203,7 @@ console.info = (function (originalLog) {
         originalLog.apply(console, args); // Call the original console.log function
 
         const message = args.map(arg => (typeof arg === 'object' ? JSON.stringify(arg) : arg)).join(' ');
-        ConsolePrintAll(`<span style="color: grey">INFO: ${message}</span>`);
+        ConsolePrintAll(`[info] ${message}`);
     };
 })(console.info);
 

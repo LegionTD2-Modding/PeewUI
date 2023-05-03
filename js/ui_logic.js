@@ -20,7 +20,7 @@ const line2mid = document.querySelector('.line-2');
 const line3mid = document.querySelector('.line-3');
 const midText = document.querySelector('.types-line-1');
 
-/* UI UTILS */
+/* UTILS */
 function endLoopingInterval() {
   clearInterval(phaseTimer);
 }
@@ -35,6 +35,18 @@ function ChatPrint(p_id, textToPrint) {
   const msg = document.createElement('span');
   msg.innerHTML = `<span style='color: ${playerColors[p_id]}'>player_${p_id}</span>${textToPrint}<br/>`;
   document.getElementById('bottom-left-txt').appendChild(msg);
+}
+
+function ConsolePrintAll(message, error = false) {
+  const msg = document.createElement('span');
+  const chatTxt = document.getElementById('top-right-txt');
+
+  if (error) {
+    msg.innerHTML =  `<span style="color: red;">${message}</span><br/>`;
+  } else {
+    msg.innerHTML =  `<span style="color: white;">${message}</span><br/>`;
+  }
+  chatTxt.appendChild(msg)
 }
 
 function playOggSound(url, volume = soundVolume) {
