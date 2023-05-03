@@ -267,14 +267,14 @@ function moveImage(wave) {
   const middle = document.querySelector('.top-row.mid-col');
   const right = document.querySelector('.top-row.right-col');
 
-  right.querySelectorAll('.image-container').forEach(t_img => {
+  right.querySelectorAll('.wave-container').forEach(ctn => {
 
-    t_img.style.animation = 'slideLeft 0.5s forwards';
-    t_img.addEventListener('animationend', function () {
+    ctn.style.animation = 'slideLeft 0.5s forwards';
+    ctn.addEventListener('animationend', function () {
 
-      t_img.style.animation = '';
+      ctn.style.animation = '';
 
-      if (t_img === image) {
+      if (ctn === image) {
 
         middle.appendChild(image);
 
@@ -301,12 +301,12 @@ function moveToTopLeft(wave) {
   image.style.border = '';
   image.style.zIndex = '0';
 
-  target.querySelectorAll('img').forEach(t_img => {
+  target.querySelectorAll('.wave-container').forEach(ctn => {
 
-    t_img.style.animation = 'slideLeft 0.5s forwards';
-    t_img.addEventListener('animationend', function () {
+    ctn.style.animation = 'slideLeft 0.5s forwards';
+    ctn.addEventListener('animationend', function () {
 
-      t_img.style.animation = '';
+      ctn.style.animation = '';
     });
   });
 
