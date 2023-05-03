@@ -1,3 +1,14 @@
+const soundUrls = [
+    'snd/battle-begin.ogg',
+    'snd/expecting-send.ogg',
+    'snd/ping-thinking-about.ogg',
+    'snd/save.ogg',
+    'snd/send.ogg',
+    'snd/tick-tock.ogg',
+    'snd/welcome.ogg',
+    'snd/windgust.ogg',
+    'snd/Fiesta.ogg'
+];
 
 const buildPhaseDuration = [13, 7];
 const fightPhaseDuration = 5;
@@ -15,30 +26,7 @@ window.addEventListener('load', updateDimensions);
 
 function initializeAndCache() {
 
-    const uiText = document.querySelector('.ui-text');
-    const uiContainer = document.querySelector('.ui-container');
-    const uiImage = document.querySelector('.ui-image');
-    //const wavesIcons = document.querySelector('.ui-container .ui-text .grid-item.top-row.right-col');
-
-    const timerText = document.querySelector('.timer');
-    const line1mid = document.querySelector('.line-1');
-    const line2mid = document.querySelector('.line-2');
-    const line3mid = document.querySelector('.line-3');
-    const midText = document.querySelector('.types-line-1');
-
     console.info('DOM Content Loaded');
-
-    const soundUrls = [
-        'snd/battle-begin.ogg',
-        'snd/expecting-send.ogg',
-        'snd/ping-thinking-about.ogg',
-        'snd/save.ogg',
-        'snd/send.ogg',
-        'snd/tick-tock.ogg',
-        'snd/welcome.ogg',
-        'snd/windgust.ogg',
-        'snd/Fiesta.ogg'
-    ];
 
     preloadSounds(soundUrls).then(() => {
         console.info('All sounds loaded');
@@ -47,8 +35,8 @@ function initializeAndCache() {
         console.error('Error while preloading sounds:', error);
     });
 
-    initializeWaveInfoContainers();
     updateDimensions();
+    initializeWaveInfoContainers();
 
     document.getElementById("pub-span-kidev").addEventListener('mousedown', event => {
         if (event.buttons & 1) {
@@ -76,66 +64,64 @@ function initializeAndCache() {
         if (event.key === "Enter") {
             event.preventDefault();
             const typedText = document.getElementById("bottom-left-input").value;
-            const msg = document.createElement('span');
-            const chatTxt = document.getElementById('bottom-left-txt');
-            msg.innerHTML = `<span style="color: ${playerColor}">PLAYER_${playerIndex}</span>: ${typedText}<br/>`;
 
             if (typedText === '/fast') {
                 timeReducer = 5.0;
-                loopDone();
+                endLoopingInterval();
                 phaseTimer = setInterval(nextSecond, 1000 / timeReducer);
-                msg.innerHTML = `<span style="color: green">Fast mode enabled</span><br/>`;
+                ChatPrintAll(`<span style="color: green">Fast mode enabled</span>`);
             }
-            if (typedText === '/slow') {
+            else if (typedText === '/slow') {
                 timeReducer = 1.0;
-                loopDone();
+                endLoopingInterval();
                 phaseTimer = setInterval(nextSecond, 1000);
-                msg.innerHTML = `<span style="color: green">Fast mode disabled</span><br/>`;
+                ChatPrintAll(`<span style="color: green">Fast mode disabled</span>`);
             }
-            if (typedText === '/mute') {
+            else if (typedText === '/mute') {
                 soundVolume = 0.0;
-                msg.innerHTML = `<span style="color: green">Sounds disabled</span><br/>`;
+                ChatPrintAll(`<span style="color: green">Sounds disabled</span>`);
             }
-            if (typedText === '/unmute') {
+            else if (typedText === '/unmute') {
                 soundVolume = 0.1;
-                msg.innerHTML = `<span style="color: green">Sounds enabled</span><br/>`;
+                ChatPrintAll(`<span style="color: green">Sounds enabled</span>`);
             }
-            if (typedText === '/start') {
+            else if (typedText === '/start') {
                 if (document.getElementById("start-button").style.opacity === '1') {
-                    msg.innerHTML = `<span style="color: green">Started game!</span><br/>`;
+                    ChatPrintAll(`<span style="color: green">Started game!</span>`);
                     window.startUILoop();
                     document.getElementById("start-button").style.opacity = '0';
                 }
             }
-            if (typedText === '/help') {
-                msg.innerHTML = `<span style="color: green">Commands: /help, /fast, /slow, /mute, /unmute<br/>/start, /reset, /stop, /restart, /idX<br/><br/>Made with love by Kidev :)</span><br/>`;
+            else if (typedText === '/help') {
+                ChatPrintAll(`<span style="color: green">Commands: /help, /fast, /slow, /mute, /unmute<br/>/start, /reset, /stop, /restart, /idX<br/><br/>Made with love by Kidev :)</span>`);
             }
-            if (typedText === '/id0') {
-                msg.innerHTML = `<span style="color: green">You are now player with id=0<br/></span><br/>`;
+            else if (typedText === '/id0') {
+                ChatPrintAll(`<span style="color: green">You are now player with id=0<br/></span>`);
                 playerIndex = 0;
             }
-            if (typedText === '/id1') {
-                msg.innerHTML = `<span style="color: green">You are now player with id=0<br/></span><br/>`;
+            else if (typedText === '/id1') {
+                ChatPrintAll(`<span style="color: green">You are now player with id=0<br/></span>`);
                 playerIndex = 1;
             }
-            if (typedText === '/id2') {
-                msg.innerHTML = `<span style="color: green">You are now player with id=0<br/></span><br/>`;
+            else if (typedText === '/id2') {
+                ChatPrintAll(`<span style="color: green">You are now player with id=0<br/></span>`);
                 playerIndex = 2;
             }
-            if (typedText === '/id3') {
-                msg.innerHTML = `<span style="color: green">You are now player with id=0<br/></span><br/>`;
+            else if (typedText === '/id3') {
+                ChatPrintAll(`<span style="color: green">You are now player with id=0<br/></span>`);
                 playerIndex = 3;
             }
-            if (typedText === '/clear') {
-                msg.innerHTML = `<span style="color: green">You cleared all pings<br/></span><br/>`;
+            else if (typedText === '/clear') {
+                ChatPrintAll(`<span style="color: green">You cleared all pings<br/></span>`);
                 clearPings();
             }
-            if (typedText === '/reset' || typedText === '/stop' || typedText === '/restart') {
-                msg.innerHTML = `<span style="color: green">Game restarted!</span><br/>`;
-                window.resetGame();
+            else if (typedText === '/reset' || typedText === '/stop' || typedText === '/restart') {
+                ChatPrintAll(`<span style="color: green">Game restarted!</span>`);
+                resetGame();
+            } else {
+                ChatPrint(playerIndex, `<span style="color: ${playerColor}">player_${playerIndex}</span>: ${typedText}`);
             }
 
-            chatTxt.appendChild(msg);
             document.getElementById("bottom-left-input").value = '';
         }
     });

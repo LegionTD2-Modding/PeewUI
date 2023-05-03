@@ -5,6 +5,17 @@ let phaseTimer;
 let remainingTime = 0;
 let timeReducer = 1.0;
 
+const uiText = document.querySelector('.ui-text');
+const uiContainer = document.querySelector('.ui-container');
+const uiImage = document.querySelector('.ui-image');
+//const wavesIcons = document.querySelector('.ui-container .ui-text .grid-item.top-row.right-col');
+
+const timerText = document.querySelector('.timer');
+const line1mid = document.querySelector('.line-1');
+const line2mid = document.querySelector('.line-2');
+const line3mid = document.querySelector('.line-3');
+const midText = document.querySelector('.types-line-1');
+
 /* UI UTILS */
 function endLoopingInterval() {
   clearInterval(phaseTimer);
