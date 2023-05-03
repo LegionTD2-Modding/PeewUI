@@ -1,3 +1,7 @@
+const buildPhaseDuration = [13, 7];
+const fightPhaseDuration = 5;
+const maxWaves = 30;
+
 let soundVolume = 0.1;
 let currentPhase = 'build';
 let currentWave = 1;

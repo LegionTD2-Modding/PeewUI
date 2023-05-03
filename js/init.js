@@ -10,9 +10,6 @@ const soundUrls = [
     'snd/Fiesta.ogg'
 ];
 
-const buildPhaseDuration = [13, 7];
-const fightPhaseDuration = 5;
-const maxWaves = 30;
 const fontSizeRatio = 0.024;
 const playerColors = ['red', 'blue', 'orange', 'purple', 'yellow', 'cyan', 'green', 'pink'];
 const playerColorsHueRotateFromYellow = ['-60deg', '180deg', '-30deg', '-120deg', '0deg', '120deg', '60deg', '90deg'];
@@ -46,7 +43,7 @@ function initializeAndCache() {
 
     document.getElementById("start-button").addEventListener('mousedown', event => {
         if (event.buttons & 1) {
-            window.startUILoop();
+            startUILoop();
             document.getElementById("start-button").style.opacity = '0';
         }
     });
