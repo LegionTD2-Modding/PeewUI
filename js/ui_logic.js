@@ -54,6 +54,17 @@ function ConsolePrintAll(message, error = false) {
   chatTxt.appendChild(msg)
 }
 
+function isPlayerCoolDowned(p_id) {
+  const gameTime = new Date().getTime();
+  if (gameTime - playersCooldown[p_id] <= cooldownTime) {
+    ChatPrintAll(`<span style="color: red">You are on cool down!</span>`);
+    playersCooldown[p_id] = gameTime;
+    return true;
+  }
+  playersCooldown[p_id] = gameTime;
+  return false;
+}
+
 function playOggSound(url, volume = soundVolume) {
   const audio = new Audio(url);
   audio.volume = Math.max(0, Math.min(1, volume));

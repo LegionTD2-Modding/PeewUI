@@ -1,5 +1,8 @@
+const cooldownTime = 1000;
+
 // playersPings[player_id][ping_type] = wave_id (if < 0 => thinking about)
 let playersPings = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
+let playersCooldown = [0, 0, 0, 0];
 
 function onLeftClickWaveIcon(event, wave_id) {
     if (event.ctrlKey) {
@@ -45,6 +48,11 @@ function createImageContainer(index) {
     container.className = 'wave-container';
 
     container.addEventListener('mousedown', event => {
+
+        if (isPlayerCoolDowned(playerIndex)) {
+            return;
+        }
+
         if (event.buttons & 1) {
             onLeftClickWaveIcon(event, index);
         } else if (event.buttons & 2) {

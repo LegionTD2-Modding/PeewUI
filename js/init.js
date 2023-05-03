@@ -76,6 +76,10 @@ function initializeAndCache() {
 
             autoScrollDownChat();
 
+            if (isPlayerCoolDowned(playerIndex)) {
+                return;
+            }
+
             if (typedText === '/fast') {
                 timeReducer = 5.0;
                 endLoopingInterval();
@@ -133,7 +137,7 @@ function initializeAndCache() {
                 ChatPrintAll(`<span style="color: green">Game restarted!</span>`);
                 resetGame();
             } else {
-                ChatPrint(playerIndex, `<span style="color: ${playerColors[playerIndex]}">player_${playerIndex}</span>: ${typedText}`);
+                ChatPrint(playerIndex, `: ${typedText}`);
             }
         }
     });
