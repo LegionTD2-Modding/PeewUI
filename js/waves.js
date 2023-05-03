@@ -59,7 +59,7 @@ function createImageContainer(index) {
 
     // Main image
     const mainImage = document.createElement('img');
-    mainImage.src = `img/${index}.png`;
+    mainImage.src = `/img/${index}.png`;
     mainImage.style.width = '100%';
     mainImage.style.height = '100%';
 
@@ -72,7 +72,7 @@ function createImageContainer(index) {
     corners.forEach((corner, i) => {
         if (displayCornerImages[i]) {
             const detailImage = document.createElement('img');
-            detailImage.src = 'img/icons/1_yellow.png';
+            detailImage.src = '/img/icons/1_yellow.png';
             detailImage.style.position = 'absolute';
 
             // Tint the image
@@ -112,5 +112,9 @@ function initializeWaveInfoContainers() {
 }
 
 function clearPings() {
+
+}
+
+function pingWaveFor(wave_id, player_id, ping_type, is_ctrl) {
 
 }

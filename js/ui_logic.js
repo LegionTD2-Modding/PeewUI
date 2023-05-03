@@ -56,7 +56,6 @@ function startUILoop() {
 
 function nextSecond() {
   remainingTime--;
-
   if (remainingTime <= 0) {
     nextPhase();
   } else {
@@ -71,7 +70,7 @@ function nextPhase() {
   } else {
     currentWave++;
     if (currentWave > maxWaves) {
-      loopDone();
+      endLoopingInterval();
       return;
     }
     currentPhase = 'build';

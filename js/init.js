@@ -88,7 +88,7 @@ function initializeAndCache() {
             else if (typedText === '/start') {
                 if (document.getElementById("start-button").style.opacity === '1') {
                     ChatPrintAll(`<span style="color: green">Started game!</span>`);
-                    window.startUILoop();
+                    startUILoop();
                     document.getElementById("start-button").style.opacity = '0';
                 }
             }
