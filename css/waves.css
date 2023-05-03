@@ -1,64 +1,41 @@
-.wave-icons-container {
+
+
+.wave-container {
     position: relative;
     display: inline-block;
+    z-index: 1;
 }
 
-.image-container .wave-icon img {
+.wave-main-image {
+    display: block;
+    width: 100%;
+}
+
+.wave-corner-image {
     position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    object-fit: cover;
-    width: auto;
-    z-index: 0;
-    cursor: pointer;
+    width: 20%;
 }
 
-.image-container .overlay {
-    z-index: 2;
-}
-.ping-icon {
-    position: absolute;
-    width: auto;
-    height: 2vh;
-    z-index: 4;
-}
-
-.ping-icon.corner0 {
+.wave-corner-1 {
     left: 50%;
     top: 50%;
     transform: translate(-100%, -100%);
 }
 
-.ping-icon.corner1 {
+.wave-corner-2 {
     right: 50%;
     top: 50%;
     transform: translate(0, -100%);
 }
 
-.ping-icon.corner2 {
+.wave-corner-3 {
     left: 50%;
     bottom: 50%;
     transform: translate(-100%, 0);
 }
 
-.ping-icon.corner3 {
+.wave-corner-4 {
     right: 50%;
     bottom: 50%;
     transform: translate(0, 0);
-}
-
-.wave-icon:hover {
-    width: auto;
-    height: 100%;
-    z-index: 0;
-    cursor: pointer;
-    border-width: 2px;
-    border-color: white;
-    border-style: inset;
-}
-
-.type-icon {
-    z-index: 1;
-    cursor: pointer;
 }
