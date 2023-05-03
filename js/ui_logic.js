@@ -12,7 +12,6 @@ let timeReducer = 1.0;
 const uiText = document.querySelector('.ui-text');
 const uiContainer = document.querySelector('.ui-container');
 const uiImage = document.querySelector('.ui-image');
-//const wavesIcons = document.querySelector('.ui-container .ui-text .grid-item.top-row.right-col');
 
 const timerText = document.querySelector('.timer');
 const line1mid = document.querySelector('.line-1');
@@ -56,12 +55,12 @@ function ConsolePrintAll(message, error = false) {
 
 function isPlayerCoolDowned(p_id) {
   const gameTime = new Date().getTime();
-  if (gameTime - playersCooldown[p_id] <= cooldownTime) {
+  if (gameTime - playersCoolDown[p_id] <= coolDownTime) {
     ChatPrintAll(`<span style="color: red">You are on cool down!</span>`);
-    playersCooldown[p_id] = gameTime;
+    playersCoolDown[p_id] = gameTime;
     return true;
   }
-  playersCooldown[p_id] = gameTime;
+  playersCoolDown[p_id] = gameTime;
   return false;
 }
 
@@ -232,13 +231,13 @@ function updateUI() {
   } else {
     line1.textContent = ``;
     line2.textContent = `WAVE ${currentWave}`;
-    line3.textContent = `Next: WAVE ${currentWave + 1}`;
+    line3.textContent = ``; //`Next: WAVE ${currentWave + 1}`;
 
     let attack = wavesData[Math.min(currentWave + 1, 21)].dmgType;
     let defense = wavesData[Math.min(currentWave + 1, 21)].defType;
 
-    line3WrapperA.innerHTML = `&nbsp;<img class='type-icon' src='img/types/${attack}.png' alt='Damage ${attack}' />&nbsp;`
-    line3WrapperD.innerHTML = `&nbsp;<img class='type-icon' src='img/types/${defense}.png' alt='Defense ${defense}' />&nbsp;`
+    line3WrapperA.innerHTML = ``; //`&nbsp;<img class='type-icon' src='img/types/${attack}.png' alt='Damage ${attack}' />&nbsp;`
+    line3WrapperD.innerHTML = ``; //`&nbsp;<img class='type-icon' src='img/types/${defense}.png' alt='Defense ${defense}' />&nbsp;`
 
     if (topMiddle.textContent !== '   ') {
       topMiddle.textContent = 'BATTLE';
@@ -261,7 +260,7 @@ function updateUI() {
 function moveImage(wave) {
 
   if (wave >= 14) {
-    const container = wavesIconscreateImageContainer(wave + 8);
+    wavesIcons.appendChild(createImageContainer(wave + 8));
   }
 
   const image = document.querySelector(`#wave-${wave}`);

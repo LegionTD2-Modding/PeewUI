@@ -1,8 +1,10 @@
-const cooldownTime = 1000;
+const coolDownTime = 1000;
+const wavesIcons = document.querySelector('.ui-container .ui-text .grid-item.top-row.right-col');
+
 
 // playersPings[player_id][ping_type] = wave_id (if < 0 => thinking about)
 let playersPings = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
-let playersCooldown = [0, 0, 0, 0];
+let playersCoolDown = [0, 0, 0, 0];
 
 function onLeftClickWaveIcon(event, wave_id) {
     if (event.ctrlKey) {
@@ -88,11 +90,8 @@ function createImageContainer(index) {
 }
 
 function initializeWaveInfoContainers() {
-    const wavesIcons = document.querySelector('.ui-container .ui-text .grid-item.top-row.right-col');
-
     for (let wave_id = 1; wave_id < wavesData.length; wave_id++) {
-        const ctn = createImageContainer(wave_id);
-        wavesIcons.appendChild(ctn);
+        wavesIcons.appendChild(createImageContainer(wave_id));
     }
 }
 
