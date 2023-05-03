@@ -148,27 +148,27 @@ body, html {
     width: auto;
 }
 
-.grid-item.right-col:not(:hover) img:nth-child(6) {
+.grid-item.right-col:not(:hover) div:nth-child(6) {
     opacity: 0.67;
 }
 
-.grid-item.right-col:not(:hover) img:nth-child(7) {
+.grid-item.right-col:not(:hover) div:nth-child(7) {
     opacity: 0.33;
 }
 
-.grid-item.right-col:not(:hover) img:nth-child(n+8) {
+.grid-item.right-col:not(:hover) div:nth-child(n+8) {
     opacity: 0;
 }
 
-.grid-item.left-col img:nth-last-child(6) {
+.grid-item.left-col div:nth-last-child(6) {
     opacity: 0.67;
 }
 
-.grid-item.left-col img:not(:hover):nth-last-child(7) {
+.grid-item.left-col div:not(:hover):nth-last-child(7) {
     opacity: 0.33;
 }
 
-.grid-item.left-col img:not(:hover):nth-last-child(n+8) {
+.grid-item.left-col div:not(:hover):nth-last-child(n+8) {
     opacity: 0;
 }
 

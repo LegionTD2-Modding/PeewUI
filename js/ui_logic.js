@@ -229,13 +229,7 @@ function updateUI() {
 function moveImage(wave) {
 
   if (wave >= 14) {
-    const wavesIcons = document.querySelector('.ui-container .ui-text .grid-item.top-row.right-col');
-    const img = document.createElement('.image-container');
-    img.src = `img/21.png`;
-    img.id = `wave-${wave + 8}`;
-    img.classList.add('wave-icon');
-    img.style.cursor = 'pointer';
-    wavesIcons.appendChild(img);
+    const container = wavesIconscreateImageContainer(wave + 8);
   }
 
   const image = document.querySelector(`#wave-${wave}`);

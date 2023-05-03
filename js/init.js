@@ -64,6 +64,7 @@ function initializeAndCache() {
         if (event.key === "Enter") {
             event.preventDefault();
             const typedText = document.getElementById("bottom-left-input").value;
+            document.getElementById("bottom-left-input").value = '';
 
             if (typedText === '/fast') {
                 timeReducer = 5.0;
@@ -121,8 +122,6 @@ function initializeAndCache() {
             } else {
                 ChatPrint(playerIndex, `<span style="color: ${playerColor}">player_${playerIndex}</span>: ${typedText}`);
             }
-
-            document.getElementById("bottom-left-input").value = '';
         }
     });
 }
@@ -176,7 +175,7 @@ function preloadSounds(soundUrls) {
     return Promise.all(soundUrls.map(loadAudio));
 }
 
-function writeToLogDiv(message, error = false) {
+function ConsolePrintAll(message, error = false) {
     const msg = document.createElement('span');
     const chatTxt = document.getElementById('top-right-txt');
 
@@ -194,7 +193,7 @@ console.log = (function (originalLog) {
         originalLog.apply(console, args); // Call the original console.log function
 
         const message = args.map(arg => (typeof arg === 'object' ? JSON.stringify(arg) : arg)).join(' ');
-        writeToLogDiv(message);
+        ConsolePrintAll(message);
     };
 })(console.log);
 
@@ -203,7 +202,7 @@ console.info = (function (originalLog) {
         originalLog.apply(console, args); // Call the original console.log function
 
         const message = args.map(arg => (typeof arg === 'object' ? JSON.stringify(arg) : arg)).join(' ');
-        writeToLogDiv(`<span style="color: grey">LOG: ${message}</span>`);
+        ConsolePrintAll(`<span style="color: grey">INFO: ${message}</span>`);
     };
 })(console.info);
 
@@ -212,6 +211,6 @@ console.error = (function (originalLog) {
         originalLog.apply(console, args); // Call the original console.log function
 
         const message = args.map(arg => (typeof arg === 'object' ? JSON.stringify(arg) : arg)).join(' ');
-        writeToLogDiv(message, true);
+        ConsolePrintAll(message, true);
     };
 })(console.error);

@@ -60,8 +60,7 @@ function createImageContainer(index) {
     // Main image
     const mainImage = document.createElement('img');
     mainImage.src = `/img/${index}.png`;
-    mainImage.style.width = '100%';
-    mainImage.style.height = '100%';
+    mainImage.className = 'wave-icon';
 
     container.appendChild(mainImage);
 
@@ -73,7 +72,6 @@ function createImageContainer(index) {
         if (displayCornerImages[i]) {
             const detailImage = document.createElement('img');
             detailImage.src = '/img/icons/1_yellow.png';
-            detailImage.style.position = 'absolute';
 
             // Tint the image
             detailImage.style.filter = `hue-rotate(${playerColorsHueRotateFromYellow[i]});`;
@@ -91,9 +89,7 @@ function createImageContainer(index) {
                 detailImage.style.right = '0';
             }
 
-            detailImage.zIndex = '2';
-            detailImage.style.height = '20%';
-            detailImage.style.width = '20%';
+            detailImage.className = `wave-icon-${corners[i]}`;
 
             container.appendChild(detailImage);
         }
