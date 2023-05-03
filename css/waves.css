@@ -1,19 +1,22 @@
 
-
 .wave-container {
     position: relative;
     display: inline-block;
-    z-index: 1;
+    z-index: 0;
+    height: 100%;
+    width: 100%;
 }
 
 .wave-main-image {
     display: block;
-    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .wave-corner-image {
     position: absolute;
     width: 20%;
+    z-index: 1;
 }
 
 .wave-corner-0 {
