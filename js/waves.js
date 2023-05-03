@@ -38,7 +38,7 @@ function createImageContainer(index) {
     // Container
     const container = document.createElement('div');
 
-    container.id = `wave-$(index)`;
+    container.id = `wave-${index}`;
     container.className = 'wave-container';
 
     container.addEventListener('mousedown', event => {
@@ -86,9 +86,12 @@ function initializeWaveInfoContainers() {
 }
 
 function clearPings() {
-
+    document.querySelectorAll(`.wave-corner-image`).forEach(img => {
+        img.style.display = 'none';
+    });
 }
 
 function pingWaveFor(wave_id, player_id, ping_type, is_ctrl) {
-
+    const cornerImg = document.querySelector(`#wave-${wave_id} .wave-corner-${player_id}`);
+    cornerImg.style.display = 'block';
 }
