@@ -15,7 +15,6 @@ const playerColors = ['red', 'blue', 'orange', 'purple', 'yellow', 'cyan', 'gree
 const playerColorsHueRotateFromYellow = ['-60deg', '180deg', '-30deg', '-120deg', '0deg', '120deg', '60deg', '90deg'];
 
 let playerIndex = 0;
-let playerColor = playerColors[playerIndex];
 
 let mouseOverChatArea = false;
 let chatInputFocused = false;
@@ -66,6 +65,7 @@ function initializeAndCache() {
         chatInputFocused = true;
         document.getElementById("bottom-left-txt").style.animation = '';
         document.getElementById("bottom-left-txt").style.opacity = '1';
+        autoScrollDownChat();
     });
 
     document.getElementById("bottom-left-input").addEventListener("keydown", function(event) {
@@ -73,6 +73,8 @@ function initializeAndCache() {
             event.preventDefault();
             const typedText = document.getElementById("bottom-left-input").value;
             document.getElementById("bottom-left-input").value = '';
+
+            autoScrollDownChat();
 
             if (typedText === '/fast') {
                 timeReducer = 5.0;
@@ -131,7 +133,7 @@ function initializeAndCache() {
                 ChatPrintAll(`<span style="color: green">Game restarted!</span>`);
                 resetGame();
             } else {
-                ChatPrint(playerIndex, `<span style="color: ${playerColor}">player_${playerIndex}</span>: ${typedText}`);
+                ChatPrint(playerIndex, `<span style="color: ${playerColors[playerIndex]}">player_${playerIndex}</span>: ${typedText}`);
             }
         }
     });

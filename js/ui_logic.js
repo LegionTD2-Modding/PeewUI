@@ -25,6 +25,11 @@ function endLoopingInterval() {
   clearInterval(phaseTimer);
 }
 
+function autoScrollDownChat() {
+  const div = document.getElementById('bottom-left-txt');
+  div.scrollTop = div.scrollHeight;
+}
+
 function ChatPrintAll(textToPrint) {
   const msg = document.createElement('span');
   msg.innerHTML = `${textToPrint}<br/>`;

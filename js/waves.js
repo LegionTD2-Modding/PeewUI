@@ -1,3 +1,6 @@
+// playersPings[player_id][ping_type] = wave_id (if < 0 => thinking about)
+let playersPings = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
+
 function onLeftClickWaveIcon(event, wave_id) {
     if (event.ctrlKey) {
         playOggSound('snd/ping-thinking-about.ogg');
@@ -64,7 +67,7 @@ function createImageContainer(index) {
     const cornersClasses = ['wave-corner-0', 'wave-corner-1', 'wave-corner-2', 'wave-corner-3'];
     cornersClasses.forEach((corner, corner_id) => {
         const detailImage = document.createElement('img');
-        detailImage.src = '/img/icons/1_yellow.png';
+        detailImage.src = '/img/icons/1.png';
         detailImage.classList.add('wave-corner-image', corner);
 
         // Tint the image
@@ -92,6 +95,14 @@ function clearPings() {
 }
 
 function pingWaveFor(wave_id, player_id, ping_type, is_ctrl) {
+    let absLastValue = Math.abs(playersPings[player_id][ping_type]);
+    playersPings[player_id][ping_type] = (is_ctrl ? -wave_id : wave_id);
+
+    if (absLastValue !== 0) {
+        const oldCorner = document.querySelector(`#wave-${absLastValue} .wave-corner-${player_id}`);
+        oldCorner.style.display = 'none';
+    }
+
     const cornerImg = document.querySelector(`#wave-${wave_id} .wave-corner-${player_id}`);
     cornerImg.style.display = 'block';
 }
