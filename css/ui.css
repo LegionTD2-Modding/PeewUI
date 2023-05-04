@@ -81,6 +81,17 @@ body, html {
     font-family: Cuprum, sans-serif;
 }
 
+.ui-text {
+    position: relative;
+    display: grid;
+    grid-template-columns: 35.4% 29.2% 35.4%;
+    grid-template-rows: 20% 46% 34%;
+    width: 100%;
+    height: 100%;
+    color: white;
+    font-family: Cuprum, sans-serif;
+}
+
 /* ********** */
 /* GRID ITEMS */
 .grid-item {
@@ -246,6 +257,16 @@ body, html {
     z-index: 4;
     height: 2vh;
     width: auto;
+}
+
+#pings-infos-ui img {
+    display: block;
+    align-items: center;
+    z-index: 10;
+    height: 100%;
+    width: 100%;
+    opacity: 1;
+    bottom: 100%;
 }
 
 /* Hide scrollbars */
