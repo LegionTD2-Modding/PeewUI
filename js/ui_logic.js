@@ -8,6 +8,7 @@ let currentWave = 1;
 let phaseTimer;
 let remainingTime = 0;
 let timeReducer = 1.0;
+let pauseCycle = false;
 
 const uiText = document.querySelector('.ui-text');
 const uiContainer = document.querySelector('.ui-container');
@@ -75,6 +76,15 @@ function playOggSound(url, volume = soundVolume) {
   });
 }
 
+function togglePause() {
+  pauseCycle = !pauseCycle;
+  if (pauseCycle) {
+    endLoopingInterval();
+  } else {
+    phaseTimer = setInterval(nextSecond, 1000 / timeReducer);
+  }
+}
+
 /* */
 
 function startUILoop() {
@@ -86,6 +96,11 @@ function startUILoop() {
 }
 
 function nextSecond() {
+
+  if (pauseCycle) {
+    return;
+  }
+
   remainingTime--;
   if (remainingTime <= 0) {
     nextPhase();

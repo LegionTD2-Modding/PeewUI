@@ -114,34 +114,42 @@ function initializeAndCache() {
             }
             else if (typedText === '/id0') {
                 playerIndex = 0;
-                ChatPrintAll(`<span style="color: green">You are now <span style="color: ${playerColors[playerIndex]}">player</span> with id: 0<br/></span>`);
+                ChatPrintAll(`<span style="color: green">You are now <span style="color: ${playerColors[playerIndex]}">player</span> with id: 0</span>`);
             }
             else if (typedText === '/id1') {
                 playerIndex = 1;
-                ChatPrintAll(`<span style="color: green">You are now <span style="color: ${playerColors[playerIndex]}">player</span> with id: 1<br/></span>`);
+                ChatPrintAll(`<span style="color: green">You are now <span style="color: ${playerColors[playerIndex]}">player</span> with id: 1</span>`);
             }
             else if (typedText === '/id2') {
                 playerIndex = 2;
-                ChatPrintAll(`<span style="color: green">You are now <span style="color: ${playerColors[playerIndex]}">player</span> with id: 2<br/></span>`);
+                ChatPrintAll(`<span style="color: green">You are now <span style="color: ${playerColors[playerIndex]}">player</span> with id: 2</span>`);
             }
             else if (typedText === '/id3') {
                 playerIndex = 3;
-                ChatPrintAll(`<span style="color: green">You are now <span style="color: ${playerColors[playerIndex]}">player</span> with id: 3<br/></span>`);
+                ChatPrintAll(`<span style="color: green">You are now <span style="color: ${playerColors[playerIndex]}">player</span> with id: 3</span>`);
             }
             else if (typedText === '/clear') {
-                ChatPrintAll(`<span style="color: green">You cleared all pings<br/></span>`);
+                ChatPrintAll(`<span style="color: green">You cleared all pings</span>`);
                 clearPings();
             }
             else if (typedText === '/chat') {
                 chatAlwaysDisplayed = !chatAlwaysDisplayed;
                 if (chatAlwaysDisplayed) {
-                    ChatPrintAll(`<span style="color: green">Your chat is now always displayed<br/></span>`);
+                    ChatPrintAll(`<span style="color: green">Your chat is now always displayed</span>`);
                 } else {
-                    ChatPrintAll(`<span style="color: green">Your chat will now auto hide after some time<br/></span>`);
+                    ChatPrintAll(`<span style="color: green">Your chat will now auto hide after some time</span>`);
                 }
             }
             else if (typedText === '/fiesta') {
                 playOggSound('snd/Fiesta.ogg');
+            }
+            else if (typedText === '/pause') {
+                togglePause();
+                if (pauseCycle) {
+                    ChatPrintAll(`<span style="color: green">Game paused !</span>`);
+                } else {
+                    ChatPrintAll(`<span style="color: green">Game resumed !</span>`);
+                }
             }
             else if (typedText === '/reset' || typedText === '/stop' || typedText === '/restart') {
                 ChatPrintAll(`<span style="color: green">Game restarted!</span>`);
@@ -154,7 +162,9 @@ function initializeAndCache() {
 }
 
 function checkIfWholeChatIsOutOfFocus() {
-    if (!mouseOverChatArea && !chatInputFocused && !chatAlwaysDisplayed) {
+    if (!mouseOverChatArea && !chatInputFocused && !chatAlwaysDisplayed
+        && document.getElementById("bottom-left-txt").style.opacity === '1')
+    {
         document.getElementById("bottom-left-txt").style.animation = 'fadeOut 0.5s forwards';
     }
 }
