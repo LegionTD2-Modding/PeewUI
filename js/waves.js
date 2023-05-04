@@ -69,7 +69,7 @@ function createImageContainer(index) {
 
     // Main image
     const mainImage = document.createElement('img');
-    mainImage.src = `/img/${wave_id_capped}.png`;
+    mainImage.src = `img/${wave_id_capped}.png`;
     mainImage.className = 'wave-main-image';
 
     container.appendChild(mainImage);
@@ -78,7 +78,7 @@ function createImageContainer(index) {
     const cornersClasses = ['wave-corner-0', 'wave-corner-1', 'wave-corner-2', 'wave-corner-3'];
     cornersClasses.forEach((corner, corner_id) => {
         const detailImage = document.createElement('img');
-        detailImage.src = '/img/icons/1.png';
+        detailImage.src = 'img/icons/1.png';
         detailImage.classList.add('wave-corner-image', corner);
 
         // Tint the image

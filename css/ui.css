@@ -1,5 +1,5 @@
-@font-face { font-family: Cuprum; src: url('/font/Cuprum.ttf'); }
-@font-face { font-family: Cuprum; font-weight: bold; src: url('/font/Cuprum-Bold.ttf');}
+@font-face { font-family: Cuprum; src: url('font/Cuprum.ttf'); }
+@font-face { font-family: Cuprum; font-weight: bold; src: url('font/Cuprum-Bold.ttf');}
 
 @keyframes breathingBorder {
     50% {
@@ -41,7 +41,7 @@ body, html {
 }
 
 .background {
-    background-image: url('/img/bg.png');
+    background-image: url('img/bg.png');
     background-size: cover;
     background-position: center;
     position: fixed;
