@@ -1,5 +1,6 @@
 const coolDownTime = 1000;
 const wavesIcons = document.querySelector('.ui-container .ui-text .grid-item.top-row.right-col');
+const pingTypeName = ['send', 'save', 'rec'];
 
 
 // playersPings[player_id][ping_type] = wave_id (if < 0 => thinking about)
@@ -50,6 +51,41 @@ function createImageContainer(index) {
     container.id = `wave-${index}`;
     container.className = 'wave-container';
 
+    const aura = document.createElement('div');
+    aura.className = 'wave-container-aura-ping';
+
+    const sendIcon = document.createElement('img');
+    sendIcon.className = 'wave-ping-icon';
+    sendIcon.id = 'ping-icon-send';
+    sendIcon.src = '../img/icons/sending.png';
+    const thinkSendIcon = document.createElement('img');
+    thinkSendIcon.className = 'wave-ping-icon';
+    thinkSendIcon.id = 'ping-icon-think-send';
+    thinkSendIcon.src = '../img/icons/thinking_sending.png';
+
+    const saveIcon = document.createElement('img');
+    saveIcon.className = 'wave-ping-icon';
+    saveIcon.id = 'ping-icon-save';
+    saveIcon.src = '../img/icons/saving.png';
+    const thinkSaveIcon = document.createElement('img');
+    thinkSaveIcon.className = 'wave-ping-icon';
+    thinkSaveIcon.id = 'ping-icon-think-save';
+    thinkSaveIcon.src = '../img/icons/thinking_saving.png';
+
+    const recIcon = document.createElement('img');
+    recIcon.className = 'wave-ping-icon';
+    recIcon.id = 'ping-icon-rec';
+    recIcon.src = '../img/icons/receiving.png';
+    const thinkRecIcon = document.createElement('img');
+    thinkRecIcon.className = 'wave-ping-icon';
+    recIcon.id = 'ping-icon-think-rec';
+    thinkRecIcon.src = '../img/icons/thinking_receiving.png';
+
+    container.appendChild(aura);
+    container.appendChild(sendIcon); container.appendChild(thinkSendIcon);
+    container.appendChild(saveIcon); container.appendChild(thinkSaveIcon);
+    container.appendChild(recIcon); container.appendChild(thinkRecIcon);
+
     container.addEventListener('mousedown', event => {
 
         if (isPlayerCoolDowned(playerIndex)) {
@@ -87,6 +123,7 @@ function createImageContainer(index) {
 
         container.appendChild(detailImage);
     });
+
     return container;
 }
 
@@ -113,4 +150,28 @@ function pingWaveFor(wave_id, player_id, ping_type, is_ctrl) {
 
     const cornerImg = document.querySelector(`#wave-${wave_id} .wave-corner-${player_id}`);
     cornerImg.style.display = 'block';
+
+    pingVisualEffects(wave_id, player_id, ping_type, is_ctrl);
+}
+
+function pingVisualEffects(wave_id, player_id, ping_id, is_ctrl) {
+
+    const aura = document.querySelector(`#wave-${wave_id} .wave-container-aura-ping`);
+    aura.style.background = getPlayerAura(player_id);
+    aura.style.animation = 'waveAuraEffect 2s linear 1';
+    aura.addEventListener('animationend',  () => {
+        aura.style.animation = '';
+        aura.style.visibility = 'none';
+    });
+
+    let pingName = pingTypeName[ping_id];
+    let pingClass = is_ctrl ? `ping-icon-think-${pingName}` : `ping-icon-${pingName}`;
+    const pingIcoElementn = document.querySelector(`#wave-${wave_id} .${pingClass}`);
+    aura.addEventListener('animationend',  () => {
+        aura.style.animation = '';
+        aura.style.visibility = 'none';
+    });
+
+    document.querySelector(`I'm sure #$[addEventListener}    let pingClass = is_ctrl ? `ping-icon-think-${pingName}` : `ping-icon-${pingName}``;
+]),
 }

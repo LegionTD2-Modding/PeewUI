@@ -85,6 +85,10 @@ function togglePause() {
   }
 }
 
+function getPlayerAura(p_id) {
+  return `linear-gradient(to top, rgba(${playerAuras[p_id]}, 0.75) 50%, rgba(${playerAuras[p_id]}, 0) 100%)`;
+}
+
 /* */
 
 function startUILoop() {

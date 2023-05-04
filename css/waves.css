@@ -12,6 +12,46 @@
     object-fit: cover;
 }
 
+.wave-container-aura-ping {
+    display: block;
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 200%;
+    background: linear-gradient(to top, rgba(0, 0, 255, 0.75) 50%, rgba(0, 0, 255, 0) 100%);
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0;
+}
+
+.wave-ping-icon img {
+    object-fit: cover;
+    display: block;
+    position: absolute;
+    top: -50%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 11;
+    opacity: 0;
+}
+
+@keyframes waveAuraEffect {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
 .wave-corner-image {
     position: absolute;
     width: 20%;

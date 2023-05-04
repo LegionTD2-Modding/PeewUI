@@ -11,8 +11,9 @@ const soundUrls = [
 ];
 
 const fontSizeRatio = 0.024;
-const playerColors = ['red', 'blue', 'orange', 'purple', 'yellow', 'cyan', 'green', 'pink'];
-const playerColorsHueRotateFromYellow = ['-60deg', '180deg', '-30deg', '-120deg', '0deg', '120deg', '60deg', '90deg'];
+const playerColors = ['red', 'blue', 'orange', 'purple']; //, 'yellow', 'cyan', 'green', 'pink'];
+const playerColorsHueRotateFromYellow = ['-60deg', '180deg', '-30deg', '-120deg']; //, '0deg', '120deg', '60deg', '90deg'];
+const playerAuras = ['255, 0, 0', '0, 0, 255', '255, 0, 0', '255, 0, 0'];
 
 let playerIndex = 0;
 
