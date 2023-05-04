@@ -25,15 +25,15 @@
     opacity: 0;
 }
 
-.wave-ping-icon img {
+.wave-ping-icon {
     object-fit: cover;
     display: block;
     position: absolute;
-    top: -50%;
+    bottom: 125%;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 11;
+    z-index: 12;
     opacity: 0;
 }
 
@@ -49,6 +49,29 @@
     }
     100% {
         opacity: 0;
+    }
+}
+
+@keyframes wavePingIconEffect {
+    0% {
+        opacity: 0;
+        scale: 90%;
+        bottom: 125%;
+    }
+    10% {
+        opacity: 1;
+        scale: 100%;
+        bottom: 125%;
+    }
+    50% {
+        opacity: 1;
+        scale: 50%;
+        bottom: 75%;
+    }
+    100% {
+        opacity: 1;
+        scale: 50%;
+        bottom: 0;
     }
 }
 

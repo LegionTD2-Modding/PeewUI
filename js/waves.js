@@ -78,7 +78,7 @@ function createImageContainer(index) {
     recIcon.src = '../img/icons/receiving.png';
     const thinkRecIcon = document.createElement('img');
     thinkRecIcon.className = 'wave-ping-icon';
-    recIcon.id = 'ping-icon-think-rec';
+    thinkRecIcon.id = 'ping-icon-think-rec';
     thinkRecIcon.src = '../img/icons/thinking_receiving.png';
 
     container.appendChild(aura);
@@ -154,24 +154,23 @@ function pingWaveFor(wave_id, player_id, ping_type, is_ctrl) {
     pingVisualEffects(wave_id, player_id, ping_type, is_ctrl);
 }
 
-function pingVisualEffects(wave_id, player_id, ping_id, is_ctrl) {
+function pingVisualEffects(wave_id, player_id, ping_type, is_ctrl) {
 
     const aura = document.querySelector(`#wave-${wave_id} .wave-container-aura-ping`);
+
     aura.style.background = getPlayerAura(player_id);
     aura.style.animation = 'waveAuraEffect 2s linear 1';
+
     aura.addEventListener('animationend',  () => {
         aura.style.animation = '';
         aura.style.visibility = 'none';
     });
 
-    let pingName = pingTypeName[ping_id];
-    let pingClass = is_ctrl ? `ping-icon-think-${pingName}` : `ping-icon-${pingName}`;
-    const pingIcoElementn = document.querySelector(`#wave-${wave_id} .${pingClass}`);
-    aura.addEventListener('animationend',  () => {
-        aura.style.animation = '';
-        aura.style.visibility = 'none';
-    });
+    let pingName = pingTypeName[ping_type];
+    let pingId = (is_ctrl ? `ping-icon-think-${pingName}` : `ping-icon-${pingName}`);
+    const pingIconElement = document.querySelector(`#wave-${wave_id} #${pingId}`);
 
-    document.querySelector(`I'm sure #$[addEventListener}    let pingClass = is_ctrl ? `ping-icon-think-${pingName}` : `ping-icon-${pingName}``;
-]),
+    pingIconElement.style.animation = `wavePingIconEffect 2s linear 1`;
+
+    pingIconElement.addEventListener('animationend',  () => { });
 }
