@@ -45,6 +45,7 @@ function onRightClickWaveIcon(event, wave_id) {
 function createImageContainer(index) {
     // Container
     const container = document.createElement('div');
+    const wave_id_capped = Math.max(1, Math.min(21, index));
 
     container.id = `wave-${index}`;
     container.className = 'wave-container';
@@ -68,7 +69,7 @@ function createImageContainer(index) {
 
     // Main image
     const mainImage = document.createElement('img');
-    mainImage.src = `/img/${index}.png`;
+    mainImage.src = `/img/${wave_id_capped}.png`;
     mainImage.className = 'wave-main-image';
 
     container.appendChild(mainImage);

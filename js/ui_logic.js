@@ -127,41 +127,6 @@ function resetGame() {
 
   clearPings();
 
-  document.querySelector('.ui-container').innerHTML =
-      ' <img class="ui-image" src="img/ui.png" alt="UI">' +
-      ' <div class="ui-text">' +
-      '    <div class="grid-item top-row left-col"></div>' +
-      '    <div class="grid-item top-row mid-col">' +
-      '      <span class="timer">0</span>' +
-      '    </div>' +
-      '    <div class="grid-item top-row right-col"></div>' +
-      '    <div class="grid-item mid-row left-col"></div>' +
-      '    <div class="grid-item mid-row mid-col">' +
-      '      <p class="types-line-1">' +
-      '        <span class="image-wrapper-attack"></span>' +
-      '        <span class="line-1"></span>' +
-      '        <span class="image-wrapper-defense"></span>' +
-      '      </p>' +
-      '      <p class="types-line-2">' +
-      '        <span class="image-wrapper-attack"></span>' +
-      '        <span class="line-2"></span>' +
-      '        <span class="image-wrapper-defense"></span>' +
-      '      </p>' +
-      '      <p class="types-line-3">' +
-      '        <span class="image-wrapper-attack"></span>' +
-      '        <span class="line-3"></span>' +
-      '        <span class="image-wrapper-defense"></span>' +
-      '      </p>' +
-      '    </div>' +
-      '    <div class="grid-item mid-row right-col"></div>' +
-      '    <div class="grid-item bot-row left-col"></div>' +
-      '    <div class="grid-item bot-row mid-col">' +
-      '      <img src="img/unpause.png" style="opacity: 1" alt="Unpause" id="start-button">' +
-      '    </div>' +
-      '    <div class="grid-item bot-row right-col"></div>' +
-      '  </div>';
-
-  setupPage(true);
   remainingTime = buildPhaseDuration[0];
 }
 
