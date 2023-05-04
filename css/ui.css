@@ -260,17 +260,25 @@ body, html {
 }
 
 .ui-info-pings {
-
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: -1;
+    height: 5vh;
+    width: 10vw;
+    opacity: 1;
+    top: 5vh;
 }
 
-#pings-infos-ui img {
-    display: block;
-    align-items: center;
-    z-index: 10;
+#pings-infos-ui {
+    position: absolute;
     height: 100%;
-    width: 100%;
-    opacity: 1;
-    bottom: 100%;
+    width: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    pointer-events: none;
 }
 
 /* Hide scrollbars */
