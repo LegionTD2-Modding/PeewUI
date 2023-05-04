@@ -74,7 +74,7 @@ body, html {
     position: relative;
     display: grid;
     grid-template-columns: 35.4% 29.2% 35.4%;
-    grid-template-rows: 20% 46% 30% 4%;
+    grid-template-rows: 20% 46% 4% 30%;
     width: 100%;
     height: 100%;
     color: white;
@@ -85,7 +85,7 @@ body, html {
     position: relative;
     display: grid;
     grid-template-columns: 35.4% 29.2% 35.4%;
-    grid-template-rows: 20% 46% 30% 4%;
+    grid-template-rows: 20% 46% 4% 30%;
     width: 100%;
     height: 100%;
     color: white;
