@@ -74,7 +74,7 @@ body, html {
     position: relative;
     display: grid;
     grid-template-columns: 35.4% 29.2% 35.4%;
-    grid-template-rows: 20% 46% 34%;
+    grid-template-rows: 20% 46% 30% 4%;
     width: 100%;
     height: 100%;
     color: white;
@@ -85,7 +85,7 @@ body, html {
     position: relative;
     display: grid;
     grid-template-columns: 35.4% 29.2% 35.4%;
-    grid-template-rows: 20% 46% 34%;
+    grid-template-rows: 20% 46% 30% 4%;
     width: 100%;
     height: 100%;
     color: white;
@@ -257,6 +257,10 @@ body, html {
     z-index: 4;
     height: 2vh;
     width: auto;
+}
+
+.ui-info-pings {
+
 }
 
 #pings-infos-ui img {
