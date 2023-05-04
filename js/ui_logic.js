@@ -93,7 +93,7 @@ function getPlayerAura(p_id) {
 
 function startUILoop() {
 
-  document.querySelector(".ui-info-pings").style.animation = 'slideUnderTop 0.5s forwards';
+  document.querySelector(".ui-info-pings").style.animation = 'slideOutOfTop 0.5s forwards';
 
 
   playOggSound('snd/welcome.ogg');
