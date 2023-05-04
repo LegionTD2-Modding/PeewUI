@@ -92,6 +92,10 @@ function getPlayerAura(p_id) {
 /* */
 
 function startUILoop() {
+
+  document.querySelector(".ui-info-pings").style.animation = 'slideUnderTop 0.5s forwards';
+
+
   playOggSound('snd/welcome.ogg');
   console.info('WELCOME TO NOVA');
   remainingTime = buildPhaseDuration[0];
