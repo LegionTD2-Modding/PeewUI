@@ -52,6 +52,7 @@
     }
 }
 
+/*
 @keyframes wavePingIconEffect {
     0% {
         opacity: 0;
@@ -72,6 +73,34 @@
         opacity: 1;
         scale: 50%;
         bottom: 0;
+    }
+}*/
+
+@keyframes wavePingIconEffect {
+    0% {
+        opacity: 0;
+        scale: 90%;
+        bottom: 125%;
+    }
+    10% {
+        opacity: 1;
+        scale: 100%;
+        bottom: 125%;
+    }
+    50% {
+        opacity: 1;
+        scale: 100%;
+        bottom: 125%;
+    }
+    90% {
+        opacity: 1;
+        scale: 100%;
+        bottom: 125%;
+    }
+    100% {
+        opacity: 0;
+        scale: 50%;
+        bottom: 100%;
     }
 }
 

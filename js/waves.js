@@ -10,10 +10,10 @@ let playersCoolDown = [0, 0, 0, 0];
 function onLeftClickWaveIcon(event, wave_id) {
     if (event.ctrlKey) {
         playOggSound('snd/ping-thinking-about.ogg');
-        ChatPrint(playerIndex, ` is thinking about sending <span style="color: green">wave ${wave_id}</span>`);
+        ChatPrint(playerIndex, ` is thinking about sending <span style="font-weight: bold">wave ${wave_id}</span>`);
     } else {
         playOggSound('snd/save.ogg');
-        ChatPrint(playerIndex, ` wants to send <span style="color: green">wave ${wave_id}</span>`);
+        ChatPrint(playerIndex, ` wants to send <span style="font-weight: bold">wave ${wave_id}</span>`);
     }
     pingWaveFor(wave_id, playerIndex, 0, event.ctrlKey);
     event.preventDefault();
@@ -22,10 +22,10 @@ function onLeftClickWaveIcon(event, wave_id) {
 function onMiddleClickWaveIcon(event, wave_id) {
     if (event.ctrlKey) {
         playOggSound('snd/ping-thinking-about.ogg');
-        ChatPrint(playerIndex, ` is thinking about saving from <span style="color: green">wave ${wave_id}</span>`);
+        ChatPrint(playerIndex, ` is thinking about saving from <span style="font-weight: bold">wave ${wave_id}</span>`);
     } else {
         playOggSound('snd/save.ogg');
-        ChatPrint(playerIndex, ` wants to start saving <span style="color: green">wave ${wave_id}</span>`);
+        ChatPrint(playerIndex, ` wants to start saving <span style="font-weight: bold">wave ${wave_id}</span>`);
     }
     pingWaveFor(wave_id, playerIndex, 1, event.ctrlKey);
     event.preventDefault();
@@ -34,10 +34,10 @@ function onMiddleClickWaveIcon(event, wave_id) {
 function onRightClickWaveIcon(event, wave_id) {
     if (event.ctrlKey) {
         playOggSound('snd/ping-thinking-about.ogg');
-        ChatPrint(playerIndex, ` thinks he may get sent <span style="color: green">wave ${wave_id}</span>`);
+        ChatPrint(playerIndex, ` thinks he may get sent <span style="font-weight: bold">wave ${wave_id}</span>`);
     } else {
         playOggSound('snd/expecting-send.ogg');
-        ChatPrint(playerIndex, ` expects the ennemy to send at <span style="color: green">wave ${wave_id}</span>`);
+        ChatPrint(playerIndex, ` expects the ennemy to send at <span style="font-weight: bold">wave ${wave_id}</span>`);
     }
     pingWaveFor(wave_id, playerIndex, 2, event.ctrlKey);
     event.preventDefault();
