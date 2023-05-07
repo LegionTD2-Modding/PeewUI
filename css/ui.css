@@ -288,13 +288,21 @@ body, html {
 }
 
 #pings-infos-ui {
-    position: relative;
+    position: absolute;
     height: 100%;
     width: 100%;
     left: 50%;
     transform: translateX(-50%);
     z-index: 1;
     pointer-events: none;
+}
+
+#ping-infos-text {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    z-index: 2;
+    transform: translate(-50%, -70%);
 }
 
 /* Hide scrollbars */
