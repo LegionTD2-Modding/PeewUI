@@ -141,7 +141,8 @@ body, html {
     display: flex;
     padding: 0;
     border: 0;
-    bottom: 27%;
+    bottom: 0;
+    margin-bottom: -1vh;
 }
 
 /* COLUMNS */

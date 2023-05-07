@@ -4,12 +4,14 @@
     display: inline-block;
     z-index: 0;
     height: 100%;
+    cursor: pointer;
 }
 
 .wave-main-image {
     display: block;
     height: 100%;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .wave-container-aura-ping {
@@ -29,6 +31,7 @@
     object-fit: cover;
     display: block;
     position: absolute;
+    pointer-events: none;
     bottom: 125%;
     left: 0;
     width: 100%;
@@ -79,22 +82,22 @@
 @keyframes wavePingIconEffect {
     0% {
         opacity: 0;
-        scale: 90%;
+        scale: 80%;
         bottom: 125%;
     }
     10% {
         opacity: 1;
-        scale: 100%;
+        scale: 95%;
         bottom: 125%;
     }
     50% {
         opacity: 1;
-        scale: 100%;
+        scale: 90%;
         bottom: 125%;
     }
     90% {
         opacity: 1;
-        scale: 100%;
+        scale: 80%;
         bottom: 125%;
     }
     100% {

@@ -89,6 +89,14 @@ function getPlayerAura(p_id) {
   return `linear-gradient(to top, rgba(${playerAuras[p_id]}, 0.75) 50%, rgba(${playerAuras[p_id]}, 0) 100%)`;
 }
 
+function setPlayButtonVisibility(visible) {
+  if (visible) {
+    document.getElementById('start-button').style.display = 'block';
+  } else {
+    document.getElementById('start-button').style.display = 'none';
+  }
+}
+
 /* */
 
 function startUILoop() {

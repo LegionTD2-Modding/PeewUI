@@ -33,7 +33,7 @@ function initializeAndCache() {
 
     preloadSounds(soundUrls).then(() => {
         console.info('All sounds loaded');
-        document.getElementById("start-button").style.opacity = '1';
+        setPlayButtonVisibility(true);
     }).catch(error => {
         console.error('Error while preloading sounds:', error);
     });
@@ -50,7 +50,7 @@ function initializeAndCache() {
     document.getElementById("start-button").addEventListener('mousedown', event => {
         if (event.buttons & 1) {
             startUILoop();
-            document.getElementById("start-button").style.opacity = '0';
+            setPlayButtonVisibility(false);
         }
     });
 
@@ -108,7 +108,7 @@ function initializeAndCache() {
                 if (document.getElementById("start-button").style.opacity === '1') {
                     ChatPrintAll(`<span style="color: green">Started game!</span>`);
                     startUILoop();
-                    document.getElementById("start-button").style.opacity = '0';
+                    setPlayButtonVisibility(false);
                 }
             }
             else if (typedText === '/help') {
