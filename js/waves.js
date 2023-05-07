@@ -118,7 +118,7 @@ function createImageContainer(index) {
         detailImage.classList.add('wave-corner-image', corner);
 
         // Tint the image
-        detailImage.style.filter = `hue-rotate(${playerColorsHueRotateFromYellow[corner_id]});`;
+        //detailImage.style.filter = `hue-rotate(${playerColorsHueRotateFromYellow[corner_id]});`;
         detailImage.style.display = 'none';
 
         container.appendChild(detailImage);
@@ -170,9 +170,13 @@ function pingVisualEffects(wave_id, player_id, ping_type, is_ctrl) {
     let pingId = (is_ctrl ? `ping-icon-think-${pingName}` : `ping-icon-${pingName}`);
     const pingIconElement = document.querySelector(`#wave-${wave_id} #${pingId}`);
 
+    pingIconElement.style.display = 'block';
     pingIconElement.style.animation = `wavePingIconEffect 2s linear 1`;
 
-    pingIconElement.addEventListener('animationend',  (wave_id) => showMostPingedTypeThisWave);
+    pingIconElement.addEventListener('animationend',  function () {
+        pingIconElement.style.animation = '';
+        pingIconElement.style.display = 'none';
+    });
 }
 
 function showMostPingedTypeThisWave(wave_id) {
@@ -195,7 +199,7 @@ function showMostPingedTypeThisWave(wave_id) {
         let pingId = `ping-icon-${pingName}`;
         const pingIconElement = document.querySelector(`#wave-${wave_id} #${pingId}`);
 
-        pingIconElement.style.visibility = 'block';
+        pingIconElement.style.display = 'block';
         pingIconElement.style.opacity = '1';
     }
 
@@ -205,7 +209,25 @@ function showMostPingedTypeThisWave(wave_id) {
             let pingName = pingTypeName[ping_type_other];
             let pingId = `ping-icon-${pingName}`;
             const pingIconElementRandom = document.querySelector(`#wave-${wave_id} #${pingId}`);
-            pingIconElementRandom.style.visibilit = 'none';
+            pingIconElementRandom.style.display = 'none';
         }
     }
+    for (let ping_type_other = 0; ping_type_other < 3; ping_type_other) {
+        let pingName = pingTypeName[ping_type_other];
+        let pingId = `ping-icon-think-${pingName}`;
+        const pingIconElementRandom = document.querySelector(`#wave-${wave_id} #${pingId}`);
+        pingIconElementRandom.style.display = 'none';
+    }
+
+    if (ping_type_winner >= 0 && votes[ping_type_winner] >= 1) {
+
+        let pingName = pingTypeName[ping_type_winner];
+
+        /*document.getElementById('icon-team-choice').src
+            = document.getElementById(`ping-icon-${pingName}`).src;*/
+
+        document.querySelector(".ui-info-pings").style.animation = 'slideOutOfTop 0.5s forwards';
+    }
+
+
 }

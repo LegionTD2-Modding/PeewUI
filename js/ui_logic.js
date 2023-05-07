@@ -100,10 +100,6 @@ function setPlayButtonVisibility(visible) {
 /* */
 
 function startUILoop() {
-
-  document.querySelector(".ui-info-pings").style.animation = 'slideOutOfTop 0.5s forwards';
-
-
   playOggSound('snd/welcome.ogg');
   console.info('WELCOME TO NOVA');
   remainingTime = buildPhaseDuration[0];
@@ -140,6 +136,8 @@ function nextPhase() {
     }
     currentPhase = 'build';
     remainingTime = buildPhaseDuration[1];
+
+    //showMostPingedTypeThisWave(currentWave);
 
     const topMiddle = document.querySelector('.timer');
     topMiddle.contentText = remainingTime;
