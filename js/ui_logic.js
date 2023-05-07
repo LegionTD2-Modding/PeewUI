@@ -239,7 +239,8 @@ function updateUI() {
     line3WrapperD.innerHTML = ``; //`&nbsp;<img class='type-icon' src='img/types/${defense}.png' alt='Defense ${defense}' />&nbsp;`
 
     if (topMiddle.textContent !== '   ') {
-      topMiddle.textContent = 'BATTLE';
+      //topMiddle.textContent = 'BATTLE';
+      topMiddle.innerHTML = '<img src="../img/icons/Mercenary2.png" alt="fight-icon">';
       topMiddle.classList.add('fade-out');
       topMiddle.addEventListener('animationend', function() {
         topMiddle.textContent = '   ';
