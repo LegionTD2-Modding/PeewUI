@@ -94,7 +94,7 @@ function setPlayButtonVisibility(visible) {
     document.getElementById('start-button').style.display = 'block';
   } else {
     document.getElementById('start-button').style.display = 'none';
-  }
+ }
 }
 
 /* */
