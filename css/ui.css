@@ -37,7 +37,7 @@
     100% {
         height: 1vh;
         width: 20vw;
-        margin-top: -10vh;
+        margin-top: -11vh;
     }
 }
 
@@ -284,12 +284,12 @@ body, html {
     width: 10vw;
     opacity: 1;
     top: 0;
-    margin-top: -10vh;
+    margin-top: -11vh;
 }
 
 #pings-infos-ui {
     position: absolute;
-    height: 80%;
+    height: 75%;
     width: 50%;
     left: 50%;
     transform: translateX(-50%);
@@ -313,7 +313,7 @@ body, html {
     position: relative;
     left: 50%;
     z-index: 2;
-    transform: translateX(-50%);
+    transform: translate(-50%, 20%);
     height: 6vh;
     /*width: 50%;*/
 }
