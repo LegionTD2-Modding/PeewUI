@@ -56,6 +56,9 @@ function ConsolePrintAll(message, error = false) {
 
 function isPlayerCoolDowned(p_id) {
   const gameTime = new Date().getTime();
+  if (!playersCoolDown[p_id]) {
+    playersCoolDown[p_id] = gameTime - coolDownTime - 1;
+  }
   if (gameTime - playersCoolDown[p_id] <= coolDownTime) {
     ChatPrintAll(`<span style="color: red">You are on cool down!</span>`);
     playersCoolDown[p_id] = gameTime;
