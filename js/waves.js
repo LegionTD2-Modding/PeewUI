@@ -168,7 +168,7 @@ function pingVisualEffects(wave_id, player_id, ping_type, is_ctrl) {
 
     aura.addEventListener('animationend',  () => {
         aura.style.animation = '';
-        aura.style.display = 'none';
+        //aura.style.display = 'none';
     });
 
     let pingName = pingTypeName[ping_type];
