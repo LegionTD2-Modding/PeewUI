@@ -1,4 +1,4 @@
-const buildPhaseDuration = [5, 5]; //[13, 7];
+const buildPhaseDuration = [13, 7];
 const fightPhaseDuration = 5;
 const maxWaves = 30;
 
