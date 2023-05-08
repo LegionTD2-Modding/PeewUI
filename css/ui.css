@@ -178,6 +178,7 @@ body, html {
 .types-line-3 .image-wrapper-defense .type-icon {
     height: 1.5vh;
     width: auto;
+    scale: 1.5;
 }
 
 .grid-item.right-col:not(:hover) div:nth-child(6) {

@@ -254,13 +254,13 @@ function updateUI() {
   } else {
     line1.textContent = ``;
     line2.textContent = `WAVE ${currentWave}`;
-    line3.textContent = ``; //`Next: WAVE ${currentWave + 1}`;
+    line3.textContent = ``;
 
     //let attack = wavesData[Math.min(currentWave + 1, 21)].dmgType;
     //let defense = wavesData[Math.min(currentWave + 1, 21)].defType;
 
-    line3WrapperA.innerHTML = ``; //`&nbsp;<img class='type-icon' src='img/types/${attack}.png' alt='Damage ${attack}' />&nbsp;`
-    line3WrapperD.innerHTML = ``; //`&nbsp;<img class='type-icon' src='img/types/${defense}.png' alt='Defense ${defense}' />&nbsp;`
+    line3WrapperA.innerHTML = `${remainingTime}&nbsp;&nbsp;<img class='type-icon' src='img/icons/enemy.png' alt='creeps' />&nbsp;&nbsp;${remainingTime}`;
+    line3WrapperD.innerHTML = ``;
 
     if (topMiddle.textContent !== '   ') {
       //topMiddle.textContent = 'BATTLE';
