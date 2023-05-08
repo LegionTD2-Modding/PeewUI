@@ -233,7 +233,8 @@ function showMostPingedTypeThisWave(wave_id) {
     if (ping_type_winner >= 0 && votes[ping_type_winner] >= 1) {
         //console.log("will display:" + pingTypeIconPath[ping_type_winner]);
         document.getElementById('icon-team-choice').src = pingTypeIconPath[ping_type_winner];
-        document.querySelector(".ui-info-pings").style.animation = 'slideOutOfTop 0.5s forwards';
+
+        showSubUI();
     }
 /*
     for (let ping_type_other = 0; ping_type_other < 3; ping_type_other) {
@@ -246,7 +247,7 @@ function showMostPingedTypeThisWave(wave_id) {
         if (ping_type_winner >= 0 && votes[ping_type_winner] >= 1) {
             console.log("will display:" + elem.src );
             //document.getElementById('icon-team-choice').src = elem.src;
-            //document.querySelector(".ui-info-pings").style.animation = 'slideOutOfTop 0.5s forwards';
+            //showSubUI()
         } else {
             console.log("will NOT DISPLAY");
         }
@@ -254,4 +255,24 @@ function showMostPingedTypeThisWave(wave_id) {
         pingId = `ping-icon-think-${pingName}`;
        //document.querySelector(`#wave-${wave_id} #${pingId}`).style.display = 'none';
     }*/
+}
+
+function showSubUI() {
+    const sub_ui = document.getElementById("ui-info-pings");
+    if (!sub_ui.classList.contains('sub-ui-deployed')) {
+        sub_ui.style.animation = 'slideOutOfTop 0.5s forwards';
+        sub_ui.addEventListener('animationend',  function () {
+            sub_ui.classList.add('sub-ui-deployed');
+        });
+    }
+}
+
+function hideSubUI() {
+    const sub_ui = document.getElementById("ui-info-pings");
+    if (sub_ui.classList.contains('sub-ui-deployed')) {
+        sub_ui.style.animation = 'slideUnderTop 0.5s forwards';
+        sub_ui.addEventListener('animationend',  function () {
+            sub_ui.classList.remove('sub-ui-deployed');
+        });
+    }
 }

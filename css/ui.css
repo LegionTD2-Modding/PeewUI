@@ -274,7 +274,7 @@ body, html {
     width: auto;
 }
 
-.ui-info-pings {
+#ui-info-pings {
     position: relative;
     display: flex;
     align-items: center;

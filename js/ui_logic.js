@@ -124,16 +124,14 @@ function nextSecond() {
 function nextPhase() {
   if (currentPhase === 'build') {
 
-    if (document.querySelector(".ui-info-pings").style.marginTop === '0') {
-      document.querySelector(".ui-info-pings").style.animation = 'slideUnderTop 0.5s forwards';
-    }
-
     currentPhase = 'fight';
     remainingTime = fightPhaseDuration;
 
     if (currentWave === 1) {
       fightBegins();
     }
+
+    hideSubUI();
 
   } else {
     currentWave++;
