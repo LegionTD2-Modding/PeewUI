@@ -307,3 +307,28 @@ const wavesData = [
     ability2: "",
     value: 9020
 }];
+
+const waveAbilitiesDescription = [
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['Each attack has a 25% chance to deal 150% damage', ''],
+    ['When this unit dies, it spawns a Blob', ''],
+    ['', ''],
+    ['Reduces damage taken from ranged units by 15%', ''],
+    ['Reduces the duration or effectiveness of most debuffs', ''],
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['Attacks up to 2 units at once but can still strike the same unit with both atttacks', ''],
+    ['', ''],
+    ['', ''],
+    ['Deals 230 single-target and 20 Magic splash damage every fourth attack', ''],
+    ['Attacks up to 3 units at once but can still strike the same unit with multiple atttacks', ''],
+    ['Reduces the duration or effectiveness of most debuffs', 'Gains 1% bonus damage and heals by 100 whenever it kills a unit'],
+    ['', '']
+];

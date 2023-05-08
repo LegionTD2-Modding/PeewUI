@@ -225,6 +225,9 @@ function updateDimensions() {
 
     document.getElementById('top-right-txt').style.fontSize = `${fontSize * 0.7}px`;
     document.getElementById('bottom-left-txt').style.fontSize = `${fontSize * 1.1}px`;
+
+    document.getElementById('wave-infos-tooltip').style.fontSize = `${fontSize * 1.1}px`;
+    document.getElementById('wave-infos-tooltip').style.maxWidth = `${0.4 * containerWidth}px`;
 }
 
 function loadAudio(url) {

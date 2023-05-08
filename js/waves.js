@@ -304,9 +304,10 @@ function hideSubUI() {
     }
 }
 
+
 function getWaveInfosTooltip(wave_id) {
     const wave = wavesData[wave_id];
-    return   `<span style="color: #ffcc00"><br/>Wave ${wave.wave}</span><br/>`
+    return   `<span style="color: #ffcc00; font-weight: bold;"><br/>Wave ${wave.wave}</span><br/>`
         + `<span style="color: #909090">${wave.creature} (${wave.amount})</span><br/><br/>`
         + `<img style="height: 2vh; width: 2vh;" src="img/types/${wave.dmgType}.png"> ${wave.dmgType}<br/>`
         + `<img style="height: 2vh; width: 2vh;" src="img/types/${wave.defType}.png"> ${wave.defType}<br/><br/>`
@@ -314,5 +315,7 @@ function getWaveInfosTooltip(wave_id) {
         + `&nbsp;&nbsp;&nbsp;&nbsp;<img style="height: 1.5vh; width: 1.5vh;" src="img/icons/Value.png"><span style="color: #ffffff"> ${wave.value}</span><br/>`
         + `<img style="height: 2vh; width: 1.5vh;" src="img/icons/Health.png"><span style="color: #ffcc00"> ${wave.hp}</span>`
         + `&nbsp;&nbsp;&nbsp;&nbsp;<img style="height: 1.5vh; width: 1.5vh;" src="img/icons/Damage.png"><span style="color: #ffffff"> ${wave.dps}</span>`
-        + (wave.range > 100 ? `&nbsp;&nbsp;&nbsp;&nbsp;<img style="height: 1.5vh; width: 1.5vh;" src="img/icons/Range.png"><span style="color: #ffffff"> ${wave.range}</span><br/>` : `<br/>`);
+        + (wave.range > 100 ? `&nbsp;&nbsp;&nbsp;&nbsp;<img style="height: 1.5vh; width: 1.5vh;" src="img/icons/Range.png"><span style="color: #ffffff"> ${wave.range}</span><br/>` : `<br/>`)
+        + (wave.ability1 !== '' ? `<br/><img style="height: 2vh; width: 2vh;" src="img/icons/abilities/${wave.ability1.replace(/\s+/g, '')}.png"><span style="color: #ffcc00"> ${waveAbilitiesDescription[wave.wave][0]}</span><br/>` : `<br/>`)
+        + (wave.ability2 !== '' ? `<img style="height: 2vh; width: 2vh;" src="img/icons/abilities/${wave.ability2.replace(/\s+/g, '')}.png"><span style="color: #ffcc00"> ${waveAbilitiesDescription[wave.wave][1]}</span><br/><br/>` : `<br/><br/>`)
 }
