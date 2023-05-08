@@ -310,6 +310,9 @@ function getWaveInfosTooltip(wave_id) {
         + `<span style="color: #909090">${wave.creature} (${wave.amount})</span><br/><br/>`
         + `<img style="height: 2vh; width: 2vh;" src="img/types/${wave.dmgType}.png"> ${wave.dmgType}<br/>`
         + `<img style="height: 2vh; width: 2vh;" src="img/types/${wave.defType}.png"> ${wave.defType}<br/><br/>`
-        + `<img style="height: 2vh; width: 2vh;" src="img/types/Gold.png"><span style="color: #ffcc00"> ${wave.reward} total reward</span><br/>`
-        + `<span style="color: #ffffff">${wave.value} rec. value</span><br/>`;
+        + `<img style="height: 1.5vh; width: 1.5vh;" src="img/icons/Gold.png"><span style="color: #ffcc00"> ${wave.reward}</span>`
+        + `&nbsp;&nbsp;&nbsp;&nbsp;<img style="height: 1.5vh; width: 1.5vh;" src="img/icons/Value.png"><span style="color: #ffffff"> ${wave.value}</span><br/>`
+        + `<img style="height: 2vh; width: 1.5vh;" src="img/icons/Health.png"><span style="color: #ffcc00"> ${wave.hp}</span>`
+        + `&nbsp;&nbsp;&nbsp;&nbsp;<img style="height: 1.5vh; width: 1.5vh;" src="img/icons/Damage.png"><span style="color: #ffffff"> ${wave.dps}</span>`
+        + (wave.range > 100 ? `&nbsp;&nbsp;&nbsp;&nbsp;<img style="height: 1.5vh; width: 1.5vh;" src="img/icons/Range.png"><span style="color: #ffffff"> ${wave.range}</span><br/>` : `<br/>`);
 }
