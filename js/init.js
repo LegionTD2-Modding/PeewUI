@@ -65,7 +65,7 @@ function initializeAndCache() {
     document.getElementById("pub-span-kidev").addEventListener('touchend', clickSpanKidevFuncTouch);
 
     document.getElementById("start-button").addEventListener('mousedown', clickStartButtonFunc);
-    document.getElementById("start-button").addEventListener('touchstart', clickStartButtonFuncTouch);
+    document.getElementById("start-button").addEventListener('touchend', clickStartButtonFuncTouch);
 
     document.getElementById("chat-area-container").addEventListener('mouseenter', () => {
         mouseOverChatArea = true;

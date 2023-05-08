@@ -3,44 +3,44 @@ const wavesIcons = document.querySelector('.ui-container .ui-text .grid-item.top
 const pingTypeName = ['send', 'save', 'rec'];
 const pingTypeIconPath = ['img/icons/sending.png', 'img/icons/saving.png', 'img/icons/receiving.png'];
 
-const touchLongPressTime = 1000;
-
+const touchLongPressTime = 600;
+let touchTimer;
 
 // playersPings[player_id][ping_type] = wave_id (if < 0 => thinking about)
 let playersPings = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
 let playersCoolDown = [0, 0, 0, 0];
 
-function onLeftClickWaveIcon(event, wave_id) {
-    if (event.ctrlKey) {
+function onLeftClickWaveIcon(ctrl, wave_id) {
+    if (ctrl) {
         playOggSound('snd/ping-thinking-about.ogg');
         ChatPrint(playerIndex, ` is thinking about sending <span style="font-weight: bold">wave ${wave_id}</span>`);
     } else {
         playOggSound('snd/save.ogg');
         ChatPrint(playerIndex, ` wants to send <span style="font-weight: bold">wave ${wave_id}</span>`);
     }
-    pingWaveFor(wave_id, playerIndex, 0, event.ctrlKey);
+    pingWaveFor(wave_id, playerIndex, 0, ctrl);
 }
 
-function onMiddleClickWaveIcon(event, wave_id) {
-    if (event.ctrlKey) {
+function onMiddleClickWaveIcon(ctrl, wave_id) {
+    if (ctrl) {
         playOggSound('snd/ping-thinking-about.ogg');
         ChatPrint(playerIndex, ` is thinking about saving from <span style="font-weight: bold">wave ${wave_id}</span>`);
     } else {
         playOggSound('snd/save.ogg');
         ChatPrint(playerIndex, ` wants to start saving <span style="font-weight: bold">wave ${wave_id}</span>`);
     }
-    pingWaveFor(wave_id, playerIndex, 1, event.ctrlKey);
+    pingWaveFor(wave_id, playerIndex, 1, ctrl);
 }
 
-function onRightClickWaveIcon(event, wave_id) {
-    if (event.ctrlKey) {
+function onRightClickWaveIcon(ctrl, wave_id) {
+    if (ctrl) {
         playOggSound('snd/ping-thinking-about.ogg');
         ChatPrint(playerIndex, ` thinks he may get sent <span style="font-weight: bold">wave ${wave_id}</span>`);
     } else {
         playOggSound('snd/expecting-send.ogg');
         ChatPrint(playerIndex, ` expects the ennemy to send at <span style="font-weight: bold">wave ${wave_id}</span>`);
     }
-    pingWaveFor(wave_id, playerIndex, 2, event.ctrlKey);
+    pingWaveFor(wave_id, playerIndex, 2, ctrl);
 }
 
 function createImageContainer(index) {
@@ -95,11 +95,11 @@ function createImageContainer(index) {
         }
 
         if (event.buttons & 1) {
-            onLeftClickWaveIcon(event, index);
+            onLeftClickWaveIcon(event.ctrlKey, index);
         } else if (event.buttons & 2) {
-            onRightClickWaveIcon(event, index);
+            onRightClickWaveIcon(event.ctrlKey, index);
         } else if (event.buttons & 4) {
-            onMiddleClickWaveIcon(event, index);
+            onMiddleClickWaveIcon(event.ctrlKey, index);
         } else {
             console.log('Unknown click type detected.');
         }
@@ -115,15 +115,14 @@ function createImageContainer(index) {
         }
 
         if (touch_type === 1) { // simple press
-            onLeftClickWaveIcon(event, index);
+            onLeftClickWaveIcon(event.ctrlKey, index);
         } else if (touch_type === 2) { // long press
-            onMiddleClickWaveIcon(event, index);
+            onMiddleClickWaveIcon(false, index);
         }
     };
 
     container.addEventListener('mousedown', clickWaveIconFunc);
 
-    let touchTimer;
     container.addEventListener('touchstart', (event) => {
         event.preventDefault();
         touchTimer = setTimeout(handleLongTouchPress, touchLongPressTime);
