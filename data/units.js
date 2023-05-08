@@ -11,6 +11,7 @@ const wavesData = [
     defType: "",
     ability1: "",
     ability2: "",
+    value: 0
 },
 {
     wave: 1,
@@ -24,6 +25,7 @@ const wavesData = [
     defType: "Fortified",
     ability1: "",
     ability2: "",
+    value: 150
 },
 {
     wave: 2,
@@ -37,6 +39,7 @@ const wavesData = [
     defType: "Arcane",
     ability1: "",
     ability2: "",
+    value: 165
 },
 {
     wave: 3,
@@ -50,6 +53,7 @@ const wavesData = [
     defType: "Natural",
     ability1: "",
     ability2: "",
+    value: 230
 },
 {
     wave: 4,
@@ -63,6 +67,7 @@ const wavesData = [
     defType: "Swift",
     ability1: "",
     ability2: "",
+    value: 290
 },
 {
     wave: 5,
@@ -76,6 +81,7 @@ const wavesData = [
     defType: "Natural",
     ability1: "",
     ability2: "",
+    value: 365
 },
 {
     wave: 6,
@@ -89,6 +95,7 @@ const wavesData = [
     defType: "Fortified",
     ability1: "Impale",
     ability2: "",
+    value: 480
 },
 {
     wave: 7,
@@ -102,6 +109,7 @@ const wavesData = [
     defType: "Arcane",
     ability1: "Blobs",
     ability2: "",
+    value: 610
 },
 {
     wave: 8,
@@ -115,6 +123,7 @@ const wavesData = [
     defType: "Swift",
     ability1: "",
     ability2: "",
+    value: 745
 },
 {
     wave: 9,
@@ -128,6 +137,7 @@ const wavesData = [
     defType: "Fortified",
     ability1: "Deflection",
     ability2: "",
+    value: 880
 },
 {
     wave: 10,
@@ -141,6 +151,7 @@ const wavesData = [
     defType: "Arcane",
     ability1: "Boss Unit",
     ability2: "",
+    value: 1150
 },
 {
     wave: 11,
@@ -154,6 +165,7 @@ const wavesData = [
     defType: "Natural",
     ability1: "",
     ability2: "",
+    value: 1375
 },
 {
     wave: 12,
@@ -167,6 +179,7 @@ const wavesData = [
     defType: "Swift",
     ability1: "",
     ability2: "",
+    value: 1635
 },
 {
     wave: 13,
@@ -180,6 +193,7 @@ const wavesData = [
     defType: "Fortified",
     ability1: "",
     ability2: "",
+    value: 1915
 },
 {
     wave: 14,
@@ -193,6 +207,7 @@ const wavesData = [
     defType: "Arcane",
     ability1: "",
     ability2: "",
+    value: 2300
 },
 {
     wave: 15,
@@ -206,6 +221,7 @@ const wavesData = [
     defType: "Natural",
     ability1: "Dual Shot",
     ability2: "",
+    value: 2905
 },
 {
     wave: 16,
@@ -219,6 +235,7 @@ const wavesData = [
     defType: "Swift",
     ability1: "",
     ability2: "",
+    value: 3495
 },
 {
     wave: 17,
@@ -232,6 +249,7 @@ const wavesData = [
     defType: "Arcane",
     ability1: "",
     ability2: "",
+    value: 4115
 },
 {
     wave: 18,
@@ -245,6 +263,7 @@ const wavesData = [
     defType: "Natural",
     ability1: "Poison-Tipped Pole",
     ability2: "",
+    value: 4860
 },
 {
     wave: 19,
@@ -258,6 +277,7 @@ const wavesData = [
     defType: "Swift",
     ability1: "Split Shot",
     ability2: "",
+    value: 5840
 },
 {
     wave: 20,
@@ -271,6 +291,7 @@ const wavesData = [
     defType: "Fortified",
     ability1: "Insatiable Hunger",
     ability2: "Boss Unit",
+    value: 7840
 },
 {
     wave: 21,
@@ -284,4 +305,5 @@ const wavesData = [
     defType: "Immaterial",
     ability1: "",
     ability2: "",
+    value: 9020
 }];

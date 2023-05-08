@@ -4,7 +4,7 @@ const maxWaves = 30;
 
 let soundVolume = 0.1;
 let currentPhase = 'build';
-let currentWave = 1;
+let currentWave = 0;
 let phaseTimer;
 let fightBeginTimer;
 let remainingTime = 0;
@@ -105,6 +105,7 @@ function setPlayButtonVisibility(visible) {
 /* */
 
 function startUILoop() {
+  currentWave = 1;
   playOggSound('snd/welcome.ogg');
   console.info('WELCOME TO NOVA');
   remainingTime = buildPhaseDuration[0];
@@ -167,7 +168,7 @@ function resetGame() {
   endLoopingInterval();
 
   currentPhase = 'build';
-  currentWave = 1;
+  currentWave = 0;
   remainingTime = 0;
 
   pauseCycle = false;
@@ -302,7 +303,8 @@ function moveImage(wave) {
 
         middle.appendChild(image);
 
-        image.style.pointerEvents = 'none';
+        //image.style.pointerEvents = 'none';
+        image.style.cursor = 'default';
         image.style.position = 'relative';
         image.style.right = '0';
         image.style.zIndex = '1';
@@ -339,7 +341,8 @@ function moveToTopLeft(wave) {
 
   image.addEventListener('animationend', function () {
 
-    image.style.pointerEvents = 'none';
+    //image.style.pointerEvents = 'none';
+    image.style.cursor = 'default';
     image.style.animation = '';
     image.style.transition = 'none';
     image.style.border = '';

@@ -11,6 +11,9 @@ let playersPings = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
 let playersCoolDown = [0, 0, 0, 0];
 
 function onLeftClickWaveIcon(ctrl, wave_id) {
+    if (wave_id <= currentWave) {
+        return;
+    }
     if (ctrl) {
         playOggSound('snd/ping-thinking-about.ogg');
         ChatPrint(playerIndex, ` is thinking about sending <span style="font-weight: bold">wave ${wave_id}</span>`);
@@ -22,6 +25,9 @@ function onLeftClickWaveIcon(ctrl, wave_id) {
 }
 
 function onMiddleClickWaveIcon(ctrl, wave_id) {
+    if (wave_id <= currentWave) {
+        return;
+    }
     if (ctrl) {
         playOggSound('snd/ping-thinking-about.ogg');
         ChatPrint(playerIndex, ` is thinking about saving from <span style="font-weight: bold">wave ${wave_id}</span>`);
@@ -33,6 +39,9 @@ function onMiddleClickWaveIcon(ctrl, wave_id) {
 }
 
 function onRightClickWaveIcon(ctrl, wave_id) {
+    if (wave_id <= currentWave) {
+        return;
+    }
     if (ctrl) {
         playOggSound('snd/ping-thinking-about.ogg');
         ChatPrint(playerIndex, ` thinks he may get sent <span style="font-weight: bold">wave ${wave_id}</span>`);
@@ -300,5 +309,5 @@ function getWaveInfosTooltip(wave_id) {
         + `<img style="height: 2vh; width: 2vh;" src="img/types/${wave.dmgType}.png"> ${wave.dmgType}<br/>`
         + `<img style="height: 2vh; width: 2vh;" src="img/types/${wave.defType}.png"> ${wave.defType}<br/><br/>`
         + `<img style="height: 2vh; width: 2vh;" src="img/types/Gold.png"><span style="color: #ffcc00"> ${wave.reward} total reward</span><br/>`
-        + `<span style="color: #ffffff">245 rec. value</span><br/>`;
+        + `<span style="color: #ffffff">${wave.value} rec. value</span><br/>`;
 }
