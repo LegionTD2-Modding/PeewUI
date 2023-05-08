@@ -89,30 +89,4 @@
     left: 50%;
     height: 2vh;
     transform: translate(-50%, -50%);
-    /*z-index: 1;*/
 }
-/*
-.wave-corner-0 {
-    left: 50%;
-    top: 50%;
-    transform: translate(-100%, -100%);
-}
-
-.wave-corner-1 {
-    right: 50%;
-    top: 50%;
-    transform: translate(0, -100%);
-}
-
-.wave-corner-2 {
-    left: 50%;
-    bottom: 50%;
-    transform: translate(-100%, 0);
-}
-
-.wave-corner-3 {
-    right: 50%;
-    bottom: 50%;
-    transform: translate(0, 0);
-}
-*/

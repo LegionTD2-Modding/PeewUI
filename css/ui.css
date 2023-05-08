@@ -300,13 +300,7 @@ body, html {
 
 #ping-infos-text {
     position: relative;
-    /*left: 50%;
-    transform: translateX(-50%);*/
     z-index: 2;
-    /*top: 70%;*/
-    /*left: 50%;*/
-    /*transform: translateY(-70%);*/
-    /*margin-top: -7.5vh;*/
 }
 
 #icon-team-choice {
@@ -315,7 +309,6 @@ body, html {
     z-index: 2;
     transform: translate(-50%, 20%);
     height: 6vh;
-    /*width: 50%;*/
 }
 
 /* Hide scrollbars */
