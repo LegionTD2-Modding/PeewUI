@@ -307,8 +307,8 @@ body, html {
     position: relative;
     left: 50%;
     z-index: 2;
-    transform: translate(-50%, 20%);
-    height: 6vh;
+    transform: translate(-50%, 15%);
+    height: 5vh;
 }
 
 /* Hide scrollbars */
