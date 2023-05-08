@@ -110,6 +110,8 @@ function startUILoop() {
   remainingTime = buildPhaseDuration[0];
   updateUI();
   phaseTimer = setInterval(nextSecond, 1000 / timeReducer);
+
+  showMostPingedTypeThisWave(1);
 }
 
 function nextSecond() {
