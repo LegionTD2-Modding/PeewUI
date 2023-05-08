@@ -243,7 +243,7 @@ function updateUI() {
 
     if (topMiddle.textContent !== '   ') {
       //topMiddle.textContent = 'BATTLE';
-      topMiddle.innerHTML = '<img src="/img/icons/Mercenary2.png" alt="fight-icon">';
+      topMiddle.innerHTML = '<img src="img/icons/Mercenary2.png" alt="fight-icon">';
       topMiddle.classList.add('fade-out');
       topMiddle.addEventListener('animationend', function() {
         topMiddle.textContent = '   ';
