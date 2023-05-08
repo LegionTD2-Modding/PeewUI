@@ -87,7 +87,7 @@ function createImageContainer(index) {
     container.appendChild(saveIcon); container.appendChild(thinkSaveIcon);
     container.appendChild(recIcon); container.appendChild(thinkRecIcon);
 
-    container.addEventListener('mousedown', event => {
+    const clickWaveIconFunc = (event) => {
 
         if (isPlayerCoolDowned(playerIndex)) {
             return;
@@ -102,7 +102,10 @@ function createImageContainer(index) {
         } else {
             console.log('Unknown click type detected.');
         }
-    });
+    };
+
+    container.addEventListener('mousedown', clickWaveIconFunc);
+    container.addEventListener('touchstart', clickWaveIconFunc);
 
     // Main image
     const mainImage = document.createElement('img');

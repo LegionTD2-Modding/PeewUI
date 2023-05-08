@@ -39,18 +39,24 @@ function initializeAndCache() {
     updateDimensions();
     initializeWaveInfoContainers();
 
-    document.getElementById("pub-span-kidev").addEventListener('mousedown', event => {
+    const clickSpanKidevFunc = (event) => {
         if (event.buttons & 1) {
             playOggSound('snd/Fiesta.ogg');
         }
-    });
+    };
 
-    document.getElementById("start-button").addEventListener('mousedown', event => {
+    const clickStartButtonFunc = (event) => {
         if (event.buttons & 1) {
             startUILoop();
             setPlayButtonVisibility(false);
         }
-    });
+    };
+
+    document.getElementById("pub-span-kidev").addEventListener('mousedown', clickSpanKidevFunc);
+    document.getElementById("pub-span-kidev").addEventListener('touchstart', clickSpanKidevFunc);
+
+    document.getElementById("start-button").addEventListener('mousedown', clickStartButtonFunc);
+    document.getElementById("start-button").addEventListener('touchstart', clickStartButtonFunc);
 
     document.getElementById("chat-area-container").addEventListener('mouseenter', () => {
         mouseOverChatArea = true;
