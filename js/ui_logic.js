@@ -276,6 +276,11 @@ function moveImage(wave) {
 
         middle.appendChild(image);
 
+        /*for (let votes_n = 1; votes_n <= 4; votes_n++) {
+          const votesIcon = document.querySelector(`#wave-${wave} #votes-{votes_n}`);
+          votesIcon.style.display = 'none';
+        }*/
+
         image.style.pointerEvents = 'none';
         image.style.position = 'relative';
         image.style.right = '0';
@@ -296,6 +301,11 @@ function moveToTopLeft(wave) {
 
   const image = document.querySelector(`#wave-${wave}`);
   const target = document.querySelector('.top-row.left-col');
+
+  /*for (let votes_n = 1; votes_n <= 4; votes_n++) {
+    const votesIcon = document.querySelector(`#wave-${wave} #votes-{votes_n}`);
+  }*/
+
 
   image.style.border = '';
   image.style.zIndex = '0';

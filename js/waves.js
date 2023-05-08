@@ -1,6 +1,7 @@
 const coolDownTime = 1000;
 const wavesIcons = document.querySelector('.ui-container .ui-text .grid-item.top-row.right-col');
 const pingTypeName = ['send', 'save', 'rec'];
+const pingTypeIconPath = ['../img/icons/sending.png', '../img/icons/saving.png', '../img/icons/receiving.png'];
 
 
 // playersPings[player_id][ping_type] = wave_id (if < 0 => thinking about)
@@ -117,7 +118,7 @@ function createImageContainer(index) {
         detailImage.src = `img/icons/${corner_id + 1}.png`;
         //detailImage.classList.add('wave-corner-image', corner);
         detailImage.className = 'wave-corner-image';
-        detailImage.id = `votes-${corner_id + 1}`;
+        detailImage.id = `wave-${index}-votes-${corner_id + 1}`;
 
         // Tint the image
         //detailImage.style.filter = `hue-rotate(${playerColorsHueRotateFromYellow[corner_id]});`;
@@ -199,7 +200,7 @@ function computeWavePingVotes(wave_id) {
 function updateVoteCountThisWave(wave_id) {
 
     for (let n_p = 1; n_p <= 4; n_p++) {
-        const elem_t = document.querySelector(`#wave-${wave_id} #votes-${n_p}`);
+        const elem_t = document.getElementById(`wave-${wave_id}-votes-${n_p}`);
         elem_t.style.display = 'none';
     }
 
@@ -208,7 +209,7 @@ function updateVoteCountThisWave(wave_id) {
     if (ping_type_winner >= 0) {
         let num_votes= votes[ping_type_winner];
         if (num_votes >= 1) {
-            const elem = document.querySelector(`#wave-${wave_id} #votes-${num_votes}`);
+            const elem = document.getElementById(`wave-${wave_id}-votes-${num_votes}`);
             elem.style.display = 'block';
         }
     }
@@ -217,12 +218,23 @@ function updateVoteCountThisWave(wave_id) {
 
 function showMostPingedTypeThisWave(wave_id) {
 
-    console.log("check ui for wave"+wave_id);
+    //console.log("check ui for wave"+wave_id);
+
+    for (let n_p = 1; n_p <= 4; n_p++) {
+        const elem_t = document.getElementById(`wave-${wave_id}-votes-${n_p}`);
+        elem_t.style.display = 'none';
+    }
 
     let votes = computeWavePingVotes(wave_id);
     let ping_type_winner = votes.indexOf(Math.max(...votes));
 
-    console.log("ping_type_winner="+ping_type_winner);
+    //console.log("ping_type_winner="+ping_type_winner);
+
+    if (ping_type_winner >= 0 && votes[ping_type_winner] >= 1) {
+        //console.log("will display:" + pingTypeIconPath[ping_type_winner]);
+        document.getElementById('icon-team-choice').src = pingTypeIconPath[ping_type_winner];
+        document.querySelector(".ui-info-pings").style.animation = 'slideOutOfTop 0.5s forwards';
+    }
 /*
     for (let ping_type_other = 0; ping_type_other < 3; ping_type_other) {
         let pingName = pingTypeName[ping_type_other];
