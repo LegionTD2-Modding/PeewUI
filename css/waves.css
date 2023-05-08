@@ -91,3 +91,41 @@
     height: 2vh;
     transform: translate(-50%, -50%);
 }
+
+#wave-infos-tooltip {
+    display: block;
+    transform: translateX(-50%);
+    height: 25vh;
+    position: absolute;
+    left: 50%;
+    top: 22vh;
+    width: 11vw;
+    z-index: 12;
+    font-size: 16px;
+    line-height: normal;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: rgba(30, 38, 37, 0.9);
+    background-image: none;
+    background-origin: padding-box;
+    background-position-x: 0;
+    background-position-y: 0;
+    background-size: auto;
+    border-bottom-color: rgb(126, 145, 162);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-image-repeat: stretch;
+    border-image-source: none;
+    border-image-width: 1;
+    border-left-color: rgb(126, 145, 162);
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-right-color: rgb(126, 145, 162);
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-top-color: rgb(126, 145, 162);
+    border-top-style: solid;
+    border-top-width: 1px;
+}

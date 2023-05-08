@@ -138,6 +138,14 @@ function createImageContainer(index) {
         clickWaveIconFuncTouch(event, 1);
     });
 
+    container.addEventListener('mouseenter', () => {
+        document.getElementById('wave-infos-tooltip').innerHTML = getWaveInfosTooltip(index);
+        document.getElementById('wave-infos-tooltip').style.display = 'block';
+    });
+    container.addEventListener('mouseleave', () => {
+        document.getElementById('wave-infos-tooltip').style.display = 'none';
+    });
+
     // Wave icon
     const mainImage = document.createElement('img');
     mainImage.src = `img/${wave_id_capped}.png`;
@@ -283,4 +291,14 @@ function hideSubUI() {
             sub_ui.classList.remove('sub-ui-deployed');
         });
     }
+}
+
+function getWaveInfosTooltip(wave_id) {
+    const wave = wavesData[wave_id];
+    return   `<span style="color: #ffcc00"><br/>Wave ${wave.wave}</span><br/>`
+        + `<span style="color: #909090">${wave.creature} (${wave.amount})</span><br/><br/>`
+        + `<img style="height: 2vh; width: 2vh;" src="img/types/${wave.dmgType}.png"> ${wave.dmgType}<br/>`
+        + `<img style="height: 2vh; width: 2vh;" src="img/types/${wave.defType}.png"> ${wave.defType}<br/><br/>`
+        + `<img style="height: 2vh; width: 2vh;" src="img/types/Gold.png"><span style="color: #ffcc00"> ${wave.reward} total reward</span><br/>`
+        + `<span style="color: #ffffff">245 rec. value</span><br/>`;
 }
