@@ -147,11 +147,20 @@
     object-fit: cover;
 }
 
-.type-icon-with-percent-text {
+.type-icon-with-percent-text-up {
     position: absolute;
     z-index: 22;
     top: 0;
     left: 50%;
     font-weight: bold;
     transform: translate(-50%, -100%);
+}
+
+.type-icon-with-percent-text-down {
+    position: absolute;
+    z-index: 22;
+    bottom: 0;
+    left: 50%;
+    font-weight: bold;
+    transform: translate(-50%, 100%);
 }

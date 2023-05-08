@@ -309,8 +309,8 @@ function getWaveInfosTooltip(wave_id) {
     const wave = wavesData[wave_id];
     return   `<span style="color: #ffcc00; font-weight: bold;"><br/>Wave ${wave.wave}</span><br/>`
         + `<span style="color: #909090">${wave.creature} (${wave.amount})</span><br/><br/><br/>`
-        + `<div><img style="height: 3vh; width: 3vh;" src="img/types/${wave.dmgType}.png"> => ${getBestTypesForAtq(wave.dmgType)}</div><br/>`
-        + `<div><img style="height: 3vh; width: 3vh;" src="img/types/${wave.defType}.png"> => ${getBestTypesForDef(wave.defType)}</div><br/><br/>`
+        + `<div style="text-align: left"><img style="height: 3vh; width: 3vh;" src="img/types/${wave.defType}.png"> => ${getBestTypesForDef(wave.defType)}<br/>`
+        + `<img style="height: 3vh; width: 3vh;" src="img/types/${wave.dmgType}.png"> => ${getBestTypesForAtq(wave.dmgType)}</div><br/><br/>`
         + `<img style="height: 1.5vh; width: 1.5vh;" src="img/icons/Gold.png"><span style="color: #ffcc00"> ${wave.reward}</span>`
         + `&nbsp;&nbsp;&nbsp;&nbsp;<img style="height: 1.5vh; width: 1.5vh;" src="img/icons/Value.png"><span style="color: #ffffff"> ${wave.value}</span><br/>`
         + `<img style="height: 2vh; width: 1.5vh;" src="img/icons/Health.png"><span style="color: #ffcc00"> ${wave.hp}</span>`
@@ -331,7 +331,7 @@ function getBestTypesForAtq(atq_type_name) {
 
         return_html += `<div style='border-color:${percent_color};' class='type-icon-with-percent-container'>`
                  + `<img class='type-icon-with-percent-icon' src='img/types/${types[type_id]}.png'>`
-                 + `<span style='color:${percent_color};' class='type-icon-with-percent-text'>${Math.abs(percent[type_id])}</span>`
+                 + `<span style='color:${percent_color};' class='type-icon-with-percent-text-down'>${Math.abs(percent[type_id])}</span>`
                  + `</div>`;
     }
     return return_html;
@@ -342,11 +342,12 @@ function getBestTypesForDef(def_type_name) {
     const types = typeBestCountersListAtq[def_type_name];
     const percent = typeBestCountersListAtqPercent[def_type_name];
     for (let type_id = 0; type_id < types.length; type_id++) {
-        //return_html += `<img style="height: 3vh; width: 3vh;" src="img/types/${types[type_id]}.png">`;
+
         const percent_color = getColorDef(percent[type_id]);
+
         return_html += `<div style='border-color:${percent_color};' class='type-icon-with-percent-container'>`
             + `<img class='type-icon-with-percent-icon' src='img/types/${types[type_id]}.png'>`
-            + `<span style='color:${percent_color};' class='type-icon-with-percent-text'>${Math.abs(percent[type_id])}</span>`
+            + `<span style='color:${percent_color};' class='type-icon-with-percent-text-up'>${Math.abs(percent[type_id])}</span>`
             + `</div>`;
     }
     return return_html;
