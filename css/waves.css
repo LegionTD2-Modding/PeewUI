@@ -131,3 +131,27 @@
     border-top-style: solid;
     border-top-width: 1px;
 }
+
+.type-icon-with-percent-container {
+    position: relative;
+    display: inline-flex;
+    z-index: 20;
+    height: 4vh;
+    width: 4vh;
+    border-style: outset;
+}
+
+.type-icon-with-percent-icon {
+    z-index: 21;
+    height: 100%;
+    object-fit: cover;
+}
+
+.type-icon-with-percent-text {
+    position: absolute;
+    z-index: 22;
+    top: 0;
+    left: 50%;
+    font-weight: bold;
+    transform: translate(-50%, -100%);
+}

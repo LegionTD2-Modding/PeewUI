@@ -16,6 +16,8 @@ const playerAuras = ['236, 71, 78', '65, 125, 237', '244, 139, 34', '172, 100, 2
 
 let playerIndex = 0;
 
+let fontSizeGlobal = 0;
+
 let mouseOverChatArea = false;
 let chatInputFocused = false;
 
@@ -228,6 +230,8 @@ function updateDimensions() {
 
     document.getElementById('wave-infos-tooltip').style.fontSize = `${fontSize * 1.1}px`;
     document.getElementById('wave-infos-tooltip').style.maxWidth = `${0.4 * containerWidth}px`;
+
+    fontSizeGlobal = fontSize;
 }
 
 function loadAudio(url) {
