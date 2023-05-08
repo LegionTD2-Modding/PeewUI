@@ -3,6 +3,8 @@ const wavesIcons = document.querySelector('.ui-container .ui-text .grid-item.top
 const pingTypeName = ['send', 'save', 'rec'];
 const pingTypeIconPath = ['img/icons/sending.png', 'img/icons/saving.png', 'img/icons/receiving.png'];
 
+const touchLongPressTime = 1000;
+
 
 // playersPings[player_id][ping_type] = wave_id (if < 0 => thinking about)
 let playersPings = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
@@ -103,16 +105,37 @@ function createImageContainer(index) {
             console.log('Unknown click type detected.');
         }
     };
-    const clickWaveIconFuncTouch = (event) => {
+
+    const handleLongTouchPress = (event) => {
+        clickWaveIconFuncTouch(event, 2);
+    };
+    const clickWaveIconFuncTouch = (event, touch_type) => {
 
         if (isPlayerCoolDowned(playerIndex)) {
             return;
         }
-        onLeftClickWaveIcon(event, index);
+
+        if (touch_type === 1) { // simple press
+            onLeftClickWaveIcon(event, index);
+        } else if (touch_type === 2) { // long press
+            onMiddleClickWaveIcon(event, index);
+        }
     };
 
     container.addEventListener('mousedown', clickWaveIconFunc);
-    container.addEventListener('touchend', clickWaveIconFuncTouch);
+
+    let touchTimer;
+    container.addEventListener('touchstart', (event) => {
+        touchTimer = setTimeout(handleLongTouchPress, touchLongPressTime);
+    });
+    container.addEventListener('touchend', (event) => {
+        clearTimeout(touchTimer);
+        clickWaveIconFuncTouch(event, 1);
+    });
+    container.addEventListener('touchcancel', (event) => {
+        clearTimeout(touchTimer);
+        clickWaveIconFuncTouch(event, 1);
+    });
 
     // Wave icon
     const mainImage = document.createElement('img');
