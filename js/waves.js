@@ -160,6 +160,10 @@ function createImageContainer(index) {
     return container;
 }
 
+function clearAllWaveInfoContainers() {
+    document.querySelectorAll('.wave-container').forEach(e => e.remove());
+}
+
 function initializeWaveInfoContainers() {
     for (let wave_id = 1; wave_id < wavesData.length; wave_id++) {
         wavesIcons.appendChild(createImageContainer(wave_id));
@@ -170,6 +174,10 @@ function clearPings() {
     document.querySelectorAll(`.wave-num-votes-image`).forEach(img => {
         img.style.display = 'none';
     });
+    for (let player_id = 0; player_id < playersPings.length; player_id++) {
+        playersPings[player_id] = [0, 0, 0];
+    }
+    hideSubUI();
 }
 
 function pingWaveFor(wave_id, player_id, ping_type, is_ctrl) {

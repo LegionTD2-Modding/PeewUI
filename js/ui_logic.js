@@ -6,6 +6,7 @@ let soundVolume = 0.1;
 let currentPhase = 'build';
 let currentWave = 1;
 let phaseTimer;
+let fightBeginTimer;
 let remainingTime = 0;
 let timeReducer = 1.0;
 let pauseCycle = false;
@@ -23,6 +24,7 @@ const midText = document.querySelector('.types-line-1');
 /* UTILS */
 function endLoopingInterval() {
   clearInterval(phaseTimer);
+  clearInterval(fightBeginTimer);
 }
 
 function autoScrollDownChat() {
@@ -149,7 +151,8 @@ function nextPhase() {
 
     const topMiddle = document.querySelector('.timer');
     topMiddle.contentText = remainingTime;
-    setTimeout(fightBegins, remainingTime * 1000 / timeReducer);
+
+    fightBeginTimer = setTimeout(fightBegins, remainingTime * 1000 / timeReducer);
   }
   updateUI();
 }
@@ -165,9 +168,22 @@ function resetGame() {
   currentWave = 1;
   remainingTime = 0;
 
+  pauseCycle = false;
+
   clearPings();
+  updateDimensions();
+  clearAllWaveInfoContainers();
+  initializeWaveInfoContainers();
 
   remainingTime = buildPhaseDuration[0];
+
+  setPlayButtonVisibility(true);
+
+  document.querySelector('.line-1').textContent = '';
+  document.querySelector('.line-2').textContent = '';
+  document.querySelector('.line-3').textContent = '';
+  document.querySelector('.types-line-2 .image-wrapper-attack').innerHTML = '';
+  document.querySelector('.types-line-2 .image-wrapper-defense').innerHTML = '';
 }
 
 
