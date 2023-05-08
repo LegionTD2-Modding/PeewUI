@@ -332,3 +332,30 @@ const waveAbilitiesDescription = [
     ['Reduces the duration or effectiveness of most debuffs', 'Gains 1% bonus damage and heals by 100 whenever it kills a unit'],
     ['', '']
 ];
+
+const typeBestCountersListDef = {
+        "Pierce": ["Fortified", "Natural", "Immaterial", "Arcane", "Swift"],
+        "Impact": ["Swift", "Natural", "Immaterial", "Fortified", "Arcane"],
+        "Magic": ["Arcane", "Swift", "Immaterial", "Fortified", "Natural"],
+        "Pure": ["Arcane", "Swift", "Immaterial", "Fortified", "Natural"]
+};
+const typeBestCountersListDefPercent = {
+    "Pierce": [-20, -15, 0, +15, +20],
+    "Impact": [-20, -10, 0, +15, +15],
+    "Magic": [-25, -0, 0, +5, +25],
+    "Pure": [0, 0, 0, 0, 0]
+};
+const typeBestCountersListAtq = {
+    "Swift": ["Pierce", "Magic", "Pure", "Impact"],
+    "Fortified": ["Impact", "Magic", "Pure", "Pierce"],
+    "Arcane": ["Impact", "Pierce", "Pure", "Magic"],
+    "Natural": ["Magic", "Pure", "Impact", "Pierce"],
+    "Immaterial": ["Impact", "Magic", "Pure", "Pierce"]
+};
+const typeBestCountersListAtqPercent = {
+    "Swift": [+20, 0, 0, -20],
+    "Fortified": [+15, +5, 0, -20],
+    "Arcane": [+15, +15, 0, -25],
+    "Natural": [+25, 0, -10, -15],
+    "Immaterial": [0, 0, 0, 0]
+};
