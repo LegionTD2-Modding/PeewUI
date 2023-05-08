@@ -289,13 +289,12 @@ body, html {
 
 #pings-infos-ui {
     position: absolute;
-    height: 75%;
-    width: 50%;
+    height: 60%;
+    width: auto;
     left: 50%;
     transform: translateX(-50%);
     z-index: 1;
     pointer-events: none;
-
 }
 
 #ping-infos-text {

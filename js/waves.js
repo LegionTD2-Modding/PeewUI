@@ -112,19 +112,17 @@ function createImageContainer(index) {
     container.appendChild(mainImage);
 
     // Corner images
-    const cornersClasses = ['wave-corner-0', 'wave-corner-1', 'wave-corner-2', 'wave-corner-3'];
-    cornersClasses.forEach((corner, corner_id) => {
+    for (let num_id = 1; num_id <= 4; num_id++) {
         const detailImage = document.createElement('img');
-        detailImage.src = `img/icons/${corner_id + 1}.png`;
-        detailImage.className = 'wave-corner-image';
-        detailImage.id = `wave-${index}-votes-${corner_id + 1}`;
+        detailImage.src = `img/icons/${num_id}.png`;
+        detailImage.className = 'wave-num-votes-image';
+        detailImage.id = `wave-${index}-votes-${num_id}`;
 
         // Tint the image
-        //detailImage.style.filter = `hue-rotate(${playerColorsHueRotateFromYellow[corner_id]});`;
         detailImage.style.display = 'none';
 
         container.appendChild(detailImage);
-    });
+    }
 
     return container;
 }
@@ -136,7 +134,7 @@ function initializeWaveInfoContainers() {
 }
 
 function clearPings() {
-    document.querySelectorAll(`.wave-corner-image`).forEach(img => {
+    document.querySelectorAll(`.wave-num-votes-image`).forEach(img => {
         img.style.display = 'none';
     });
 }
@@ -221,7 +219,6 @@ function showMostPingedTypeThisWave(wave_id) {
     let ping_type_winner = votes.indexOf(Math.max(...votes));
 
     if (ping_type_winner >= 0 && votes[ping_type_winner] >= 1) {
-        //console.log("will display:" + pingTypeIconPath[ping_type_winner]);
         document.getElementById('icon-team-choice').src = pingTypeIconPath[ping_type_winner];
 
         showSubUI();
