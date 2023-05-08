@@ -114,21 +114,19 @@ function createImageContainer(index) {
     container.addEventListener('mousedown', clickWaveIconFunc);
     container.addEventListener('touchend', clickWaveIconFuncTouch);
 
-    // Main image
+    // Wave icon
     const mainImage = document.createElement('img');
     mainImage.src = `img/${wave_id_capped}.png`;
     mainImage.className = 'wave-main-image';
 
     container.appendChild(mainImage);
 
-    // Corner images
     for (let num_id = 1; num_id <= 4; num_id++) {
         const detailImage = document.createElement('img');
         detailImage.src = `img/icons/${num_id}.png`;
         detailImage.className = 'wave-num-votes-image';
         detailImage.id = `wave-${index}-votes-${num_id}`;
 
-        // Tint the image
         detailImage.style.display = 'none';
 
         container.appendChild(detailImage);

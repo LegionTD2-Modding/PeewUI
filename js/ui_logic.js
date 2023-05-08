@@ -56,7 +56,7 @@ function ConsolePrintAll(message, error = false) {
 
 function isPlayerCoolDowned(p_id) {
   const gameTime = new Date().getTime();
-  if (!playersCoolDown[p_id]) {
+  if (playersCoolDown[p_id] === 0) {
     playersCoolDown[p_id] = gameTime - coolDownTime - 1;
   }
   if (gameTime - playersCoolDown[p_id] <= coolDownTime) {
@@ -238,8 +238,8 @@ function updateUI() {
     line2.textContent = `WAVE ${currentWave}`;
     line3.textContent = ``; //`Next: WAVE ${currentWave + 1}`;
 
-    let attack = wavesData[Math.min(currentWave + 1, 21)].dmgType;
-    let defense = wavesData[Math.min(currentWave + 1, 21)].defType;
+    //let attack = wavesData[Math.min(currentWave + 1, 21)].dmgType;
+    //let defense = wavesData[Math.min(currentWave + 1, 21)].defType;
 
     line3WrapperA.innerHTML = ``; //`&nbsp;<img class='type-icon' src='img/types/${attack}.png' alt='Damage ${attack}' />&nbsp;`
     line3WrapperD.innerHTML = ``; //`&nbsp;<img class='type-icon' src='img/types/${defense}.png' alt='Defense ${defense}' />&nbsp;`
