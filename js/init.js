@@ -123,7 +123,7 @@ function initializeAndCache() {
                 }
             }
             else if (typedText === '/help') {
-                ChatPrintAll(`<span style="color: green">Commands: /help, /fast, /slow, /mute, /unmute<br/>/start, /reset, /stop, /restart, /idX, /chat, /fiesta<br/><br/>Made with love by Kidev :)</span>`);
+                ChatPrintAll(`<span style="color: green">Commands: /help, /fast, /slow, /mute, /unmute<br/>/start, /reset, /stop, /restart, /idX, /chat, /fiesta, /debug<br/><br/>Made with love by Kidev :)</span>`);
             }
             else if (typedText === '/id0') {
                 playerIndex = 0;
@@ -144,6 +144,16 @@ function initializeAndCache() {
             else if (typedText === '/clear') {
                 ChatPrintAll(`<span style="color: green">You cleared all pings</span>`);
                 clearPings();
+            }
+            else if (typedText === '/debug') {
+                if (document.getElementById("top-right-txt").style.display === 'block') {
+                    document.getElementById("top-right-txt").style.display = 'none';
+                    ChatPrintAll(`<span style="color: green">You disabled the debug console</span>`);
+                } else {
+                    document.getElementById("top-right-txt").style.display = 'block';
+                    ChatPrintAll(`<span style="color: green">You enabled the debug console</span>`);
+                }
+
             }
             else if (typedText === '/chat') {
                 chatAlwaysDisplayed = !chatAlwaysDisplayed;
