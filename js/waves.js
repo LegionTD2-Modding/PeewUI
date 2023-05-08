@@ -58,29 +58,29 @@ function createImageContainer(index) {
     const sendIcon = document.createElement('img');
     sendIcon.className = 'wave-ping-icon';
     sendIcon.id = 'ping-icon-send';
-    sendIcon.src = '../img/icons/sending.png';
+    sendIcon.src = '/img/icons/sending.png';
     const thinkSendIcon = document.createElement('img');
     thinkSendIcon.className = 'wave-ping-icon';
     thinkSendIcon.id = 'ping-icon-think-send';
-    thinkSendIcon.src = '../img/icons/thinking_sending.png';
+    thinkSendIcon.src = '/img/icons/thinking_sending.png';
 
     const saveIcon = document.createElement('img');
     saveIcon.className = 'wave-ping-icon';
     saveIcon.id = 'ping-icon-save';
-    saveIcon.src = '../img/icons/saving.png';
+    saveIcon.src = '/img/icons/saving.png';
     const thinkSaveIcon = document.createElement('img');
     thinkSaveIcon.className = 'wave-ping-icon';
     thinkSaveIcon.id = 'ping-icon-think-save';
-    thinkSaveIcon.src = '../img/icons/thinking_saving.png';
+    thinkSaveIcon.src = '/img/icons/thinking_saving.png';
 
     const recIcon = document.createElement('img');
     recIcon.className = 'wave-ping-icon';
     recIcon.id = 'ping-icon-rec';
-    recIcon.src = '../img/icons/receiving.png';
+    recIcon.src = '/img/icons/receiving.png';
     const thinkRecIcon = document.createElement('img');
     thinkRecIcon.className = 'wave-ping-icon';
     thinkRecIcon.id = 'ping-icon-think-rec';
-    thinkRecIcon.src = '../img/icons/thinking_receiving.png';
+    thinkRecIcon.src = '/img/icons/thinking_receiving.png';
 
     container.appendChild(aura);
     container.appendChild(sendIcon); container.appendChild(thinkSendIcon);
