@@ -123,7 +123,7 @@ function initializeAndCache() {
                 }
             }
             else if (typedText === '/help') {
-                ChatPrintAll(`<span style="color: green">Commands: /help, /fast, /slow, /mute, /unmute<br/>/start, /reset, /stop, /restart, /idX, /chat, /fiesta, /debug<br/><br/>Made with love by Kidev :)</span>`);
+                ChatPrintAll(`<span style="color: green"><span style="font-weight: bold">Commands:</span><br/>/help, /start, /pause, /stop, /fast, /slow<br/>/mute, /unmute, /idX, /chat, /fiesta, /debug<br/><br/>Made with love by Kidev :)</span>`);
             }
             else if (typedText === '/id0') {
                 playerIndex = 0;
