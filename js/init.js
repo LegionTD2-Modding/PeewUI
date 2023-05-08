@@ -44,6 +44,9 @@ function initializeAndCache() {
             playOggSound('snd/Fiesta.ogg');
         }
     };
+    const clickSpanKidevFuncTouch = (event) => {
+        playOggSound('snd/Fiesta.ogg');
+    };
 
     const clickStartButtonFunc = (event) => {
         if (event.buttons & 1) {
@@ -51,12 +54,16 @@ function initializeAndCache() {
             setPlayButtonVisibility(false);
         }
     };
+    const clickStartButtonFuncTouch = (event) => {
+        startUILoop();
+        setPlayButtonVisibility(false);
+    };
 
     document.getElementById("pub-span-kidev").addEventListener('mousedown', clickSpanKidevFunc);
-    document.getElementById("pub-span-kidev").addEventListener('touchstart', clickSpanKidevFunc);
+    document.getElementById("pub-span-kidev").addEventListener('touchend', clickSpanKidevFuncTouch);
 
     document.getElementById("start-button").addEventListener('mousedown', clickStartButtonFunc);
-    document.getElementById("start-button").addEventListener('touchstart', clickStartButtonFunc);
+    document.getElementById("start-button").addEventListener('touchstart', clickStartButtonFuncTouch);
 
     document.getElementById("chat-area-container").addEventListener('mouseenter', () => {
         mouseOverChatArea = true;

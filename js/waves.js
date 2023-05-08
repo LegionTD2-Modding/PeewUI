@@ -103,9 +103,16 @@ function createImageContainer(index) {
             console.log('Unknown click type detected.');
         }
     };
+    const clickWaveIconFuncTouch = (event) => {
+
+        if (isPlayerCoolDowned(playerIndex)) {
+            return;
+        }
+        onLeftClickWaveIcon(event, index);
+    };
 
     container.addEventListener('mousedown', clickWaveIconFunc);
-    container.addEventListener('touchstart', clickWaveIconFunc);
+    container.addEventListener('touchend', clickWaveIconFuncTouch);
 
     // Main image
     const mainImage = document.createElement('img');
