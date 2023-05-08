@@ -114,8 +114,10 @@ function createImageContainer(index) {
     const cornersClasses = ['wave-corner-0', 'wave-corner-1', 'wave-corner-2', 'wave-corner-3'];
     cornersClasses.forEach((corner, corner_id) => {
         const detailImage = document.createElement('img');
-        detailImage.src = 'img/icons/1.png';
-        detailImage.classList.add('wave-corner-image', corner);
+        detailImage.src = `img/icons/${corner_id + 1}.png`;
+        //detailImage.classList.add('wave-corner-image', corner);
+        detailImage.className = 'wave-corner-image';
+        detailImage.id = `votes-${corner_id + 1}`;
 
         // Tint the image
         //detailImage.style.filter = `hue-rotate(${playerColorsHueRotateFromYellow[corner_id]});`;
@@ -144,12 +146,14 @@ function pingWaveFor(wave_id, player_id, ping_type, is_ctrl) {
     playersPings[player_id][ping_type] = (is_ctrl ? -wave_id : wave_id);
 
     if (absLastValue !== 0) {
-        const oldCorner = document.querySelector(`#wave-${absLastValue} .wave-corner-${player_id}`);
-        oldCorner.style.display = 'none';
+        //const oldCorner = document.querySelector(`#wave-${absLastValue} .wave-corner-${player_id}`);
+        //oldCorner.style.display = 'none';
+        updateVoteCountThisWave(absLastValue);
     }
 
-    const cornerImg = document.querySelector(`#wave-${wave_id} .wave-corner-${player_id}`);
-    cornerImg.style.display = 'block';
+    //const cornerImg = document.querySelector(`#wave-${wave_id} .wave-corner-${player_id}`);
+    //cornerImg.style.display = 'block';
+    updateVoteCountThisWave(wave_id);
 
     pingVisualEffects(wave_id, player_id, ping_type, is_ctrl);
 }
@@ -163,7 +167,7 @@ function pingVisualEffects(wave_id, player_id, ping_type, is_ctrl) {
 
     aura.addEventListener('animationend',  () => {
         aura.style.animation = '';
-        aura.style.visibility = 'none';
+        aura.style.display = 'none';
     });
 
     let pingName = pingTypeName[ping_type];
@@ -179,8 +183,7 @@ function pingVisualEffects(wave_id, player_id, ping_type, is_ctrl) {
     });
 }
 
-function showMostPingedTypeThisWave(wave_id) {
-
+function computeWavePingVotes(wave_id) {
     let votes = [0, 0, 0];
 
     for (let player_id = 0; player_id < playersPings.length; player_id++) {
@@ -190,44 +193,53 @@ function showMostPingedTypeThisWave(wave_id) {
             }
         }
     }
+    return votes;
+}
 
-    let ping_type_winner = votes.indexOf(Math.max(...votes));
+function updateVoteCountThisWave(wave_id) {
 
-    if (ping_type_winner >= 0) {
-
-        let pingName = pingTypeName[ping_type_winner];
-        let pingId = `ping-icon-${pingName}`;
-        const pingIconElement = document.querySelector(`#wave-${wave_id} #${pingId}`);
-
-        pingIconElement.style.display = 'block';
-        pingIconElement.style.opacity = '1';
+    for (let n_p = 1; n_p <= 4; n_p++) {
+        const elem_t = document.querySelector(`#wave-${wave_id} #votes-${n_p}`);
+        elem_t.style.display = 'none';
     }
 
-    for (let ping_type_other = 0; ping_type_other < 3; ping_type_other) {
-        if (ping_type_other !== ping_type_winner) {
-
-            let pingName = pingTypeName[ping_type_other];
-            let pingId = `ping-icon-${pingName}`;
-            const pingIconElementRandom = document.querySelector(`#wave-${wave_id} #${pingId}`);
-            pingIconElementRandom.style.display = 'none';
+    let votes = computeWavePingVotes(wave_id);
+    let ping_type_winner = votes.indexOf(Math.max(...votes));
+    if (ping_type_winner >= 0) {
+        let num_votes= votes[ping_type_winner];
+        if (num_votes >= 1) {
+            const elem = document.querySelector(`#wave-${wave_id} #votes-${num_votes}`);
+            elem.style.display = 'block';
         }
     }
+
+}
+
+function showMostPingedTypeThisWave(wave_id) {
+
+    console.log("check ui for wave"+wave_id);
+
+    let votes = computeWavePingVotes(wave_id);
+    let ping_type_winner = votes.indexOf(Math.max(...votes));
+
+    console.log("ping_type_winner="+ping_type_winner);
+/*
     for (let ping_type_other = 0; ping_type_other < 3; ping_type_other) {
         let pingName = pingTypeName[ping_type_other];
-        let pingId = `ping-icon-think-${pingName}`;
-        const pingIconElementRandom = document.querySelector(`#wave-${wave_id} #${pingId}`);
-        pingIconElementRandom.style.display = 'none';
-    }
 
-    if (ping_type_winner >= 0 && votes[ping_type_winner] >= 1) {
+        let pingId = `ping-icon-${pingName}`;
+        const elem = document.querySelector(`#wave-${wave_id} #${pingId}`);
+        //elem.style.display = 'none';
 
-        let pingName = pingTypeName[ping_type_winner];
+        if (ping_type_winner >= 0 && votes[ping_type_winner] >= 1) {
+            console.log("will display:" + elem.src );
+            //document.getElementById('icon-team-choice').src = elem.src;
+            //document.querySelector(".ui-info-pings").style.animation = 'slideOutOfTop 0.5s forwards';
+        } else {
+            console.log("will NOT DISPLAY");
+        }
 
-        /*document.getElementById('icon-team-choice').src
-            = document.getElementById(`ping-icon-${pingName}`).src;*/
-
-        document.querySelector(".ui-info-pings").style.animation = 'slideOutOfTop 0.5s forwards';
-    }
-
-
+        pingId = `ping-icon-think-${pingName}`;
+       //document.querySelector(`#wave-${wave_id} #${pingId}`).style.display = 'none';
+    }*/
 }

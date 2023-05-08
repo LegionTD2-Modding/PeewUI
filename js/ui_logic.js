@@ -1,4 +1,4 @@
-const buildPhaseDuration = [13, 7];
+const buildPhaseDuration = [5, 5]; //[13, 7];
 const fightPhaseDuration = 5;
 const maxWaves = 30;
 
@@ -137,7 +137,7 @@ function nextPhase() {
     currentPhase = 'build';
     remainingTime = buildPhaseDuration[1];
 
-    //showMostPingedTypeThisWave(currentWave);
+    showMostPingedTypeThisWave(currentWave);
 
     const topMiddle = document.querySelector('.timer');
     topMiddle.contentText = remainingTime;
@@ -276,6 +276,7 @@ function moveImage(wave) {
 
         middle.appendChild(image);
 
+        image.style.pointerEvents = 'none';
         image.style.position = 'relative';
         image.style.right = '0';
         image.style.zIndex = '1';
@@ -312,6 +313,7 @@ function moveToTopLeft(wave) {
 
   image.addEventListener('animationend', function () {
 
+    image.style.pointerEvents = 'none';
     image.style.animation = '';
     image.style.transition = 'none';
     image.style.border = '';

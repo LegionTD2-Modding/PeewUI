@@ -15,7 +15,7 @@
 }
 
 .wave-container-aura-ping {
-    display: block;
+    /*display: block;*/
     position: absolute;
     top: -100%;
     left: 0;
@@ -85,10 +85,13 @@
 
 .wave-corner-image {
     position: absolute;
-    width: 20%;
-    z-index: 1;
+    top: 50%;
+    left: 50%;
+    height: 2vh;
+    transform: translate(-50%, -50%);
+    /*z-index: 1;*/
 }
-
+/*
 .wave-corner-0 {
     left: 50%;
     top: 50%;
@@ -112,3 +115,4 @@
     bottom: 50%;
     transform: translate(0, 0);
 }
+*/
