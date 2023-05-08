@@ -60,6 +60,8 @@ function createImageContainer(index) {
     container.id = `wave-${index}`;
     container.className = 'wave-container';
 
+    container.style.cursor = 'pointer';
+
     const aura = document.createElement('div');
     aura.className = 'wave-container-aura-ping';
 

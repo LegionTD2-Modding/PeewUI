@@ -304,7 +304,7 @@ function moveImage(wave) {
         middle.appendChild(image);
 
         //image.style.pointerEvents = 'none';
-        image.style.cursor = 'default';
+        image.style.cursor = 'auto';
         image.style.position = 'relative';
         image.style.right = '0';
         image.style.zIndex = '1';
@@ -342,7 +342,7 @@ function moveToTopLeft(wave) {
   image.addEventListener('animationend', function () {
 
     //image.style.pointerEvents = 'none';
-    image.style.cursor = 'default';
+    image.style.cursor = 'auto';
     image.style.animation = '';
     image.style.transition = 'none';
     image.style.border = '';

@@ -5,14 +5,12 @@
     z-index: 0;
     height: 4vh;
     width: 4vh;
-    cursor: pointer;
 }
 
 .wave-main-image {
     display: block;
     height: 100%;
     object-fit: cover;
-    cursor: pointer;
 }
 
 .wave-container-aura-ping {
