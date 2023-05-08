@@ -59,6 +59,8 @@ function initializeAndCache() {
         setPlayButtonVisibility(false);
     };
 
+    document.addEventListener("contextmenu", (e) => {e.preventDefault()});
+
     document.getElementById("pub-span-kidev").addEventListener('mousedown', clickSpanKidevFunc);
     document.getElementById("pub-span-kidev").addEventListener('touchend', clickSpanKidevFuncTouch);
 

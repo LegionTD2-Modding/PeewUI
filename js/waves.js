@@ -19,7 +19,6 @@ function onLeftClickWaveIcon(event, wave_id) {
         ChatPrint(playerIndex, ` wants to send <span style="font-weight: bold">wave ${wave_id}</span>`);
     }
     pingWaveFor(wave_id, playerIndex, 0, event.ctrlKey);
-    event.preventDefault();
 }
 
 function onMiddleClickWaveIcon(event, wave_id) {
@@ -31,7 +30,6 @@ function onMiddleClickWaveIcon(event, wave_id) {
         ChatPrint(playerIndex, ` wants to start saving <span style="font-weight: bold">wave ${wave_id}</span>`);
     }
     pingWaveFor(wave_id, playerIndex, 1, event.ctrlKey);
-    event.preventDefault();
 }
 
 function onRightClickWaveIcon(event, wave_id) {
@@ -43,7 +41,6 @@ function onRightClickWaveIcon(event, wave_id) {
         ChatPrint(playerIndex, ` expects the ennemy to send at <span style="font-weight: bold">wave ${wave_id}</span>`);
     }
     pingWaveFor(wave_id, playerIndex, 2, event.ctrlKey);
-    event.preventDefault();
 }
 
 function createImageContainer(index) {
@@ -91,6 +88,8 @@ function createImageContainer(index) {
 
     const clickWaveIconFunc = (event) => {
 
+        event.preventDefault();
+
         if (isPlayerCoolDowned(playerIndex)) {
             return;
         }
@@ -126,13 +125,16 @@ function createImageContainer(index) {
 
     let touchTimer;
     container.addEventListener('touchstart', (event) => {
+        event.preventDefault();
         touchTimer = setTimeout(handleLongTouchPress, touchLongPressTime);
     });
     container.addEventListener('touchend', (event) => {
+        event.preventDefault();
         clearTimeout(touchTimer);
         clickWaveIconFuncTouch(event, 1);
     });
     container.addEventListener('touchcancel', (event) => {
+        event.preventDefault();
         clearTimeout(touchTimer);
         clickWaveIconFuncTouch(event, 1);
     });
