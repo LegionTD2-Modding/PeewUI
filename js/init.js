@@ -181,7 +181,29 @@ function initializeAndCache() {
             else if (typedText === '/reset' || typedText === '/stop' || typedText === '/restart') {
                 ChatPrintAll(`<span style="color: green">Game restarted!</span>`);
                 resetGame();
-            } else {
+            }
+            else if (typedText === '/king_skin') {
+
+            }
+            else if (typedText === '/hp100') {
+
+            }
+            else if (typedText === '/hp75') {
+
+            }
+            else if (typedText === '/hp50') {
+
+            }
+            else if (typedText === '/hp25') {
+
+            }
+            else if (typedText === '/victory') {
+
+            }
+            else if (typedText === '/defeat') {
+
+            }
+            else {
                 ChatPrint(playerIndex, `: ${typedText}`);
             }
         }
@@ -230,6 +252,9 @@ function updateDimensions() {
 
     document.getElementById('wave-infos-tooltip').style.fontSize = `${fontSize * 1.1}px`;
     document.getElementById('wave-infos-tooltip').style.maxWidth = `${0.4 * containerWidth}px`;
+
+    document.getElementById('ui-txt-king-left-health').style.fontSize = `${fontSize * 1.2}px`;
+    document.getElementById('ui-txt-king-right-health').style.fontSize = `${fontSize * 1.2}px`;
 
     fontSizeGlobal = fontSize;
 }

@@ -95,6 +95,43 @@ body, html {
     pointer-events: none;
 }
 
+#ui-image-king-left {
+    position: absolute;
+    transform: scaleX(-1);
+    top: 28.57%;
+    left: 1.25%;
+    height: 31.75%;
+    width: auto;
+    z-index: 2;
+}
+
+#ui-image-king-left-health {
+    position: absolute;
+    top: 29.52%;
+    right: 65.23%;
+    height: 17.78%;
+    width: 23.48%;
+    z-index: 2;
+}
+
+#ui-txt-king-left-health {
+    position: absolute;
+    top: 31.43%;
+    left: 12.10%;
+    z-index: 5;
+    color: white;
+    font-weight: bold;
+}
+
+#ui-txt-king-right-health {
+    position: absolute;
+    top: 31.43%;
+    right: 12.10%;
+    z-index: 5;
+    color: white;
+    font-weight: bold;
+}
+
 .ui-text {
     position: relative;
     display: grid;
@@ -203,6 +240,18 @@ body, html {
 
 .grid-item.left-col div:not(:hover):nth-last-child(n+8) {
     opacity: 0;
+}
+
+.near0-hovered-wave-container {
+    opacity: 1;
+}
+
+.near1-hovered-wave-container {
+    opacity: 0.67;
+}
+
+.near2-hovered-wave-container {
+    opacity: 0.33;
 }
 
 .timer {

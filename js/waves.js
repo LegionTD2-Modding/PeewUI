@@ -6,6 +6,8 @@ const pingTypeIconPath = ['img/icons/sending.png', 'img/icons/saving.png', 'img/
 const touchLongPressTime = 600;
 let touchTimer;
 
+const opacitiesHover = [1, 0.67, 0.33];
+
 // playersPings[player_id][ping_type] = wave_id (if < 0 => thinking about)
 let playersPings = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
 let playersCoolDown = [0, 0, 0, 0];
@@ -149,12 +151,44 @@ function createImageContainer(index) {
         clickWaveIconFuncTouch(event, 1);
     });
 
-    container.addEventListener('mouseenter', () => {
+    container.addEventListener('mouseenter', (e) => {
+
+        console.log(index);
+
         document.getElementById('wave-infos-tooltip').innerHTML = getWaveInfosTooltip(index);
         document.getElementById('wave-infos-tooltip').style.display = 'block';
+
+        document.querySelectorAll('.wave-container').forEach((elem) => {
+            for (let t_count = 0; t_count < 3; t_count++) {
+                if (elem.classList.contains(`near${t_count}-hovered-wave-container`)) {
+                    elem.classList.remove(`near${t_count}-hovered-wave-container`);
+                }
+            }
+        });
+
+        for (let t_count = 0; t_count < 3; t_count++) {
+            let tmp_wave = index + t_count;
+            if (t_count > 0 && tmp_wave > currentWave && document.getElementById(`wave-${tmp_wave}`).style.opacity > opacitiesHover[t_count]) {
+                document.getElementById(`wave-${tmp_wave}`).classList.add(`near${t_count}-hovered-wave-container`);
+            }
+
+            tmp_wave = index - t_count;
+            if (tmp_wave > currentWave && document.getElementById(`wave-${tmp_wave}`).style.opacity > opacitiesHover[t_count]) {
+                document.getElementById(`wave-${tmp_wave}`).classList.add(`near${t_count}-hovered-wave-container`);
+            }
+        }
     });
-    container.addEventListener('mouseleave', () => {
+
+    container.addEventListener('mouseleave', (event) => {
         document.getElementById('wave-infos-tooltip').style.display = 'none';
+
+        document.querySelectorAll('.wave-container').forEach((e) => {
+            for (let t_count = 0; t_count < 3; t_count++) {
+                if (e.classList.contains(`near${1 + t_count}-hovered-wave-container`)) {
+                    e.classList.remove(`near${1 + t_count}-hovered-wave-container`);
+                }
+            }
+        });
     });
 
     // Wave icon
